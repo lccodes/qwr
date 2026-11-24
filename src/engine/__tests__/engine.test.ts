@@ -55,6 +55,31 @@ describe('geo engine', () => {
     expect(proj.distanceMeters).toBeCloseTo(30, 0);
     expect(proj.distanceAlongMeters).toBeCloseTo(50, 0);
   });
+
+  it('keeps every in-refuge trail waypoint strictly inside boundaryPolygon', () => {
+    const ring = network.boundaryPolygon;
+    const isInside = (lat: number, lng: number) => {
+      let inside = false;
+      for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+        const [yi, xi] = ring[i];
+        const [yj, xj] = ring[j];
+        if (
+          yi > lat !== yj > lat &&
+          lng < ((xj - xi) * (lat - yi)) / (yj - yi + 1e-12) + xi
+        ) {
+          inside = !inside;
+        }
+      }
+      return inside;
+    };
+
+    for (const seg of network.segments) {
+      if (seg.id.startsWith('fairy-dell')) continue;
+      for (const [lat, lng] of seg.waypoints) {
+        expect(isInside(lat, lng), `${seg.id} waypoint (${lat},${lng}) crossed boundary`).toBe(true);
+      }
+    }
+  });
 });
 
 describe('closure-aware trail router', () => {
