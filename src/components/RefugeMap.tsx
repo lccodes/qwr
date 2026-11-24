@@ -930,43 +930,14 @@ export const RefugeMap: React.FC<RefugeMapProps> = ({
             </g>
           )}
 
-          {/* 8. Water & Habitat Cartographic Labels (Always Counter-Rotated Upright!) */}
+          {/* 8. Habitat Region Labels (Always Counter-Rotated Upright!) */}
           <g pointerEvents="none">
-            {network.waterBodies.map((wb) => {
-              if (!wb.labelPosition) return null;
-              const pt = projector.latLngToSvg(wb.labelPosition);
-              return (
-                <g
-                  key={`lbl-${wb.id}`}
-                  transform={`translate(${pt.x.toFixed(1)}, ${pt.y.toFixed(
-                    1
-                  )}) rotate(${mapRotationDeg.toFixed(1)}) scale(${inverseScale.toFixed(2)})`}
-                >
-                  <text
-                    textAnchor="middle"
-                    y="4"
-                    fontSize="11.5"
-                    fontWeight="800"
-                    letterSpacing="0.04em"
-                    fill="#FFFFFF"
-                    stroke="#1C5F8A"
-                    strokeWidth="3.4"
-                    paintOrder="stroke"
-                  >
-                    {wb.name.toUpperCase()}
-                  </text>
-                </g>
-              );
-            })}
-
-            {/* Subtle Habitat Region Labels */}
             {[
               { label: 'DWARF PINE BARRENS', lat: 40.8470, lng: -72.6172 },
               { label: 'PINE BARRENS', lat: 40.8423, lng: -72.6181 },
               { label: 'FOREST REGENERATION', lat: 40.8386, lng: -72.6180 },
               { label: 'TRAILS CLOSED', lat: 40.8364, lng: -72.6194, isDanger: true },
-              { label: 'BOG', lat: 40.8337, lng: -72.6177 },
-              { label: 'FAIRY DELL', lat: 40.8318, lng: -72.6164 }
+              { label: 'BOG', lat: 40.8337, lng: -72.6177 }
             ].map((h, idx) => {
               const hasClosed = Object.values(status.segments).some(
                 (s) => s.status === 'closed'
@@ -1001,17 +972,14 @@ export const RefugeMap: React.FC<RefugeMapProps> = ({
           {network.pois.map((poi) => {
             // Keep major pins clear and clutter-free; reveal dense southern hub details when zoomed in or selected
             const isSelected = selectedPoiIds.includes(poi.id);
-            const isWaterPin =
-              poi.id === 'old-ice-pond' ||
-              poi.id === 'north-pond' ||
-              poi.id === 'deer-pond';
+            const isWaterPin = poi.icon === 'pond';
             const isMajor =
               poi.id === 'parking' ||
               poi.id === 'the-bridge' ||
               poi.id === 'bluebird-nestboxes' ||
               poi.id === 'dwarf-pines' ||
               poi.id === 'fairy-dell';
-            // Show water pins when selected or zoomed in close (water bodies already have bold cartographic labels)
+            // Show pond pins when selected or zoomed in close (water bodies already display their white cartographic labels)
             if (isWaterPin && !isSelected && zoom < 2.2) return null;
             if (!isMajor && !isWaterPin && !isSelected && zoom < 2.35) return null;
 
@@ -1053,21 +1021,68 @@ export const RefugeMap: React.FC<RefugeMapProps> = ({
                     <PoiIconGlyph icon={poi.icon} />
                   )}
                 </g>
-                <text
-                  y={isSelected ? 25 : 22}
-                  textAnchor="middle"
-                  fontSize="10.5"
-                  fontWeight="800"
-                  fill="#16291F"
-                  stroke="#FAF8F2"
-                  strokeWidth="3.4"
-                  paintOrder="stroke"
-                >
-                  {poi.shortName}
-                </text>
+                {/* Omit dark text beneath pond icons — the white water label renders cleanly without duplication */}
+                {!isWaterPin && (
+                  <text
+                    y={isSelected ? 25 : 22}
+                    textAnchor="middle"
+                    fontSize="10.5"
+                    fontWeight="800"
+                    fill="#16291F"
+                    stroke="#FAF8F2"
+                    strokeWidth="3.4"
+                    paintOrder="stroke"
+                  >
+                    {poi.shortName}
+                  </text>
+                )}
               </g>
             );
           })}
+
+          {/* 9b. White Cartographic Water Labels (Rendered cleanly above pond pins with smart offset so zero letters are covered) */}
+          <g pointerEvents="none">
+            {network.waterBodies.map((wb) => {
+              if (!wb.labelPosition) return null;
+              const matchedPoi = network.pois.find(
+                (p) => p.icon === 'pond' && wb.id.startsWith(p.id)
+              );
+              const pinSelected = matchedPoi
+                ? selectedPoiIds.includes(matchedPoi.id)
+                : false;
+              const pinVisible = Boolean(
+                matchedPoi && (pinSelected || zoom >= 2.2)
+              );
+              const anchor =
+                pinVisible && matchedPoi
+                  ? { lat: matchedPoi.lat, lng: matchedPoi.lng }
+                  : wb.labelPosition;
+              const pt = projector.latLngToSvg(anchor);
+              const yOffset = pinVisible ? (pinSelected ? 26 : 23) : 4;
+              return (
+                <g
+                  key={`lbl-${wb.id}`}
+                  transform={`translate(${pt.x.toFixed(1)}, ${pt.y.toFixed(
+                    1
+                  )}) rotate(${mapRotationDeg.toFixed(1)}) scale(${inverseScale.toFixed(2)})`}
+                >
+                  <text
+                    textAnchor="middle"
+                    y={yOffset}
+                    fontSize="11.5"
+                    fontWeight="800"
+                    letterSpacing="0.04em"
+                    fill="#FFFFFF"
+                    stroke="#1C5F8A"
+                    strokeWidth="3.4"
+                    paintOrder="stroke"
+                  >
+                    {wb.name.toUpperCase()}
+                  </text>
+                </g>
+              );
+            })}
+          </g>
 
           {/* 10. Off-Track Rejoin Dashed Tether */}
           {userSvg && snappedSvg && navState?.isOffTrack && (
