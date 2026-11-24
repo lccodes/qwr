@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "1.0",
+  "lastUpdated": "2025-12-01",
+  "refugePhone": "631-653-4771",
+  "globalAlert": {
+    "active": true,
+    "severity": "warning",
+    "title": "Partial Trail Closures (Tree Work)",
+    "message": "Southwest trails are temporarily closed for Southern Pine Beetle tree cutting. Standard loops and custom walks automatically detour onto open trails."
+  },
+  "facilities": {
+    "nature-center": {
+      "name": "Charles Banks Belt Nature Center",
+      "status": "closed",
+      "note": "Closed for renovations and expansion. Trails, Outdoor Restrooms, and the Outdoor Wildlife Complex are open daily sunrise to sunset."
+    },
+    "restrooms": {
+      "name": "Outdoor Restrooms",
+      "status": "open",
+      "note": "Open daily from sunrise to sunset."
+    },
+    "animal-complex": {
+      "name": "Outdoor Wildlife Complex",
+      "status": "open",
+      "note": "Open daily from sunrise to sunset at no charge."
+    }
+  },
+  "segments": {
+    "old-ice-pond-nw-spur": {
+      "name": "Old Ice Pond Northwest Connector (Bridge to West Fence)",
+      "status": "closed",
+      "reason": "Southern Pine Beetle tree cutting",
+      "updated": "2025-12-01"
+    },
+    "west-fence-mid-south": {
+      "name": "West Fence Trail (Regeneration Area to Old Ice Pond Spur)",
+      "status": "closed",
+      "reason": "Southern Pine Beetle tree cutting",
+      "updated": "2025-12-01"
+    },
+    "west-fence-spur-link": {
+      "name": "West Fence Spur Link",
+      "status": "closed",
+      "reason": "Southern Pine Beetle tree cutting",
+      "updated": "2025-12-01"
+    },
+    "west-fence-south-inner": {
+      "name": "West Trail (Old Ice Pond West Side — Inner)",
+      "status": "closed",
+      "reason": "Southern Pine Beetle tree cutting",
+      "updated": "2025-12-01"
+    },
+    "west-fence-south-outer": {
+      "name": "West Fence Trail (Old Ice Pond West Side — Outer)",
+      "status": "closed",
+      "reason": "Southern Pine Beetle tree cutting",
+      "updated": "2025-12-01"
+    },
+    "regeneration-new-trail": {
+      "name": "New Trail (Forest Regeneration & Eastern Bluebird Nestboxes)",
+      "status": "open",
+      "badge": "new",
+      "updated": "2025-12-01"
+    }
+  }
+}

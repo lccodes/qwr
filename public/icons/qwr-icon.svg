@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192">
+  <rect width="192" height="192" rx="44" fill="#1B4332"/>
+  <circle cx="96" cy="96" r="74" fill="#24553F" opacity="0.55"/>
+  <!-- Stylized pond wave -->
+  <path d="M36 132 Q66 118 96 130 T156 126 L156 154 Q126 168 96 168 Q66 168 36 154 Z" fill="#4BA3D4"/>
+  <path d="M46 139 Q74 128 102 138 T148 135" fill="none" stroke="#BEE5F7" stroke-width="4" stroke-linecap="round"/>
+  <!-- Pitch pine silhouette -->
+  <path d="M96 34 L68 78 L80 78 L58 110 L76 110 L62 128 L130 128 L116 110 L134 110 L112 78 L124 78 Z" fill="#F7F4EC"/>
+  <rect x="91" y="124" width="10" height="14" rx="3" fill="#D4C7A9"/>
+  <!-- Compass star glint -->
+  <circle cx="142" cy="52" r="9" fill="#E9B949"/>
+</svg>
