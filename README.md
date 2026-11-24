@@ -10,7 +10,7 @@ An offline-first Progressive Web App (PWA) reimagining the Quogue Wildlife Refug
 - **Heading-Up Turn-by-Turn & Off-Track Guidance**: Oversized turn arrows, compass heading-up rotation with upright labels, hysteresis-stabilized off-track detection with live rejoin arrow, gentle haptics, and optional offline Web Speech voice prompts.
 - **Safety Built-In**: One-tap **Back to Parking**, direct QWR Office call button `(631) 653-4771`, live GPS coordinate display, and offline NOAA solar sunset countdown.
 - **100% Offline PWA**: Tiny static bundle cached via Service Worker (`vite-plugin-pwa`). Works with zero cell signal deep in the Pine Barrens.
-- **Built-In Virtual Walk Simulator**: Test turn-by-turn navigation, off-track recovery, and tap-to-teleport from anywhere away from the Refuge.
+- **Feature-Flagged Virtual Walk Simulator**: Disabled in production builds so visitors always use real browser Geolocation and Compass APIs (`VITE_ENABLE_SIMULATOR=true npm run dev` enables it locally for QA).
 
 ## Updating Trail Closures (Admin Workflow)
 
@@ -24,9 +24,10 @@ npm run validate:trails
 
 ```bash
 npm install
-npm run dev           # Local dev server
-npm test              # Run Vitest core engine suite
+npm run dev                                  # Production-mode dev server (real browser GPS)
+VITE_ENABLE_SIMULATOR=true npm run dev       # Dev server with Virtual Walk Simulator enabled
+npm test                                     # Run Vitest core engine suite
 npm run validate:trails
-npm run build         # Typecheck + build static offline PWA in dist/
-npm run preview       # Preview production PWA locally
+npm run build                                # Typecheck + build static offline PWA in dist/
+npm run preview                              # Preview production PWA locally
 ```

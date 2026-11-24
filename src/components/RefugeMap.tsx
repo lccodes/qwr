@@ -25,11 +25,13 @@ interface RefugeMapProps {
   selectedPoiIds: string[];
   isNavigating: boolean;
   userPosition: LatLng | null;
+  isAwayFromRefuge: boolean;
   accuracyMeters: number | null;
   headingDeg: number | null;
   navState: NavigationState | null;
   headingUp: boolean;
   onToggleHeadingUp: () => void;
+  onRequestGps: () => void;
   onSelectPoi: (poi: PoiDef) => void;
   simTapToMove: boolean;
   onMapTeleport: (coord: LatLng) => void;
@@ -223,11 +225,13 @@ export const RefugeMap: React.FC<RefugeMapProps> = ({
   selectedPoiIds,
   isNavigating,
   userPosition,
+  isAwayFromRefuge,
   accuracyMeters,
   headingDeg,
   navState,
   headingUp,
   onToggleHeadingUp,
+  onRequestGps,
   onSelectPoi,
   simTapToMove,
   onMapTeleport
@@ -235,6 +239,7 @@ export const RefugeMap: React.FC<RefugeMapProps> = ({
   const projector = useMemo(() => createMapProjector(network), [network]);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [viewportSize, setViewportSize] = useState({ width: 390, height: 844 });
+  const onSitePosition = userPosition && !isAwayFromRefuge ? userPosition : null;
 
   // Camera state in SVG coordinates
   const defaultFocus = useMemo(
@@ -270,9 +275,9 @@ export const RefugeMap: React.FC<RefugeMapProps> = ({
     return Math.min(sx, sy);
   }, [viewportSize, projector]);
 
-  // Smoothly center on route preview when selecting a trail in explore mode
+  // Smoothly center on route preview when selecting a trail or waiting for on-site GPS
   useEffect(() => {
-    if (isNavigating) {
+    if (isNavigating && onSitePosition) {
       setFollowUser(true);
       setZoom((prev) => (prev < 1.9 ? 2.25 : prev));
       return;
@@ -295,7 +300,7 @@ export const RefugeMap: React.FC<RefugeMapProps> = ({
       const spanH = Math.max(200, maxY - minY + 130);
       const targetScale = Math.min(
         (viewportSize.width * 0.78) / spanW,
-        (viewportSize.height * 0.37) / spanH
+        (viewportSize.height * (isNavigating ? 0.52 : 0.37)) / spanH
       );
       const nextZoom = Math.max(0.75, Math.min(1.65, targetScale / baseScale));
       setZoom(nextZoom);
@@ -303,18 +308,28 @@ export const RefugeMap: React.FC<RefugeMapProps> = ({
       setCamCenter({ x: defaultFocus.x, y: defaultFocus.y });
       setZoom(0.84);
     }
-  }, [activeRoute?.id, isNavigating, projector, baseScale, viewportSize, defaultFocus]);
+  }, [
+    activeRoute?.id,
+    isNavigating,
+    Boolean(onSitePosition),
+    projector,
+    baseScale,
+    viewportSize,
+    defaultFocus
+  ]);
 
-  // Keep camera locked onto live GPS position when following
+  // Keep camera locked onto live on-site GPS position when following
   useEffect(() => {
-    if (!followUser || !userPosition) return;
-    const pt = projector.latLngToSvg(userPosition);
+    if (!followUser || !onSitePosition) return;
+    const pt = projector.latLngToSvg(onSitePosition);
     setCamCenter(pt);
-  }, [followUser, userPosition, projector]);
+  }, [followUser, onSitePosition, projector]);
 
   const effectiveScale = baseScale * zoom;
   const mapRotationDeg =
-    isNavigating && headingUp && headingDeg !== null ? headingDeg : 0;
+    isNavigating && Boolean(onSitePosition) && headingUp && headingDeg !== null
+      ? headingDeg
+      : 0;
 
   // Center the map cleanly in the visible window above the bottom sheet
   const screenPivotX = viewportSize.width * 0.48;
@@ -424,15 +439,17 @@ export const RefugeMap: React.FC<RefugeMapProps> = ({
   };
 
   const handleRecenter = useCallback(() => {
-    if (userPosition) {
+    onRequestGps();
+    if (onSitePosition) {
       setFollowUser(true);
-      setCamCenter(projector.latLngToSvg(userPosition));
+      setCamCenter(projector.latLngToSvg(onSitePosition));
       setZoom((z) => Math.max(z, 2.1));
     } else {
+      setFollowUser(false);
       setCamCenter({ x: defaultFocus.x, y: defaultFocus.y });
       setZoom(0.84);
     }
-  }, [userPosition, projector, defaultFocus]);
+  }, [onRequestGps, onSitePosition, projector, defaultFocus]);
 
   // Precompute evenly spaced active route directional chevrons (deduping overlaps on out-and-back legs)
   const routeChevrons = useMemo(() => {
@@ -473,9 +490,9 @@ export const RefugeMap: React.FC<RefugeMapProps> = ({
     return pts;
   }, [network, status, projector]);
 
-  const userSvg = userPosition ? projector.latLngToSvg(userPosition) : null;
+  const userSvg = onSitePosition ? projector.latLngToSvg(onSitePosition) : null;
   const snappedSvg =
-    navState && navState.isOffTrack
+    userSvg && navState && navState.isOffTrack
       ? projector.latLngToSvg(navState.snappedPoint)
       : null;
 
@@ -1150,7 +1167,11 @@ export const RefugeMap: React.FC<RefugeMapProps> = ({
       {/* Right-Edge Floating Map Controls */}
       <div
         className={`map-controls ${
-          isNavigating && navState?.isOffTrack ? 'off-track-shift' : ''
+          isNavigating
+            ? navState?.isOffTrack
+              ? 'off-track-shift'
+              : 'nav-shift'
+            : ''
         }`}
       >
         <button

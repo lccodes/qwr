@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { PoiDef, ResolvedRoute } from './types';
+import { FEATURE_FLAGS } from './config/featureFlags';
 import {
   buildCustomWalk,
   resolveStandardLoop,
@@ -11,12 +12,15 @@ import { useTrailData } from './hooks/useTrailData';
 import { useGeolocation } from './hooks/useGeolocation';
 import { useCompass } from './hooks/useCompass';
 import { useGuidanceCues } from './hooks/useGuidanceCues';
+import { useWakeLock } from './hooks/useWakeLock';
 import { RefugeMap } from './components/RefugeMap';
 import { TopHud } from './components/TopHud';
 import { BottomSheet } from './components/BottomSheet';
 import { PoiModal } from './components/PoiModal';
 import { SafetyDrawer } from './components/SafetyDrawer';
 import { SimulatorBar } from './components/SimulatorBar';
+
+const SIMULATOR_ENABLED = FEATURE_FLAGS.virtualWalkSimulator;
 
 export const App: React.FC = () => {
   const { network, status, loading, error, isOffline, offlineReady } =
@@ -34,6 +38,9 @@ export const App: React.FC = () => {
   const [focusedPoi, setFocusedPoi] = useState<PoiDef | null>(null);
   const [safetyOpen, setSafetyOpen] = useState(false);
   const [nowTick, setNowTick] = useState(() => new Date());
+
+  // Keep mobile screen awake while actively walking a trail
+  useWakeLock(isNavigating);
 
   // Refresh offline solar sunset indicator every minute
   useEffect(() => {
@@ -72,20 +79,14 @@ export const App: React.FC = () => {
     customRoute
   ]);
 
-  const geo = useGeolocation(activeRoute);
-  const compass = useCompass(geo.gpsHeadingDeg);
+  const geo = useGeolocation(activeRoute, SIMULATOR_ENABLED);
+  // Prefer live device compass for real hikers; prefer simulated heading only when simulator is active
+  const compass = useCompass(geo.gpsHeadingDeg, geo.simEnabled);
 
-  // Start passive GPS lock shortly after load so geofence & position are ready
-  useEffect(() => {
-    if (network) {
-      geo.startLiveGps();
-    }
-  }, [network, geo.startLiveGps]);
-
-  // Evaluate live turn-by-turn & off-track state with hysteresis
+  // Evaluate live turn-by-turn & off-track state with hysteresis (only when on-site at QWR)
   const wasOffTrackRef = useRef(false);
   const navState = useMemo(() => {
-    if (!isNavigating || !activeRoute || !geo.position) {
+    if (!isNavigating || !activeRoute || !geo.position || geo.isAwayFromRefuge) {
       wasOffTrackRef.current = false;
       return null;
     }
@@ -97,9 +98,15 @@ export const App: React.FC = () => {
     );
     wasOffTrackRef.current = next.isOffTrack;
     return next;
-  }, [isNavigating, activeRoute, geo.position, compass.headingDeg]);
+  }, [
+    isNavigating,
+    activeRoute,
+    geo.position,
+    geo.isAwayFromRefuge,
+    compass.headingDeg
+  ]);
 
-  useGuidanceCues(navState, isNavigating, voiceEnabled);
+  useGuidanceCues(navState, isNavigating && !geo.isAwayFromRefuge, voiceEnabled);
 
   const selectablePois = useMemo(
     () => (network ? network.pois.filter((p) => p.selectableForCustomWalk) : []),
@@ -119,15 +126,11 @@ export const App: React.FC = () => {
     async (useSimulator: boolean) => {
       if (!activeRoute) return;
       await compass.requestCompassPermission();
-      if (useSimulator) {
+      if (SIMULATOR_ENABLED && useSimulator) {
         geo.enableSimulator(true);
       } else {
         geo.disableSimulator();
-        geo.startLiveGps();
-        // If user is clearly away from QWR or GPS unavailable, smoothly launch simulator
-        if (geo.isAwayFromRefuge || geo.gpsStatus === 'unavailable' || geo.gpsStatus === 'denied') {
-          geo.enableSimulator(true);
-        }
+        geo.startLiveGps(geo.gpsStatus === 'denied' || geo.gpsStatus === 'unavailable');
       }
       setHeadingUp(true);
       setIsNavigating(true);
@@ -138,13 +141,21 @@ export const App: React.FC = () => {
   const handleEndWalk = useCallback(() => {
     setIsNavigating(false);
     setReturnRouteOverride(null);
-    geo.setSimPlaying(false);
+    if (SIMULATOR_ENABLED) {
+      geo.setSimPlaying(false);
+    }
   }, [geo]);
 
-  const handleBackToParking = useCallback(() => {
+  const handleBackToParking = useCallback(async () => {
     if (!network || !status) return;
+    await compass.requestCompassPermission();
+    if (!geo.simEnabled) {
+      geo.startLiveGps(geo.gpsStatus === 'denied' || geo.gpsStatus === 'unavailable');
+    }
+    const onSiteCoord =
+      geo.position && !geo.isAwayFromRefuge ? geo.position : null;
     const fromCoord =
-      geo.position ??
+      onSiteCoord ??
       activeRoute?.polyline[Math.floor((activeRoute.polyline.length || 1) / 2)] ?? {
         lat: 40.8402,
         lng: -72.6155
@@ -154,23 +165,21 @@ export const App: React.FC = () => {
     setReturnRouteOverride(rescue);
     setIsNavigating(true);
     setHeadingUp(true);
-    if (geo.simEnabled) {
+    if (SIMULATOR_ENABLED && geo.simEnabled) {
       geo.setSimProgress(0);
       geo.setSimPlaying(true);
     }
-  }, [network, status, geo, activeRoute]);
+  }, [network, status, compass, geo, activeRoute]);
 
-  const handleWalkToPoiFromModal = useCallback(
-    (poi: PoiDef) => {
-      setFocusedPoi(null);
-      setReturnRouteOverride(null);
-      setMode('custom');
-      setSelectedPoiIds([poi.id]);
-    },
-    []
-  );
+  const handleWalkToPoiFromModal = useCallback((poi: PoiDef) => {
+    setFocusedPoi(null);
+    setReturnRouteOverride(null);
+    setMode('custom');
+    setSelectedPoiIds([poi.id]);
+  }, []);
 
   const handleStartVirtualWalkQuick = useCallback(() => {
+    if (!SIMULATOR_ENABLED) return;
     if (!activeRoute) {
       setMode('standard');
       setSelectedLoopId('yellow-14');
@@ -181,6 +190,7 @@ export const App: React.FC = () => {
   }, [activeRoute, geo]);
 
   const handleCycleSpeed = useCallback(() => {
+    if (!SIMULATOR_ENABLED) return;
     const next: 1 | 3 | 8 =
       geo.simSpeed === 1 ? 3 : geo.simSpeed === 3 ? 8 : 1;
     geo.setSimSpeed(next);
@@ -250,6 +260,7 @@ export const App: React.FC = () => {
         selectedPoiIds={mode === 'custom' ? selectedPoiIds : []}
         isNavigating={isNavigating}
         userPosition={geo.position}
+        isAwayFromRefuge={geo.isAwayFromRefuge}
         accuracyMeters={geo.accuracyMeters}
         headingDeg={compass.headingDeg}
         navState={navState}
@@ -258,9 +269,11 @@ export const App: React.FC = () => {
           await compass.requestCompassPermission();
           setHeadingUp((h) => !h);
         }}
+        onRequestGps={() => geo.startLiveGps(geo.gpsStatus === 'denied' || geo.gpsStatus === 'unavailable')}
         onSelectPoi={(poi) => setFocusedPoi(poi)}
-        simTapToMove={geo.simTapToMove}
+        simTapToMove={SIMULATOR_ENABLED && geo.simTapToMove}
         onMapTeleport={(coord) => {
+          if (!SIMULATOR_ENABLED) return;
           geo.teleportSimPosition(coord);
           if (!isNavigating && activeRoute) {
             setIsNavigating(true);
@@ -270,20 +283,24 @@ export const App: React.FC = () => {
 
       <TopHud
         isNavigating={isNavigating}
+        activeRoute={activeRoute}
         navState={navState}
+        gpsStatus={geo.gpsStatus}
         sunsetInfo={sunsetInfo}
         statusConfig={status}
         isOffline={isOffline}
         offlineReady={offlineReady}
         isAwayFromRefuge={geo.isAwayFromRefuge}
+        simulatorFeatureEnabled={SIMULATOR_ENABLED}
         simEnabled={geo.simEnabled}
         onOpenSafety={() => setSafetyOpen(true)}
         onStartVirtualWalk={handleStartVirtualWalkQuick}
+        onRetryGps={() => geo.startLiveGps(true)}
         onRerouteBackToParking={handleBackToParking}
       />
 
       <div className="bottom-sheet-wrap">
-        {geo.simEnabled && (
+        {SIMULATOR_ENABLED && geo.simEnabled && (
           <SimulatorBar
             playing={geo.simPlaying}
             speed={geo.simSpeed}
@@ -323,6 +340,7 @@ export const App: React.FC = () => {
           isNavigating={isNavigating}
           navState={navState}
           voiceEnabled={voiceEnabled}
+          simulatorFeatureEnabled={SIMULATOR_ENABLED}
           onToggleVoice={() => setVoiceEnabled((v) => !v)}
           onStartWalk={handleStartWalk}
           onEndWalk={handleEndWalk}
@@ -344,8 +362,13 @@ export const App: React.FC = () => {
           statusConfig={status}
           sunsetInfo={sunsetInfo}
           userPosition={geo.position}
+          accuracyMeters={geo.accuracyMeters}
+          gpsStatus={geo.gpsStatus}
+          isAwayFromRefuge={geo.isAwayFromRefuge}
+          distanceFromRefugeMeters={geo.distanceFromRefugeMeters}
           onClose={() => setSafetyOpen(false)}
           onBackToParking={handleBackToParking}
+          onRequestGps={() => geo.startLiveGps(true)}
         />
       )}
     </main>

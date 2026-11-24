@@ -9,21 +9,33 @@ import {
   X
 } from 'lucide-react';
 import type { LatLng, SunsetInfo, TrailStatusConfig } from '../types';
+import type { GeoHookState } from '../hooks/useGeolocation';
+import { metersToMiles } from '../engine/geo';
 
 interface SafetyDrawerProps {
   statusConfig: TrailStatusConfig;
   sunsetInfo: SunsetInfo;
   userPosition: LatLng | null;
+  accuracyMeters: number | null;
+  gpsStatus: GeoHookState['gpsStatus'];
+  isAwayFromRefuge: boolean;
+  distanceFromRefugeMeters: number | null;
   onClose: () => void;
   onBackToParking: () => void;
+  onRequestGps: () => void;
 }
 
 export const SafetyDrawer: React.FC<SafetyDrawerProps> = ({
   statusConfig,
   sunsetInfo,
   userPosition,
+  accuracyMeters,
+  gpsStatus,
+  isAwayFromRefuge,
+  distanceFromRefugeMeters,
   onClose,
-  onBackToParking
+  onBackToParking,
+  onRequestGps
 }) => {
   const closedSegments = Object.entries(statusConfig.segments).filter(
     ([, entry]) => entry.status === 'closed'
@@ -82,17 +94,57 @@ export const SafetyDrawer: React.FC<SafetyDrawerProps> = ({
           </div>
         </div>
 
-        {userPosition && (
-          <div className="safety-info-box">
-            <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-              <MapPin size={16} />
-              <strong>Your Current GPS Coordinates</strong>
-            </div>
-            <div className="tabular" style={{ fontWeight: 700, color: 'var(--qwr-pine)' }}>
-              {userPosition.lat.toFixed(5)}° N, {Math.abs(userPosition.lng).toFixed(5)}° W
-            </div>
+        <div className="safety-info-box">
+          <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+            <MapPin size={16} />
+            <strong>Your GPS Location</strong>
           </div>
-        )}
+          {userPosition ? (
+            <>
+              <div
+                className="tabular"
+                style={{ fontWeight: 700, color: 'var(--qwr-pine)' }}
+              >
+                {userPosition.lat.toFixed(5)}° N,{' '}
+                {Math.abs(userPosition.lng).toFixed(5)}° W
+                {accuracyMeters !== null ? ` (±${accuracyMeters} m)` : ''}
+              </div>
+              {isAwayFromRefuge && distanceFromRefugeMeters !== null && (
+                <div>
+                  Currently {metersToMiles(distanceFromRefugeMeters).toFixed(1)}{' '}
+                  mi from Quogue Wildlife Refuge.
+                </div>
+              )}
+            </>
+          ) : (
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8 }}>
+              <span>
+                {gpsStatus === 'denied'
+                  ? 'Location permission is turned off in browser settings.'
+                  : gpsStatus === 'requesting'
+                    ? 'Acquiring satellite GPS fix…'
+                    : 'Tap Enable GPS to view your live coordinates.'}
+              </span>
+              {gpsStatus !== 'requesting' && (
+                <button
+                  type="button"
+                  onClick={onRequestGps}
+                  style={{
+                    padding: '6px 10px',
+                    borderRadius: 10,
+                    background: 'var(--qwr-pine)',
+                    color: '#fff',
+                    fontSize: '0.8rem',
+                    fontWeight: 700,
+                    flexShrink: 0
+                  }}
+                >
+                  Enable GPS
+                </button>
+              )}
+            </div>
+          )}
+        </div>
 
         {closedSegments.length > 0 && (
           <div className="safety-info-box" style={{ background: 'var(--alert-bg)' }}>

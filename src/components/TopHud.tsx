@@ -10,6 +10,8 @@ import {
   CheckCircle2,
   CornerUpLeft,
   Footprints,
+  LocateFixed,
+  MapPin,
   PhoneCall,
   RefreshCw,
   Sunset,
@@ -17,22 +19,28 @@ import {
 } from 'lucide-react';
 import type {
   NavigationState,
+  ResolvedRoute,
   SunsetInfo,
   TrailStatusConfig,
   TurnType
 } from '../types';
+import type { GeoHookState } from '../hooks/useGeolocation';
 
 interface TopHudProps {
   isNavigating: boolean;
+  activeRoute: ResolvedRoute | null;
   navState: NavigationState | null;
+  gpsStatus: GeoHookState['gpsStatus'];
   sunsetInfo: SunsetInfo;
   statusConfig: TrailStatusConfig;
   isOffline: boolean;
   offlineReady: boolean;
   isAwayFromRefuge: boolean;
+  simulatorFeatureEnabled: boolean;
   simEnabled: boolean;
   onOpenSafety: () => void;
   onStartVirtualWalk: () => void;
+  onRetryGps: () => void;
   onRerouteBackToParking: () => void;
 }
 
@@ -101,46 +109,113 @@ function TurnArrowIcon({
 
 export const TopHud: React.FC<TopHudProps> = ({
   isNavigating,
+  activeRoute,
   navState,
+  gpsStatus,
   sunsetInfo,
   statusConfig,
   isOffline,
   offlineReady,
   isAwayFromRefuge,
+  simulatorFeatureEnabled,
   simEnabled,
   onOpenSafety,
   onStartVirtualWalk,
+  onRetryGps,
   onRerouteBackToParking
 }) => {
-  if (isNavigating && navState) {
-    const bannerClass = navState.hasArrived
-      ? 'nav-banner arrived'
-      : navState.isOffTrack
-        ? 'nav-banner off-track'
-        : 'nav-banner';
+  if (isNavigating) {
+    // 1. Live on-site GPS navigation state
+    if (navState && !isAwayFromRefuge) {
+      const bannerClass = navState.hasArrived
+        ? 'nav-banner arrived'
+        : navState.isOffTrack
+          ? 'nav-banner off-track'
+          : 'nav-banner';
+
+      return (
+        <header className="top-hud">
+          <div className={bannerClass} role="status" aria-live="polite">
+            <div className="nav-arrow-box" aria-hidden="true">
+              <TurnArrowIcon
+                turnType={navState.nextStep?.turnType}
+                isOffTrack={navState.isOffTrack}
+                rejoinRelativeDeg={navState.rejoinRelativeDeg}
+                rejoinBearingDeg={navState.rejoinBearingDeg}
+              />
+            </div>
+            <div className="nav-banner-text">
+              <div className="nav-headline">{navState.headline}</div>
+              <div className="nav-subline tabular">{navState.subline}</div>
+              {navState.isOffTrack && (
+                <button
+                  type="button"
+                  className="nav-reroute-btn"
+                  onClick={onRerouteBackToParking}
+                >
+                  <RefreshCw size={15} />
+                  Guide me straight to Parking
+                </button>
+              )}
+            </div>
+            <button
+              type="button"
+              className="icon-btn"
+              style={{
+                background: 'rgba(255,255,255,0.18)',
+                color: '#FFFFFF',
+                borderColor: 'rgba(255,255,255,0.22)'
+              }}
+              onClick={onOpenSafety}
+              aria-label="Safety and refuge phone"
+            >
+              <PhoneCall size={20} />
+            </button>
+          </div>
+        </header>
+      );
+    }
+
+    // 2. Real browser GPS states (permission denied, away from Refuge, acquiring satellite lock)
+    const isPermissionIssue = gpsStatus === 'denied' || gpsStatus === 'unavailable';
+    const bannerClass = isPermissionIssue ? 'nav-banner off-track' : 'nav-banner';
+
+    let headline = 'Finding your GPS location…';
+    let subline = 'Step into an open spot for a faster satellite lock';
+    if (isAwayFromRefuge) {
+      headline = 'You’re away from the Refuge';
+      subline = `Previewing ${activeRoute?.title ?? 'trail'} · Live GPS starts at QWR`;
+    } else if (gpsStatus === 'denied') {
+      headline = 'Location access is off';
+      subline = 'Enable Location in your browser settings to track your walk';
+    } else if (gpsStatus === 'unavailable') {
+      headline = 'Waiting for GPS signal';
+      subline = 'Check that Location Services are turned on for your device';
+    }
 
     return (
       <header className="top-hud">
         <div className={bannerClass} role="status" aria-live="polite">
           <div className="nav-arrow-box" aria-hidden="true">
-            <TurnArrowIcon
-              turnType={navState.nextStep?.turnType}
-              isOffTrack={navState.isOffTrack}
-              rejoinRelativeDeg={navState.rejoinRelativeDeg}
-              rejoinBearingDeg={navState.rejoinBearingDeg}
-            />
+            {isAwayFromRefuge ? (
+              <MapPin size={32} strokeWidth={2.5} />
+            ) : isPermissionIssue ? (
+              <AlertTriangle size={32} strokeWidth={2.5} />
+            ) : (
+              <LocateFixed size={32} strokeWidth={2.5} />
+            )}
           </div>
           <div className="nav-banner-text">
-            <div className="nav-headline">{navState.headline}</div>
-            <div className="nav-subline tabular">{navState.subline}</div>
-            {navState.isOffTrack && (
+            <div className="nav-headline">{headline}</div>
+            <div className="nav-subline">{subline}</div>
+            {isPermissionIssue && (
               <button
                 type="button"
                 className="nav-reroute-btn"
-                onClick={onRerouteBackToParking}
+                onClick={onRetryGps}
               >
                 <RefreshCw size={15} />
-                Guide me straight to Parking
+                Retry GPS
               </button>
             )}
           </div>
@@ -187,15 +262,17 @@ export const TopHud: React.FC<TopHudProps> = ({
         </div>
 
         <div className="header-actions">
-          <button
-            type="button"
-            className="icon-btn"
-            onClick={onStartVirtualWalk}
-            aria-label="Virtual Walk GPS simulator"
-            title="Test Virtual Walk"
-          >
-            <Footprints size={20} />
-          </button>
+          {simulatorFeatureEnabled && (
+            <button
+              type="button"
+              className="icon-btn"
+              onClick={onStartVirtualWalk}
+              aria-label="Virtual Walk GPS simulator"
+              title="Test Virtual Walk"
+            >
+              <Footprints size={20} />
+            </button>
+          )}
           <button
             type="button"
             className="icon-btn primary-tint"
@@ -227,7 +304,7 @@ export const TopHud: React.FC<TopHudProps> = ({
           </span>
         )}
 
-        {isAwayFromRefuge && !simEnabled && (
+        {simulatorFeatureEnabled && isAwayFromRefuge && !simEnabled && (
           <button
             type="button"
             className="mini-pill sim-offer"

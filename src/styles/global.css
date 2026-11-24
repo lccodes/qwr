@@ -344,6 +344,10 @@ button:focus-visible {
   transition: top 0.2s ease;
 }
 
+.map-controls.nav-shift {
+  top: calc(var(--safe-top) + 148px);
+}
+
 .map-controls.off-track-shift {
   top: calc(var(--safe-top) + 196px);
 }

@@ -34,6 +34,7 @@ interface BottomSheetProps {
   isNavigating: boolean;
   navState: NavigationState | null;
   voiceEnabled: boolean;
+  simulatorFeatureEnabled: boolean;
   onToggleVoice: () => void;
   onStartWalk: (useSimulator: boolean) => void;
   onEndWalk: () => void;
@@ -55,6 +56,7 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({
   isNavigating,
   navState,
   voiceEnabled,
+  simulatorFeatureEnabled,
   onToggleVoice,
   onStartWalk,
   onEndWalk,
@@ -285,15 +287,17 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({
                 <Navigation size={20} />
                 <span>Start GPS Walk</span>
               </button>
-              <button
-                type="button"
-                className="secondary-cta"
-                onClick={() => onStartWalk(true)}
-                title="Try a simulated virtual walk on this trail"
-              >
-                <Footprints size={18} />
-                <span>Demo</span>
-              </button>
+              {simulatorFeatureEnabled && (
+                <button
+                  type="button"
+                  className="secondary-cta"
+                  onClick={() => onStartWalk(true)}
+                  title="Try a simulated virtual walk on this trail"
+                >
+                  <Footprints size={18} />
+                  <span>Demo</span>
+                </button>
+              )}
             </div>
           </>
         ) : (
