@@ -1,0 +1,4598 @@
+{
+  "version": "2026.11-osm",
+  "sourceNote": "Real-world GPS coordinates from OpenStreetMap contributors reconciled with Quogue Wildlife Refuge Trail Map & Fairy Dell Boardwalk geometry.",
+  "refugeCenter": {
+    "lat": 40.8405,
+    "lng": -72.6166
+  },
+  "bounds": {
+    "north": 40.8504,
+    "south": 40.83,
+    "west": -72.621,
+    "east": -72.6124
+  },
+  "svgViewBox": {
+    "width": 560,
+    "height": 1120,
+    "padding": 28
+  },
+  "nodes": [
+    {
+      "id": "parking",
+      "lat": 40.834545,
+      "lng": -72.61528,
+      "label": "Parking & Trailhead"
+    },
+    {
+      "id": "animal-complex-north",
+      "lat": 40.834729,
+      "lng": -72.615316,
+      "label": "Animal Complex Split"
+    },
+    {
+      "id": "east-fence-mid-south",
+      "lat": 40.836789,
+      "lng": -72.613722,
+      "label": "East Fence Junction"
+    },
+    {
+      "id": "bridge-east-junction",
+      "lat": 40.836699,
+      "lng": -72.615184,
+      "label": "East of Bridge"
+    },
+    {
+      "id": "bridge-west",
+      "lat": 40.836852,
+      "lng": -72.616992,
+      "label": "The Bridge (West)"
+    },
+    {
+      "id": "west-fence-nw-spur",
+      "lat": 40.836648,
+      "lng": -72.619046,
+      "label": "West Trail NW Spur"
+    },
+    {
+      "id": "west-fence-mid-south-outer",
+      "lat": 40.836766,
+      "lng": -72.619145,
+      "label": "West Fence at NW Spur"
+    },
+    {
+      "id": "sw-bog-corner",
+      "lat": 40.834192,
+      "lng": -72.618837,
+      "label": "Southwest Bog Corner"
+    },
+    {
+      "id": "bog-boardwalk-west",
+      "lat": 40.834031,
+      "lng": -72.616684,
+      "label": "Bog Boardwalk"
+    },
+    {
+      "id": "ice-exhibit-junction",
+      "lat": 40.834336,
+      "lng": -72.61552,
+      "label": "Ice Harvesting Exhibit"
+    },
+    {
+      "id": "east-swamp-mid",
+      "lat": 40.838256,
+      "lng": -72.614752,
+      "label": "East Swamp Trail"
+    },
+    {
+      "id": "east-fence-north-pond",
+      "lat": 40.838967,
+      "lng": -72.614048,
+      "label": "East Fence near North Pond"
+    },
+    {
+      "id": "north-pond-east",
+      "lat": 40.839648,
+      "lng": -72.614797,
+      "label": "North Pond (East)"
+    },
+    {
+      "id": "north-pond-west",
+      "lat": 40.839788,
+      "lng": -72.616682,
+      "label": "North Pond (West)"
+    },
+    {
+      "id": "new-trail-se",
+      "lat": 40.838486,
+      "lng": -72.616791,
+      "label": "Forest Regeneration Clearing"
+    },
+    {
+      "id": "new-trail-west",
+      "lat": 40.839826,
+      "lng": -72.618763,
+      "label": "New Trail West End"
+    },
+    {
+      "id": "west-fence-regen",
+      "lat": 40.839644,
+      "lng": -72.619309,
+      "label": "West Fence at Regeneration Area"
+    },
+    {
+      "id": "east-fence-deer-pond",
+      "lat": 40.843786,
+      "lng": -72.614805,
+      "label": "Deer Pond Trailhead"
+    },
+    {
+      "id": "deer-pond-overlook",
+      "lat": 40.843745,
+      "lng": -72.615142,
+      "label": "Deer Pond Overlook"
+    },
+    {
+      "id": "east-fence-north-cross",
+      "lat": 40.845503,
+      "lng": -72.615249,
+      "label": "East Fence North Cross"
+    },
+    {
+      "id": "dwarf-pine-apex",
+      "lat": 40.849179,
+      "lng": -72.616763,
+      "label": "Dwarf Pine Barrens North Tip"
+    },
+    {
+      "id": "nw-fence-red-split",
+      "lat": 40.847256,
+      "lng": -72.619161,
+      "label": "Northwest Fence Split"
+    },
+    {
+      "id": "interior-north-cross-east",
+      "lat": 40.845032,
+      "lng": -72.617412,
+      "label": "Dwarf Pine Crossroad (East)"
+    },
+    {
+      "id": "interior-north-cross-west",
+      "lat": 40.845082,
+      "lng": -72.617669,
+      "label": "Dwarf Pine Crossroad (West)"
+    },
+    {
+      "id": "west-fence-north-cross",
+      "lat": 40.844454,
+      "lng": -72.619578,
+      "label": "West Fence North Cross"
+    },
+    {
+      "id": "old-main-rail-crossing",
+      "lat": 40.833684,
+      "lng": -72.615682,
+      "label": "LIRR Crossing (Old Main Rd)"
+    },
+    {
+      "id": "fairy-dell-entry",
+      "lat": 40.832749,
+      "lng": -72.616262,
+      "label": "Fairy Dell Boardwalk Gate"
+    },
+    {
+      "id": "fairy-dell-fork",
+      "lat": 40.832358,
+      "lng": -72.616457,
+      "label": "Fairy Dell Boardwalk Fork"
+    },
+    {
+      "id": "fairy-dell-mid-fork",
+      "lat": 40.831745,
+      "lng": -72.616595,
+      "label": "Fairy Dell Middle Split"
+    },
+    {
+      "id": "fairy-dell-west-overlook",
+      "lat": 40.83172,
+      "lng": -72.617516,
+      "label": "Fairy Dell West Overlook"
+    },
+    {
+      "id": "fairy-dell-east-overlook",
+      "lat": 40.831538,
+      "lng": -72.616632,
+      "label": "Fairy Dell Middle Overlook"
+    },
+    {
+      "id": "fairy-dell-overlook",
+      "lat": 40.830972,
+      "lng": -72.617373,
+      "label": "Fairy Dell South Overlook"
+    }
+  ],
+  "segments": [
+    {
+      "id": "entrance-to-split",
+      "name": "Main Trailhead (Parking to Animal Complex Split)",
+      "from": "parking",
+      "to": "animal-complex-north",
+      "waypoints": [
+        [
+          40.834545,
+          -72.61528
+        ],
+        [
+          40.834729,
+          -72.615316
+        ]
+      ],
+      "habitat": "pine-oak-forest",
+      "surface": "gravel",
+      "loops": [
+        "purple",
+        "yellow",
+        "blue",
+        "red"
+      ]
+    },
+    {
+      "id": "storybook-pond-east",
+      "name": "Old Ice Pond East Trail (Storybook Walk Trail)",
+      "from": "animal-complex-north",
+      "to": "bridge-east-junction",
+      "waypoints": [
+        [
+          40.834729,
+          -72.615316
+        ],
+        [
+          40.835209,
+          -72.615318
+        ],
+        [
+          40.835883,
+          -72.615227
+        ],
+        [
+          40.835924,
+          -72.615222
+        ],
+        [
+          40.836577,
+          -72.615184
+        ],
+        [
+          40.836699,
+          -72.615184
+        ]
+      ],
+      "habitat": "pine-oak-forest",
+      "surface": "dirt",
+      "loops": [
+        "purple"
+      ]
+    },
+    {
+      "id": "east-amphitheater-field",
+      "name": "East Trail (Amphitheater, Restrooms & Field)",
+      "from": "animal-complex-north",
+      "to": "east-fence-mid-south",
+      "waypoints": [
+        [
+          40.834729,
+          -72.615316
+        ],
+        [
+          40.834832,
+          -72.615148
+        ],
+        [
+          40.834861,
+          -72.614774
+        ],
+        [
+          40.834784,
+          -72.614704
+        ],
+        [
+          40.834779,
+          -72.614557
+        ],
+        [
+          40.834795,
+          -72.614451
+        ],
+        [
+          40.834851,
+          -72.614378
+        ],
+        [
+          40.834974,
+          -72.614207
+        ],
+        [
+          40.835072,
+          -72.614158
+        ],
+        [
+          40.835221,
+          -72.61403
+        ],
+        [
+          40.835393,
+          -72.613989
+        ],
+        [
+          40.83559,
+          -72.613988
+        ],
+        [
+          40.835815,
+          -72.614003
+        ],
+        [
+          40.836048,
+          -72.613992
+        ],
+        [
+          40.836245,
+          -72.614
+        ],
+        [
+          40.836388,
+          -72.613933
+        ],
+        [
+          40.836452,
+          -72.613862
+        ],
+        [
+          40.836467,
+          -72.613791
+        ],
+        [
+          40.836517,
+          -72.6137
+        ],
+        [
+          40.83655,
+          -72.613681
+        ],
+        [
+          40.836789,
+          -72.613722
+        ]
+      ],
+      "habitat": "field",
+      "surface": "dirt",
+      "loops": [
+        "yellow",
+        "blue",
+        "red"
+      ]
+    },
+    {
+      "id": "east-bridge-connector",
+      "name": "East Fence to Bridge Connector",
+      "from": "east-fence-mid-south",
+      "to": "bridge-east-junction",
+      "waypoints": [
+        [
+          40.836789,
+          -72.613722
+        ],
+        [
+          40.836825,
+          -72.613791
+        ],
+        [
+          40.836824,
+          -72.613842
+        ],
+        [
+          40.836762,
+          -72.61396
+        ],
+        [
+          40.836711,
+          -72.614071
+        ],
+        [
+          40.836704,
+          -72.614106
+        ],
+        [
+          40.836755,
+          -72.614129
+        ],
+        [
+          40.836804,
+          -72.614165
+        ],
+        [
+          40.836804,
+          -72.614267
+        ],
+        [
+          40.836755,
+          -72.614366
+        ],
+        [
+          40.836722,
+          -72.61449
+        ],
+        [
+          40.8367,
+          -72.614664
+        ],
+        [
+          40.836697,
+          -72.614876
+        ],
+        [
+          40.836699,
+          -72.615184
+        ]
+      ],
+      "habitat": "pine-oak-forest",
+      "surface": "dirt",
+      "loops": [
+        "yellow",
+        "red"
+      ]
+    },
+    {
+      "id": "bridge-crossing",
+      "name": "Old Ice Pond Bridge Crossing",
+      "from": "bridge-east-junction",
+      "to": "bridge-west",
+      "waypoints": [
+        [
+          40.836699,
+          -72.615184
+        ],
+        [
+          40.836727,
+          -72.615967
+        ],
+        [
+          40.836742,
+          -72.616087
+        ],
+        [
+          40.836832,
+          -72.616818
+        ],
+        [
+          40.836852,
+          -72.616992
+        ]
+      ],
+      "habitat": "swamp",
+      "surface": "bridge",
+      "loops": [
+        "purple",
+        "red"
+      ]
+    },
+    {
+      "id": "old-ice-pond-nw-spur",
+      "name": "Old Ice Pond Northwest Connector (Bridge to West Fence)",
+      "from": "bridge-west",
+      "to": "west-fence-nw-spur",
+      "waypoints": [
+        [
+          40.836852,
+          -72.616992
+        ],
+        [
+          40.836848,
+          -72.61738
+        ],
+        [
+          40.836889,
+          -72.617869
+        ],
+        [
+          40.836922,
+          -72.618348
+        ],
+        [
+          40.836953,
+          -72.618723
+        ],
+        [
+          40.836961,
+          -72.618896
+        ],
+        [
+          40.83691,
+          -72.619012
+        ],
+        [
+          40.836787,
+          -72.619045
+        ],
+        [
+          40.836648,
+          -72.619046
+        ]
+      ],
+      "habitat": "pine-barrens",
+      "surface": "dirt",
+      "loops": [
+        "purple",
+        "yellow"
+      ]
+    },
+    {
+      "id": "west-fence-spur-link",
+      "name": "West Fence Spur Link",
+      "from": "west-fence-mid-south-outer",
+      "to": "west-fence-nw-spur",
+      "waypoints": [
+        [
+          40.836766,
+          -72.619145
+        ],
+        [
+          40.836648,
+          -72.619046
+        ]
+      ],
+      "habitat": "pine-barrens",
+      "surface": "dirt",
+      "loops": [
+        "red"
+      ]
+    },
+    {
+      "id": "west-fence-south-inner",
+      "name": "West Trail (Old Ice Pond West Side — Inner)",
+      "from": "west-fence-nw-spur",
+      "to": "sw-bog-corner",
+      "waypoints": [
+        [
+          40.836648,
+          -72.619046
+        ],
+        [
+          40.836575,
+          -72.619047
+        ],
+        [
+          40.836459,
+          -72.619043
+        ],
+        [
+          40.836246,
+          -72.619005
+        ],
+        [
+          40.836107,
+          -72.618959
+        ],
+        [
+          40.835933,
+          -72.618858
+        ],
+        [
+          40.835742,
+          -72.618727
+        ],
+        [
+          40.835584,
+          -72.618687
+        ],
+        [
+          40.835335,
+          -72.61855
+        ],
+        [
+          40.835183,
+          -72.618491
+        ],
+        [
+          40.835055,
+          -72.61841
+        ],
+        [
+          40.834806,
+          -72.61841
+        ],
+        [
+          40.834686,
+          -72.618439
+        ],
+        [
+          40.834548,
+          -72.618548
+        ],
+        [
+          40.834434,
+          -72.618667
+        ],
+        [
+          40.834334,
+          -72.61877
+        ],
+        [
+          40.834192,
+          -72.618837
+        ]
+      ],
+      "habitat": "pine-barrens",
+      "surface": "dirt",
+      "loops": [
+        "purple",
+        "yellow",
+        "red"
+      ]
+    },
+    {
+      "id": "west-fence-south-outer",
+      "name": "West Fence Trail (Old Ice Pond West Side — Outer)",
+      "from": "west-fence-mid-south-outer",
+      "to": "sw-bog-corner",
+      "waypoints": [
+        [
+          40.836766,
+          -72.619145
+        ],
+        [
+          40.835998,
+          -72.619101
+        ],
+        [
+          40.834395,
+          -72.619005
+        ],
+        [
+          40.834192,
+          -72.618837
+        ]
+      ],
+      "habitat": "pine-barrens",
+      "surface": "dirt",
+      "loops": [
+        "blue"
+      ]
+    },
+    {
+      "id": "west-fence-mid-south",
+      "name": "West Fence Trail (Regeneration Area to Old Ice Pond Spur)",
+      "from": "west-fence-regen",
+      "to": "west-fence-mid-south-outer",
+      "waypoints": [
+        [
+          40.839644,
+          -72.619309
+        ],
+        [
+          40.83881,
+          -72.619262
+        ],
+        [
+          40.836766,
+          -72.619145
+        ]
+      ],
+      "habitat": "pine-barrens",
+      "surface": "dirt",
+      "loops": [
+        "blue",
+        "red"
+      ]
+    },
+    {
+      "id": "bog-south-trail",
+      "name": "South Bog Trail (SW Corner to Bog Boardwalk)",
+      "from": "sw-bog-corner",
+      "to": "bog-boardwalk-west",
+      "waypoints": [
+        [
+          40.834192,
+          -72.618837
+        ],
+        [
+          40.834087,
+          -72.618817
+        ],
+        [
+          40.833962,
+          -72.61879
+        ],
+        [
+          40.8339,
+          -72.618729
+        ],
+        [
+          40.83387,
+          -72.618638
+        ],
+        [
+          40.833858,
+          -72.618521
+        ],
+        [
+          40.833933,
+          -72.617948
+        ],
+        [
+          40.834071,
+          -72.616688
+        ],
+        [
+          40.834031,
+          -72.616684
+        ]
+      ],
+      "habitat": "bog",
+      "surface": "dirt",
+      "loops": [
+        "purple",
+        "yellow",
+        "blue",
+        "red"
+      ]
+    },
+    {
+      "id": "bog-boardwalk",
+      "name": "Bog Boardwalk & Nature Center Loop (South of Old Ice Pond)",
+      "from": "bog-boardwalk-west",
+      "to": "ice-exhibit-junction",
+      "waypoints": [
+        [
+          40.834031,
+          -72.616684
+        ],
+        [
+          40.834011,
+          -72.616619
+        ],
+        [
+          40.833988,
+          -72.616583
+        ],
+        [
+          40.83398,
+          -72.616499
+        ],
+        [
+          40.833943,
+          -72.616403
+        ],
+        [
+          40.833917,
+          -72.616355
+        ],
+        [
+          40.833853,
+          -72.616321
+        ],
+        [
+          40.833785,
+          -72.616277
+        ],
+        [
+          40.833767,
+          -72.616237
+        ],
+        [
+          40.833792,
+          -72.616033
+        ],
+        [
+          40.833797,
+          -72.61601
+        ],
+        [
+          40.833821,
+          -72.615899
+        ],
+        [
+          40.833871,
+          -72.615784
+        ],
+        [
+          40.833962,
+          -72.615705
+        ],
+        [
+          40.834035,
+          -72.615635
+        ],
+        [
+          40.834098,
+          -72.615603
+        ],
+        [
+          40.834222,
+          -72.615577
+        ],
+        [
+          40.834336,
+          -72.61552
+        ]
+      ],
+      "habitat": "bog",
+      "surface": "boardwalk",
+      "loops": [
+        "purple",
+        "yellow",
+        "blue",
+        "red"
+      ]
+    },
+    {
+      "id": "ice-exhibit-to-parking",
+      "name": "Ice Harvesting Exhibit to Parking Path",
+      "from": "ice-exhibit-junction",
+      "to": "parking",
+      "waypoints": [
+        [
+          40.834336,
+          -72.61552
+        ],
+        [
+          40.83445,
+          -72.615419
+        ],
+        [
+          40.834496,
+          -72.615372
+        ],
+        [
+          40.834545,
+          -72.61528
+        ]
+      ],
+      "habitat": "pine-oak-forest",
+      "surface": "gravel",
+      "loops": [
+        "purple",
+        "yellow",
+        "blue",
+        "red"
+      ]
+    },
+    {
+      "id": "swamp-east-south",
+      "name": "East Swamp Trail (Bridge to Mid-Swamp)",
+      "from": "bridge-east-junction",
+      "to": "east-swamp-mid",
+      "waypoints": [
+        [
+          40.836699,
+          -72.615184
+        ],
+        [
+          40.836906,
+          -72.615066
+        ],
+        [
+          40.837034,
+          -72.614983
+        ],
+        [
+          40.837222,
+          -72.614876
+        ],
+        [
+          40.837426,
+          -72.614837
+        ],
+        [
+          40.837824,
+          -72.614774
+        ],
+        [
+          40.838079,
+          -72.61476
+        ],
+        [
+          40.838256,
+          -72.614752
+        ]
+      ],
+      "habitat": "swamp",
+      "surface": "dirt",
+      "loops": [
+        "yellow"
+      ]
+    },
+    {
+      "id": "swamp-east-north",
+      "name": "East Swamp Trail (Mid-Swamp to North Pond)",
+      "from": "east-swamp-mid",
+      "to": "north-pond-east",
+      "waypoints": [
+        [
+          40.838256,
+          -72.614752
+        ],
+        [
+          40.838436,
+          -72.614744
+        ],
+        [
+          40.838765,
+          -72.614708
+        ],
+        [
+          40.838978,
+          -72.614648
+        ],
+        [
+          40.839201,
+          -72.61459
+        ],
+        [
+          40.839332,
+          -72.614628
+        ],
+        [
+          40.839461,
+          -72.614711
+        ],
+        [
+          40.839531,
+          -72.614773
+        ],
+        [
+          40.839648,
+          -72.614797
+        ]
+      ],
+      "habitat": "swamp",
+      "surface": "dirt",
+      "loops": [
+        "yellow"
+      ]
+    },
+    {
+      "id": "east-fence-south-to-north-pond",
+      "name": "East Fence Trail (Mid-South to North Pond)",
+      "from": "east-fence-mid-south",
+      "to": "east-fence-north-pond",
+      "waypoints": [
+        [
+          40.836789,
+          -72.613722
+        ],
+        [
+          40.837396,
+          -72.613791
+        ],
+        [
+          40.838015,
+          -72.613893
+        ],
+        [
+          40.838772,
+          -72.614011
+        ],
+        [
+          40.838967,
+          -72.614048
+        ]
+      ],
+      "habitat": "pine-oak-forest",
+      "surface": "dirt",
+      "loops": [
+        "blue"
+      ]
+    },
+    {
+      "id": "east-swamp-shortcut",
+      "name": "East Fence to Swamp Connector",
+      "from": "east-fence-north-pond",
+      "to": "east-swamp-mid",
+      "waypoints": [
+        [
+          40.838967,
+          -72.614048
+        ],
+        [
+          40.838836,
+          -72.614263
+        ],
+        [
+          40.838634,
+          -72.61435
+        ],
+        [
+          40.838256,
+          -72.614752
+        ]
+      ],
+      "habitat": "pine-oak-forest",
+      "surface": "dirt"
+    },
+    {
+      "id": "north-pond-east-link",
+      "name": "North Pond East Spur (East Fence to North Pond)",
+      "from": "east-fence-north-pond",
+      "to": "north-pond-east",
+      "waypoints": [
+        [
+          40.838967,
+          -72.614048
+        ],
+        [
+          40.839233,
+          -72.614193
+        ],
+        [
+          40.839276,
+          -72.614217
+        ],
+        [
+          40.839582,
+          -72.614453
+        ],
+        [
+          40.839648,
+          -72.614797
+        ]
+      ],
+      "habitat": "pine-barrens",
+      "surface": "dirt",
+      "loops": [
+        "red"
+      ]
+    },
+    {
+      "id": "north-pond-crossing",
+      "name": "North Pond South Shore Crossing",
+      "from": "north-pond-east",
+      "to": "north-pond-west",
+      "waypoints": [
+        [
+          40.839648,
+          -72.614797
+        ],
+        [
+          40.839703,
+          -72.614899
+        ],
+        [
+          40.839712,
+          -72.615183
+        ],
+        [
+          40.839739,
+          -72.61611
+        ],
+        [
+          40.839771,
+          -72.616592
+        ],
+        [
+          40.839788,
+          -72.616682
+        ]
+      ],
+      "habitat": "swamp",
+      "surface": "dirt",
+      "loops": [
+        "yellow",
+        "red"
+      ]
+    },
+    {
+      "id": "bridge-to-regen-se",
+      "name": "Central Trail (Bridge West to Regeneration Clearing)",
+      "from": "bridge-west",
+      "to": "new-trail-se",
+      "waypoints": [
+        [
+          40.836852,
+          -72.616992
+        ],
+        [
+          40.836882,
+          -72.616925
+        ],
+        [
+          40.836965,
+          -72.616899
+        ],
+        [
+          40.837077,
+          -72.616898
+        ],
+        [
+          40.837148,
+          -72.617091
+        ],
+        [
+          40.837164,
+          -72.617233
+        ],
+        [
+          40.837176,
+          -72.617362
+        ],
+        [
+          40.837233,
+          -72.617469
+        ],
+        [
+          40.837391,
+          -72.617519
+        ],
+        [
+          40.837515,
+          -72.61748
+        ],
+        [
+          40.837686,
+          -72.617337
+        ],
+        [
+          40.837866,
+          -72.617216
+        ],
+        [
+          40.838201,
+          -72.616997
+        ],
+        [
+          40.838421,
+          -72.616854
+        ],
+        [
+          40.838486,
+          -72.616791
+        ]
+      ],
+      "habitat": "pine-barrens",
+      "surface": "dirt",
+      "loops": [
+        "yellow",
+        "red"
+      ]
+    },
+    {
+      "id": "regen-se-to-north-pond-west",
+      "name": "Central Trail (Regeneration Clearing to North Pond West)",
+      "from": "new-trail-se",
+      "to": "north-pond-west",
+      "waypoints": [
+        [
+          40.838486,
+          -72.616791
+        ],
+        [
+          40.838562,
+          -72.616717
+        ],
+        [
+          40.838685,
+          -72.616713
+        ],
+        [
+          40.838805,
+          -72.616832
+        ],
+        [
+          40.839002,
+          -72.616956
+        ],
+        [
+          40.839161,
+          -72.617028
+        ],
+        [
+          40.839273,
+          -72.616993
+        ],
+        [
+          40.839361,
+          -72.616832
+        ],
+        [
+          40.839413,
+          -72.61672
+        ],
+        [
+          40.839563,
+          -72.616677
+        ],
+        [
+          40.839788,
+          -72.616682
+        ]
+      ],
+      "habitat": "pine-barrens",
+      "surface": "dirt",
+      "loops": [
+        "yellow",
+        "red"
+      ]
+    },
+    {
+      "id": "regeneration-new-trail",
+      "name": "New Trail (Forest Regeneration & Eastern Bluebird Nestboxes)",
+      "from": "new-trail-se",
+      "to": "new-trail-west",
+      "waypoints": [
+        [
+          40.838486,
+          -72.616791
+        ],
+        [
+          40.838538,
+          -72.616887
+        ],
+        [
+          40.838544,
+          -72.616919
+        ],
+        [
+          40.838578,
+          -72.616997
+        ],
+        [
+          40.838599,
+          -72.6171
+        ],
+        [
+          40.838602,
+          -72.617146
+        ],
+        [
+          40.83862,
+          -72.617181
+        ],
+        [
+          40.838674,
+          -72.617222
+        ],
+        [
+          40.838715,
+          -72.617247
+        ],
+        [
+          40.83875,
+          -72.61726
+        ],
+        [
+          40.838814,
+          -72.617294
+        ],
+        [
+          40.838904,
+          -72.617311
+        ],
+        [
+          40.838985,
+          -72.617328
+        ],
+        [
+          40.839066,
+          -72.617363
+        ],
+        [
+          40.839182,
+          -72.617445
+        ],
+        [
+          40.839205,
+          -72.617467
+        ],
+        [
+          40.839293,
+          -72.617544
+        ],
+        [
+          40.839325,
+          -72.617634
+        ],
+        [
+          40.839351,
+          -72.617694
+        ],
+        [
+          40.83937,
+          -72.617766
+        ],
+        [
+          40.8394,
+          -72.617894
+        ],
+        [
+          40.839398,
+          -72.617926
+        ],
+        [
+          40.839409,
+          -72.618009
+        ],
+        [
+          40.839432,
+          -72.618133
+        ],
+        [
+          40.83946,
+          -72.618263
+        ],
+        [
+          40.839509,
+          -72.61832
+        ],
+        [
+          40.83959,
+          -72.618384
+        ],
+        [
+          40.83967,
+          -72.618479
+        ],
+        [
+          40.839764,
+          -72.618597
+        ],
+        [
+          40.839809,
+          -72.618676
+        ],
+        [
+          40.839826,
+          -72.618763
+        ]
+      ],
+      "habitat": "forest-regeneration",
+      "surface": "dirt",
+      "isNewTrail": true
+    },
+    {
+      "id": "regen-north-trail",
+      "name": "Regeneration North Trail (North Pond West to West Trail)",
+      "from": "north-pond-west",
+      "to": "new-trail-west",
+      "waypoints": [
+        [
+          40.839788,
+          -72.616682
+        ],
+        [
+          40.839975,
+          -72.618085
+        ],
+        [
+          40.839912,
+          -72.618404
+        ],
+        [
+          40.839826,
+          -72.618763
+        ]
+      ],
+      "habitat": "forest-regeneration",
+      "surface": "dirt",
+      "loops": [
+        "red"
+      ]
+    },
+    {
+      "id": "regen-to-west-fence",
+      "name": "Regeneration Trail to West Fence Link",
+      "from": "new-trail-west",
+      "to": "west-fence-regen",
+      "waypoints": [
+        [
+          40.839826,
+          -72.618763
+        ],
+        [
+          40.839823,
+          -72.618777
+        ],
+        [
+          40.839819,
+          -72.618793
+        ],
+        [
+          40.839792,
+          -72.618872
+        ],
+        [
+          40.839769,
+          -72.618942
+        ],
+        [
+          40.839644,
+          -72.619309
+        ]
+      ],
+      "habitat": "forest-regeneration",
+      "surface": "dirt",
+      "loops": [
+        "red"
+      ]
+    },
+    {
+      "id": "east-fence-north-pond-to-deer",
+      "name": "East Fence Trail (North Pond to Deer Pond)",
+      "from": "east-fence-north-pond",
+      "to": "east-fence-deer-pond",
+      "waypoints": [
+        [
+          40.838967,
+          -72.614048
+        ],
+        [
+          40.839262,
+          -72.614091
+        ],
+        [
+          40.839831,
+          -72.614174
+        ],
+        [
+          40.840487,
+          -72.614255
+        ],
+        [
+          40.840943,
+          -72.614327
+        ],
+        [
+          40.841318,
+          -72.614418
+        ],
+        [
+          40.841698,
+          -72.614472
+        ],
+        [
+          40.842065,
+          -72.614544
+        ],
+        [
+          40.842921,
+          -72.614676
+        ],
+        [
+          40.843591,
+          -72.614772
+        ],
+        [
+          40.843786,
+          -72.614805
+        ]
+      ],
+      "habitat": "pine-barrens",
+      "surface": "dirt",
+      "loops": [
+        "blue",
+        "red"
+      ]
+    },
+    {
+      "id": "deer-pond-overlook-spur",
+      "name": "Deer Pond Scenic Overlook Spur",
+      "from": "east-fence-deer-pond",
+      "to": "deer-pond-overlook",
+      "waypoints": [
+        [
+          40.843786,
+          -72.614805
+        ],
+        [
+          40.843745,
+          -72.615142
+        ]
+      ],
+      "habitat": "swamp",
+      "surface": "dirt"
+    },
+    {
+      "id": "east-fence-deer-to-cross",
+      "name": "East Fence Trail (Deer Pond to North Cross Trail)",
+      "from": "east-fence-deer-pond",
+      "to": "east-fence-north-cross",
+      "waypoints": [
+        [
+          40.843786,
+          -72.614805
+        ],
+        [
+          40.844251,
+          -72.614882
+        ],
+        [
+          40.844695,
+          -72.614933
+        ],
+        [
+          40.844944,
+          -72.615022
+        ],
+        [
+          40.845503,
+          -72.615249
+        ]
+      ],
+      "habitat": "pine-barrens",
+      "surface": "dirt",
+      "loops": [
+        "blue",
+        "red"
+      ]
+    },
+    {
+      "id": "east-fence-dwarf-pine-north",
+      "name": "East Fence Trail (Dwarf Pine Barrens to North Apex)",
+      "from": "east-fence-north-cross",
+      "to": "dwarf-pine-apex",
+      "waypoints": [
+        [
+          40.845503,
+          -72.615249
+        ],
+        [
+          40.845533,
+          -72.615261
+        ],
+        [
+          40.846302,
+          -72.615545
+        ],
+        [
+          40.847515,
+          -72.615985
+        ],
+        [
+          40.848331,
+          -72.61628
+        ],
+        [
+          40.848964,
+          -72.616489
+        ],
+        [
+          40.849078,
+          -72.616532
+        ],
+        [
+          40.849134,
+          -72.616602
+        ],
+        [
+          40.849171,
+          -72.616682
+        ],
+        [
+          40.849179,
+          -72.616763
+        ]
+      ],
+      "habitat": "dwarf-pine-barrens",
+      "surface": "dirt",
+      "loops": [
+        "blue",
+        "red"
+      ]
+    },
+    {
+      "id": "nw-fence-dwarf-pine",
+      "name": "Northwest Fence Trail (Dwarf Pine Barrens)",
+      "from": "dwarf-pine-apex",
+      "to": "nw-fence-red-split",
+      "waypoints": [
+        [
+          40.849179,
+          -72.616763
+        ],
+        [
+          40.849155,
+          -72.61687
+        ],
+        [
+          40.84909,
+          -72.616961
+        ],
+        [
+          40.847256,
+          -72.619161
+        ]
+      ],
+      "habitat": "dwarf-pine-barrens",
+      "surface": "dirt",
+      "loops": [
+        "blue",
+        "red"
+      ]
+    },
+    {
+      "id": "interior-deer-pond-west",
+      "name": "Interior Pine Barrens Trail (West of Deer Pond)",
+      "from": "north-pond-west",
+      "to": "interior-north-cross-east",
+      "waypoints": [
+        [
+          40.839788,
+          -72.616682
+        ],
+        [
+          40.840002,
+          -72.616747
+        ],
+        [
+          40.840452,
+          -72.616865
+        ],
+        [
+          40.840641,
+          -72.616843
+        ],
+        [
+          40.841043,
+          -72.61662
+        ],
+        [
+          40.841418,
+          -72.616414
+        ],
+        [
+          40.841649,
+          -72.616266
+        ],
+        [
+          40.842019,
+          -72.616245
+        ],
+        [
+          40.84225,
+          -72.616041
+        ],
+        [
+          40.842512,
+          -72.615845
+        ],
+        [
+          40.842668,
+          -72.615818
+        ],
+        [
+          40.842846,
+          -72.615934
+        ],
+        [
+          40.843212,
+          -72.616189
+        ],
+        [
+          40.845032,
+          -72.617412
+        ]
+      ],
+      "habitat": "pine-barrens",
+      "surface": "dirt",
+      "loops": [
+        "red"
+      ]
+    },
+    {
+      "id": "interior-cross-link",
+      "name": "Dwarf Pine Crossroad Link",
+      "from": "interior-north-cross-east",
+      "to": "interior-north-cross-west",
+      "waypoints": [
+        [
+          40.845032,
+          -72.617412
+        ],
+        [
+          40.845082,
+          -72.617669
+        ]
+      ],
+      "habitat": "dwarf-pine-barrens",
+      "surface": "dirt",
+      "loops": [
+        "red"
+      ]
+    },
+    {
+      "id": "interior-dwarf-pine-nw",
+      "name": "Interior Dwarf Pine Trail (Crossroad to NW Fence)",
+      "from": "interior-north-cross-west",
+      "to": "nw-fence-red-split",
+      "waypoints": [
+        [
+          40.845082,
+          -72.617669
+        ],
+        [
+          40.847256,
+          -72.619161
+        ]
+      ],
+      "habitat": "dwarf-pine-barrens",
+      "surface": "dirt",
+      "loops": [
+        "red"
+      ]
+    },
+    {
+      "id": "north-cross-east",
+      "name": "Northern Cross Trail (East Half)",
+      "from": "interior-north-cross-east",
+      "to": "east-fence-north-cross",
+      "waypoints": [
+        [
+          40.845032,
+          -72.617412
+        ],
+        [
+          40.845128,
+          -72.617322
+        ],
+        [
+          40.845466,
+          -72.615927
+        ],
+        [
+          40.845503,
+          -72.615249
+        ]
+      ],
+      "habitat": "dwarf-pine-barrens",
+      "surface": "dirt"
+    },
+    {
+      "id": "north-cross-west",
+      "name": "Northern Cross Trail (West Half)",
+      "from": "interior-north-cross-west",
+      "to": "west-fence-north-cross",
+      "waypoints": [
+        [
+          40.845082,
+          -72.617669
+        ],
+        [
+          40.844699,
+          -72.618951
+        ],
+        [
+          40.844454,
+          -72.619578
+        ]
+      ],
+      "habitat": "dwarf-pine-barrens",
+      "surface": "dirt"
+    },
+    {
+      "id": "west-fence-north-upper",
+      "name": "West Fence Trail (Dwarf Pines North Half)",
+      "from": "nw-fence-red-split",
+      "to": "west-fence-north-cross",
+      "waypoints": [
+        [
+          40.847256,
+          -72.619161
+        ],
+        [
+          40.84685,
+          -72.619649
+        ],
+        [
+          40.846777,
+          -72.619702
+        ],
+        [
+          40.846712,
+          -72.619713
+        ],
+        [
+          40.845665,
+          -72.619638
+        ],
+        [
+          40.845604,
+          -72.619616
+        ],
+        [
+          40.845567,
+          -72.619568
+        ],
+        [
+          40.845336,
+          -72.619209
+        ],
+        [
+          40.845304,
+          -72.619182
+        ],
+        [
+          40.845255,
+          -72.619171
+        ],
+        [
+          40.845214,
+          -72.619209
+        ],
+        [
+          40.844938,
+          -72.619568
+        ],
+        [
+          40.844853,
+          -72.6196
+        ],
+        [
+          40.844454,
+          -72.619578
+        ]
+      ],
+      "habitat": "dwarf-pine-barrens",
+      "surface": "dirt",
+      "loops": [
+        "blue"
+      ]
+    },
+    {
+      "id": "west-fence-north-lower",
+      "name": "West Fence Trail (North Cross to Regeneration Area)",
+      "from": "west-fence-north-cross",
+      "to": "west-fence-regen",
+      "waypoints": [
+        [
+          40.844454,
+          -72.619578
+        ],
+        [
+          40.841785,
+          -72.619429
+        ],
+        [
+          40.839644,
+          -72.619309
+        ]
+      ],
+      "habitat": "pine-barrens",
+      "surface": "dirt",
+      "loops": [
+        "blue"
+      ]
+    },
+    {
+      "id": "fairy-dell-lirr-approach",
+      "name": "Parking to LIRR Crossing (Old Main Rd)",
+      "from": "parking",
+      "to": "old-main-rail-crossing",
+      "waypoints": [
+        [
+          40.834545,
+          -72.61528
+        ],
+        [
+          40.834456,
+          -72.615262
+        ],
+        [
+          40.834464,
+          -72.6152
+        ],
+        [
+          40.834362,
+          -72.615178
+        ],
+        [
+          40.834359,
+          -72.615209
+        ],
+        [
+          40.83432,
+          -72.615191
+        ],
+        [
+          40.834289,
+          -72.615204
+        ],
+        [
+          40.834244,
+          -72.615246
+        ],
+        [
+          40.834169,
+          -72.615365
+        ],
+        [
+          40.834096,
+          -72.615418
+        ],
+        [
+          40.834002,
+          -72.615417
+        ],
+        [
+          40.833998,
+          -72.615453
+        ],
+        [
+          40.83399,
+          -72.615496
+        ],
+        [
+          40.833983,
+          -72.615515
+        ],
+        [
+          40.833968,
+          -72.615538
+        ],
+        [
+          40.833952,
+          -72.615554
+        ],
+        [
+          40.833931,
+          -72.61557
+        ],
+        [
+          40.833904,
+          -72.615586
+        ],
+        [
+          40.833871,
+          -72.615603
+        ],
+        [
+          40.833825,
+          -72.615625
+        ],
+        [
+          40.833775,
+          -72.615648
+        ],
+        [
+          40.833684,
+          -72.615682
+        ]
+      ],
+      "habitat": "pine-oak-forest",
+      "surface": "roadside"
+    },
+    {
+      "id": "fairy-dell-roadside",
+      "name": "Roadside walk to Fairy Dell (Old Main Rd)",
+      "from": "old-main-rail-crossing",
+      "to": "fairy-dell-entry",
+      "waypoints": [
+        [
+          40.833684,
+          -72.615682
+        ],
+        [
+          40.833086,
+          -72.615926
+        ],
+        [
+          40.833062,
+          -72.61598
+        ],
+        [
+          40.833043,
+          -72.616034
+        ],
+        [
+          40.833039,
+          -72.616045
+        ],
+        [
+          40.833002,
+          -72.616064
+        ],
+        [
+          40.832974,
+          -72.616127
+        ],
+        [
+          40.832939,
+          -72.616141
+        ],
+        [
+          40.832868,
+          -72.616203
+        ],
+        [
+          40.8328,
+          -72.616215
+        ],
+        [
+          40.832777,
+          -72.616236
+        ],
+        [
+          40.832749,
+          -72.616262
+        ]
+      ],
+      "habitat": "bog",
+      "surface": "roadside"
+    },
+    {
+      "id": "fairy-dell-gigis-path",
+      "name": "Gigi's Path to Fairy Dell (Wooded Trail)",
+      "from": "old-main-rail-crossing",
+      "to": "fairy-dell-entry",
+      "waypoints": [
+        [
+          40.833684,
+          -72.615682
+        ],
+        [
+          40.833585,
+          -72.61578
+        ],
+        [
+          40.83352,
+          -72.61601
+        ],
+        [
+          40.833425,
+          -72.616225
+        ],
+        [
+          40.83327,
+          -72.616365
+        ],
+        [
+          40.83309,
+          -72.616405
+        ],
+        [
+          40.83293,
+          -72.616345
+        ],
+        [
+          40.832749,
+          -72.616262
+        ]
+      ],
+      "habitat": "pine-oak-forest",
+      "surface": "dirt"
+    },
+    {
+      "id": "fairy-dell-boardwalk-stem",
+      "name": "Fairy Dell Boardwalk Entry",
+      "from": "fairy-dell-entry",
+      "to": "fairy-dell-fork",
+      "waypoints": [
+        [
+          40.832749,
+          -72.616262
+        ],
+        [
+          40.832594,
+          -72.616394
+        ],
+        [
+          40.83248,
+          -72.616437
+        ],
+        [
+          40.832358,
+          -72.616457
+        ]
+      ],
+      "habitat": "swamp",
+      "surface": "boardwalk"
+    },
+    {
+      "id": "fairy-dell-boardwalk-west",
+      "name": "Fairy Dell Boardwalk (West Platform Branch)",
+      "from": "fairy-dell-fork",
+      "to": "fairy-dell-west-overlook",
+      "waypoints": [
+        [
+          40.832358,
+          -72.616457
+        ],
+        [
+          40.832303,
+          -72.616646
+        ],
+        [
+          40.832258,
+          -72.616734
+        ],
+        [
+          40.832237,
+          -72.616828
+        ],
+        [
+          40.832203,
+          -72.616891
+        ],
+        [
+          40.832194,
+          -72.616965
+        ],
+        [
+          40.83211,
+          -72.617084
+        ],
+        [
+          40.83192,
+          -72.617253
+        ],
+        [
+          40.831848,
+          -72.617368
+        ],
+        [
+          40.83172,
+          -72.617516
+        ]
+      ],
+      "habitat": "swamp",
+      "surface": "boardwalk"
+    },
+    {
+      "id": "fairy-dell-boardwalk-mid",
+      "name": "Fairy Dell Boardwalk (Main Catwalk)",
+      "from": "fairy-dell-fork",
+      "to": "fairy-dell-mid-fork",
+      "waypoints": [
+        [
+          40.832358,
+          -72.616457
+        ],
+        [
+          40.832027,
+          -72.61651
+        ],
+        [
+          40.831972,
+          -72.616505
+        ],
+        [
+          40.831906,
+          -72.616535
+        ],
+        [
+          40.831847,
+          -72.616545
+        ],
+        [
+          40.831745,
+          -72.616595
+        ]
+      ],
+      "habitat": "swamp",
+      "surface": "boardwalk"
+    },
+    {
+      "id": "fairy-dell-boardwalk-east-spur",
+      "name": "Fairy Dell Boardwalk (Middle Overlook Platform)",
+      "from": "fairy-dell-mid-fork",
+      "to": "fairy-dell-east-overlook",
+      "waypoints": [
+        [
+          40.831745,
+          -72.616595
+        ],
+        [
+          40.831668,
+          -72.616625
+        ],
+        [
+          40.8316,
+          -72.616636
+        ],
+        [
+          40.831538,
+          -72.616632
+        ]
+      ],
+      "habitat": "swamp",
+      "surface": "boardwalk"
+    },
+    {
+      "id": "fairy-dell-boardwalk",
+      "name": "Fairy Dell Boardwalk (South Quantuck Creek Overlook)",
+      "from": "fairy-dell-mid-fork",
+      "to": "fairy-dell-overlook",
+      "waypoints": [
+        [
+          40.831745,
+          -72.616595
+        ],
+        [
+          40.831657,
+          -72.61679
+        ],
+        [
+          40.831579,
+          -72.616895
+        ],
+        [
+          40.831498,
+          -72.617046
+        ],
+        [
+          40.831413,
+          -72.617105
+        ],
+        [
+          40.831266,
+          -72.617152
+        ],
+        [
+          40.830972,
+          -72.617373
+        ]
+      ],
+      "habitat": "swamp",
+      "surface": "boardwalk"
+    }
+  ],
+  "standardLoops": [
+    {
+      "id": "storybook-08",
+      "colorId": "purple",
+      "name": "Storybook Walk Trail",
+      "shortName": "Storybook · 0.8 mi",
+      "colorHex": "#7B2D8E",
+      "badgeShape": "circle",
+      "canonicalMiles": 0.8,
+      "difficulty": "Easy",
+      "summary": "Old Ice Pond & Storybook Walk",
+      "highlights": [
+        "Storybook Pages",
+        "Old Ice Pond",
+        "The Bridge"
+      ],
+      "canonicalNodeIds": [
+        "parking",
+        "animal-complex-north",
+        "bridge-east-junction",
+        "bridge-west",
+        "west-fence-nw-spur",
+        "sw-bog-corner",
+        "bog-boardwalk-west",
+        "ice-exhibit-junction",
+        "parking"
+      ],
+      "detourAnchors": [
+        "animal-complex-north",
+        "bridge-east-junction",
+        "bridge-west",
+        "east-fence-mid-south"
+      ]
+    },
+    {
+      "id": "yellow-14",
+      "colorId": "yellow",
+      "name": "Yellow Trail",
+      "shortName": "Yellow · 1.4 mi",
+      "colorHex": "#C28500",
+      "badgeShape": "diamond",
+      "canonicalMiles": 1.4,
+      "difficulty": "Easy",
+      "summary": "Field, North Pond & Pine Barrens",
+      "highlights": [
+        "Butterfly Garden",
+        "North Pond",
+        "Bluebird Nestboxes"
+      ],
+      "canonicalNodeIds": [
+        "parking",
+        "animal-complex-north",
+        "east-fence-mid-south",
+        "bridge-east-junction",
+        "east-swamp-mid",
+        "north-pond-east",
+        "north-pond-west",
+        "new-trail-se",
+        "bridge-west",
+        "west-fence-nw-spur",
+        "sw-bog-corner",
+        "bog-boardwalk-west",
+        "ice-exhibit-junction",
+        "parking"
+      ],
+      "detourAnchors": [
+        "east-fence-mid-south",
+        "east-swamp-mid",
+        "north-pond-east",
+        "north-pond-west",
+        "new-trail-se",
+        "bridge-west",
+        "bridge-east-junction"
+      ]
+    },
+    {
+      "id": "blue-25",
+      "colorId": "blue",
+      "name": "Blue Trail",
+      "shortName": "Blue · 2.5 mi",
+      "colorHex": "#1D5FD6",
+      "badgeShape": "square",
+      "canonicalMiles": 2.5,
+      "difficulty": "Moderate",
+      "summary": "Perimeter Loop & Dwarf Pines",
+      "highlights": [
+        "Deer Pond",
+        "Dwarf Pine Barrens",
+        "New Trail Bypass"
+      ],
+      "canonicalNodeIds": [
+        "parking",
+        "animal-complex-north",
+        "east-fence-mid-south",
+        "east-fence-north-pond",
+        "east-fence-deer-pond",
+        "east-fence-north-cross",
+        "dwarf-pine-apex",
+        "nw-fence-red-split",
+        "west-fence-north-cross",
+        "west-fence-regen",
+        "west-fence-mid-south-outer",
+        "sw-bog-corner",
+        "bog-boardwalk-west",
+        "ice-exhibit-junction",
+        "parking"
+      ],
+      "detourAnchors": [
+        "east-fence-north-pond",
+        "east-fence-deer-pond",
+        "dwarf-pine-apex",
+        "nw-fence-red-split",
+        "west-fence-regen",
+        "new-trail-west",
+        "new-trail-se",
+        "bridge-west"
+      ]
+    },
+    {
+      "id": "red-31",
+      "colorId": "red",
+      "name": "Red Trail",
+      "shortName": "Red · 3.1 mi",
+      "colorHex": "#C62828",
+      "badgeShape": "triangle",
+      "canonicalMiles": 3.1,
+      "difficulty": "Moderate",
+      "summary": "Full Refuge Grand Tour",
+      "highlights": [
+        "The Bridge",
+        "Deer Pond",
+        "Dwarf Pines",
+        "North Pond"
+      ],
+      "canonicalNodeIds": [
+        "parking",
+        "animal-complex-north",
+        "east-fence-mid-south",
+        "bridge-east-junction",
+        "bridge-west",
+        "new-trail-se",
+        "north-pond-west",
+        "interior-north-cross-east",
+        "interior-north-cross-west",
+        "nw-fence-red-split",
+        "dwarf-pine-apex",
+        "east-fence-north-cross",
+        "east-fence-deer-pond",
+        "east-fence-north-pond",
+        "north-pond-east",
+        "north-pond-west",
+        "new-trail-west",
+        "west-fence-regen",
+        "west-fence-mid-south-outer",
+        "west-fence-nw-spur",
+        "sw-bog-corner",
+        "bog-boardwalk-west",
+        "ice-exhibit-junction",
+        "parking"
+      ],
+      "detourAnchors": [
+        "east-fence-mid-south",
+        "bridge-west",
+        "north-pond-west",
+        "interior-north-cross-east",
+        "nw-fence-red-split",
+        "dwarf-pine-apex",
+        "east-fence-deer-pond",
+        "north-pond-east",
+        "new-trail-west",
+        "new-trail-se",
+        "bridge-east-junction"
+      ]
+    }
+  ],
+  "pois": [
+    {
+      "id": "parking",
+      "name": "Main Parking & Trailhead",
+      "shortName": "Parking",
+      "category": "entry",
+      "icon": "parking",
+      "lat": 40.83402,
+      "lng": -72.61453,
+      "nodeId": "parking",
+      "description": "Free gravel parking lot at 3 Old Country Rd plus upper accessible turnaround spots near the trailhead.",
+      "kidTip": "Start and end your walk here — check the trailhead board for seasonal bird sightings!",
+      "selectableForCustomWalk": false
+    },
+    {
+      "id": "education-cottage",
+      "name": "Temporary Office / Education Cottage",
+      "shortName": "Temp Office / Cottage",
+      "category": "entry",
+      "icon": "cottage",
+      "lat": 40.83428,
+      "lng": -72.61476,
+      "nodeId": "parking",
+      "description": "Temporary home for Refuge staff and indoor Nature Center animals during renovations — slated to become the permanent Education Cottage for camps, workshops, and family programs.",
+      "kidTip": "Right beside the parking lot — wave hello to Refuge educators or stop by with questions!",
+      "selectableForCustomWalk": true
+    },
+    {
+      "id": "ice-exhibit",
+      "name": "Ice Harvesting Exhibit",
+      "shortName": "Ice Harvesting Exhibit",
+      "category": "landmark",
+      "icon": "ice-exhibit",
+      "lat": 40.83442,
+      "lng": -72.61533,
+      "nodeId": "ice-exhibit-junction",
+      "description": "Historic exhibit house right beside the trailhead displaying authentic century-old saws, tongs, and tools used by the Quogue Ice Company to harvest winter ice from Old Ice Pond.",
+      "kidTip": "Before freezers existed, people sawed giant blocks of winter ice right out of Old Ice Pond!",
+      "selectableForCustomWalk": true
+    },
+    {
+      "id": "nature-center",
+      "name": "Charles Banks Belt Nature Center",
+      "shortName": "Nature Center",
+      "category": "entry",
+      "icon": "nature-center",
+      "lat": 40.8341,
+      "lng": -72.61587,
+      "nodeId": "ice-exhibit-junction",
+      "description": "Historic lakeside Nature Center overlooking Old Ice Pond — currently closed for major renovation and expansion. Visit the open Temporary Office / Education Cottage beside the parking lot.",
+      "kidTip": "The building is getting a brand-new expansion! Follow open trails around Old Ice Pond to spot turtles and ducks.",
+      "selectableForCustomWalk": false
+    },
+    {
+      "id": "animal-complex",
+      "name": "Outdoor Wildlife Complex",
+      "shortName": "Animal Complex",
+      "category": "wildlife",
+      "icon": "animals",
+      "lat": 40.83462,
+      "lng": -72.6151,
+      "nodeId": "animal-complex-north",
+      "description": "Home to permanently injured native New York wildlife ambassadors including owls, hawks, falcons, and foxes.",
+      "kidTip": "Look quietly into the tall aviaries to spot barred owls, screech owls, and red-tailed hawks.",
+      "selectableForCustomWalk": true
+    },
+    {
+      "id": "restrooms",
+      "name": "Outdoor Restrooms",
+      "shortName": "Restrooms",
+      "category": "amenity",
+      "icon": "restrooms",
+      "lat": 40.83467,
+      "lng": -72.61456,
+      "nodeId": "animal-complex-north",
+      "description": "Accessible outdoor restrooms open daily from sunrise to sunset near the Butterfly Garden.",
+      "kidTip": "Good pit stop right at the start or end of your walk!",
+      "selectableForCustomWalk": true
+    },
+    {
+      "id": "butterfly-garden",
+      "name": "Butterfly Garden & Greenhouse",
+      "shortName": "Butterfly Garden",
+      "category": "garden",
+      "icon": "butterfly",
+      "lat": 40.83444,
+      "lng": -72.61482,
+      "nodeId": "animal-complex-north",
+      "description": "Native Long Island pollinator garden and greenhouse where resident giant tortoises live.",
+      "kidTip": "Look for monarch butterflies on goldenrod and milkweed in warm months, plus giant tortoises in the greenhouse!",
+      "selectableForCustomWalk": true
+    },
+    {
+      "id": "amphitheater",
+      "name": "Woodland Amphitheater",
+      "shortName": "Amphitheater",
+      "category": "landmark",
+      "icon": "amphitheater",
+      "lat": 40.8349,
+      "lng": -72.61465,
+      "nodeId": "animal-complex-north",
+      "description": "Shaded outdoor wooden seating area along the east trail used for nature talks and school groups.",
+      "kidTip": "Take a quick rest on the curved benches and listen for woodpeckers tapping nearby.",
+      "selectableForCustomWalk": false
+    },
+    {
+      "id": "old-ice-pond",
+      "name": "Old Ice Pond",
+      "shortName": "Old Ice Pond",
+      "category": "water",
+      "icon": "pond",
+      "lat": 40.83555,
+      "lng": -72.61665,
+      "nodeId": "bridge-east-junction",
+      "description": "10-acre freshwater pond dotted with mossy islands — a favorite sanctuary for waterfowl, turtles, and osprey.",
+      "kidTip": "Count how many tiny wooded islands you can spot floating across the pond.",
+      "selectableForCustomWalk": true
+    },
+    {
+      "id": "the-bridge",
+      "name": "The Bridge",
+      "shortName": "The Bridge",
+      "category": "landmark",
+      "icon": "bridge",
+      "lat": 40.83678,
+      "lng": -72.61645,
+      "nodeId": "bridge-west",
+      "description": "Wooden footbridge spanning the lush wetland channel connecting the northern swamp into Old Ice Pond.",
+      "kidTip": "Pause in the middle of the bridge and look straight down into the water for frogs and dragonflies.",
+      "selectableForCustomWalk": true
+    },
+    {
+      "id": "bluebird-nestboxes",
+      "name": "Eastern Bluebird Nestboxes (New Trail)",
+      "shortName": "Bluebird Nestboxes",
+      "category": "wildlife",
+      "icon": "bluebird",
+      "lat": 40.83918,
+      "lng": -72.61775,
+      "nodeId": "new-trail-se",
+      "description": "Open Forest Regeneration Area along the New Trail featuring wooden nestboxes for bright blue Eastern Bluebirds.",
+      "kidTip": "Look for tiny wooden birdhouses mounted on posts in the sunny clearing — bluebirds love open meadows!",
+      "selectableForCustomWalk": true
+    },
+    {
+      "id": "north-pond",
+      "name": "North Pond",
+      "shortName": "North Pond",
+      "category": "water",
+      "icon": "pond",
+      "lat": 40.8402,
+      "lng": -72.6155,
+      "nodeId": "north-pond-east",
+      "description": "Quiet freshwater marsh pond tucked between pine-oak woodland and swamp — great for spotting herons and wood ducks.",
+      "kidTip": "Whisper softly as you walk up to the shore so you don’t spook resting ducks or turtles.",
+      "selectableForCustomWalk": true
+    },
+    {
+      "id": "deer-pond",
+      "name": "Deer Pond Overlook",
+      "shortName": "Deer Pond",
+      "category": "water",
+      "icon": "pond",
+      "lat": 40.84355,
+      "lng": -72.6153,
+      "nodeId": "deer-pond-overlook",
+      "description": "Tranquil northern forest pond with a wooden waterside bench where white-tailed deer often come to drink.",
+      "kidTip": "Check the soft sandy trail near the bench for heart-shaped deer hoofprints!",
+      "selectableForCustomWalk": true
+    },
+    {
+      "id": "dwarf-pines",
+      "name": "Dwarf Pine Barrens",
+      "shortName": "Dwarf Pines",
+      "category": "landmark",
+      "icon": "dwarf-pines",
+      "lat": 40.8482,
+      "lng": -72.6172,
+      "nodeId": "dwarf-pine-apex",
+      "description": "One of the rarest ecosystems in the world — ancient pitch pines that naturally grow only 4 to 8 feet tall.",
+      "kidTip": "Even though these miniature pine trees are shorter than a basketball hoop, some are over 50 years old!",
+      "selectableForCustomWalk": true
+    },
+    {
+      "id": "fairy-dell",
+      "name": "Fairy Dell Boardwalk",
+      "shortName": "Fairy Dell",
+      "category": "water",
+      "icon": "boardwalk",
+      "lat": 40.8316,
+      "lng": -72.61695,
+      "nodeId": "fairy-dell-overlook",
+      "description": "1,500-foot wooden catwalk south of the railroad tracks winding through tidal wetlands along Quantuck Creek with three creek overlooks. Reachable via Gigi’s Path (wooded trail) or the Roadside walk along Old Main Rd.",
+      "kidTip": "Cross Old Main Rd and the LIRR tracks carefully — then look for osprey nests, fiddler crabs, and egrets from the three platforms!",
+      "selectableForCustomWalk": false
+    }
+  ],
+  "waterBodies": [
+    {
+      "id": "old-ice-pond-water",
+      "name": "Old Ice Pond",
+      "kind": "water",
+      "coordinates": [
+        [
+          40.833956,
+          -72.618576
+        ],
+        [
+          40.834056,
+          -72.617648
+        ],
+        [
+          40.834156,
+          -72.616727
+        ],
+        [
+          40.834189,
+          -72.616002
+        ],
+        [
+          40.834219,
+          -72.61582
+        ],
+        [
+          40.834223,
+          -72.615792
+        ],
+        [
+          40.834276,
+          -72.615671
+        ],
+        [
+          40.83448,
+          -72.61554
+        ],
+        [
+          40.834493,
+          -72.615532
+        ],
+        [
+          40.834692,
+          -72.615532
+        ],
+        [
+          40.83485,
+          -72.615741
+        ],
+        [
+          40.835085,
+          -72.615741
+        ],
+        [
+          40.835317,
+          -72.615784
+        ],
+        [
+          40.835751,
+          -72.615806
+        ],
+        [
+          40.835857,
+          -72.615741
+        ],
+        [
+          40.835995,
+          -72.615628
+        ],
+        [
+          40.836157,
+          -72.61558
+        ],
+        [
+          40.836465,
+          -72.615709
+        ],
+        [
+          40.836538,
+          -72.61587
+        ],
+        [
+          40.836441,
+          -72.615907
+        ],
+        [
+          40.836177,
+          -72.615934
+        ],
+        [
+          40.836161,
+          -72.616004
+        ],
+        [
+          40.836206,
+          -72.616106
+        ],
+        [
+          40.836303,
+          -72.616133
+        ],
+        [
+          40.836388,
+          -72.616202
+        ],
+        [
+          40.836522,
+          -72.616208
+        ],
+        [
+          40.836644,
+          -72.616181
+        ],
+        [
+          40.836749,
+          -72.61616
+        ],
+        [
+          40.836883,
+          -72.616084
+        ],
+        [
+          40.83694,
+          -72.615902
+        ],
+        [
+          40.837001,
+          -72.615763
+        ],
+        [
+          40.837019,
+          -72.615821
+        ],
+        [
+          40.837025,
+          -72.615891
+        ],
+        [
+          40.83705,
+          -72.615988
+        ],
+        [
+          40.83707,
+          -72.616063
+        ],
+        [
+          40.836989,
+          -72.616154
+        ],
+        [
+          40.836798,
+          -72.616299
+        ],
+        [
+          40.836603,
+          -72.616315
+        ],
+        [
+          40.836453,
+          -72.616331
+        ],
+        [
+          40.836327,
+          -72.616385
+        ],
+        [
+          40.83621,
+          -72.616369
+        ],
+        [
+          40.836088,
+          -72.616326
+        ],
+        [
+          40.835978,
+          -72.616401
+        ],
+        [
+          40.836007,
+          -72.616524
+        ],
+        [
+          40.83608,
+          -72.61661
+        ],
+        [
+          40.836165,
+          -72.616616
+        ],
+        [
+          40.83621,
+          -72.616717
+        ],
+        [
+          40.836356,
+          -72.61676
+        ],
+        [
+          40.836376,
+          -72.61683
+        ],
+        [
+          40.836193,
+          -72.616819
+        ],
+        [
+          40.835966,
+          -72.616819
+        ],
+        [
+          40.835808,
+          -72.616803
+        ],
+        [
+          40.835714,
+          -72.616948
+        ],
+        [
+          40.835625,
+          -72.617023
+        ],
+        [
+          40.835528,
+          -72.617125
+        ],
+        [
+          40.835491,
+          -72.617281
+        ],
+        [
+          40.835495,
+          -72.61749
+        ],
+        [
+          40.835495,
+          -72.617603
+        ],
+        [
+          40.83541,
+          -72.617629
+        ],
+        [
+          40.835382,
+          -72.617629
+        ],
+        [
+          40.835402,
+          -72.617533
+        ],
+        [
+          40.83539,
+          -72.617479
+        ],
+        [
+          40.835355,
+          -72.617447
+        ],
+        [
+          40.835303,
+          -72.617477
+        ],
+        [
+          40.83529,
+          -72.61756
+        ],
+        [
+          40.835329,
+          -72.617662
+        ],
+        [
+          40.83526,
+          -72.617753
+        ],
+        [
+          40.835234,
+          -72.617973
+        ],
+        [
+          40.835079,
+          -72.618032
+        ],
+        [
+          40.834917,
+          -72.61811
+        ],
+        [
+          40.834769,
+          -72.618169
+        ],
+        [
+          40.834606,
+          -72.618155
+        ],
+        [
+          40.834554,
+          -72.618228
+        ],
+        [
+          40.834574,
+          -72.618308
+        ],
+        [
+          40.834493,
+          -72.618367
+        ],
+        [
+          40.83429,
+          -72.618498
+        ],
+        [
+          40.834142,
+          -72.618614
+        ],
+        [
+          40.833956,
+          -72.618576
+        ]
+      ],
+      "labelPosition": [
+        40.8352,
+        -72.61695
+      ]
+    },
+    {
+      "id": "north-pond-water",
+      "name": "North Pond",
+      "kind": "water",
+      "coordinates": [
+        [
+          40.839761,
+          -72.615119
+        ],
+        [
+          40.839771,
+          -72.615444
+        ],
+        [
+          40.839784,
+          -72.61587
+        ],
+        [
+          40.839806,
+          -72.616137
+        ],
+        [
+          40.839837,
+          -72.61617
+        ],
+        [
+          40.840173,
+          -72.616164
+        ],
+        [
+          40.840309,
+          -72.616154
+        ],
+        [
+          40.840341,
+          -72.615977
+        ],
+        [
+          40.840463,
+          -72.615795
+        ],
+        [
+          40.840547,
+          -72.61568
+        ],
+        [
+          40.840601,
+          -72.615607
+        ],
+        [
+          40.840751,
+          -72.615521
+        ],
+        [
+          40.840962,
+          -72.615457
+        ],
+        [
+          40.840759,
+          -72.615221
+        ],
+        [
+          40.840922,
+          -72.614894
+        ],
+        [
+          40.841035,
+          -72.614808
+        ],
+        [
+          40.840727,
+          -72.614942
+        ],
+        [
+          40.840719,
+          -72.615221
+        ],
+        [
+          40.84067,
+          -72.615403
+        ],
+        [
+          40.840512,
+          -72.615564
+        ],
+        [
+          40.840418,
+          -72.615682
+        ],
+        [
+          40.840265,
+          -72.615633
+        ],
+        [
+          40.840183,
+          -72.615607
+        ],
+        [
+          40.840045,
+          -72.615489
+        ],
+        [
+          40.839923,
+          -72.615274
+        ],
+        [
+          40.839838,
+          -72.615167
+        ],
+        [
+          40.839826,
+          -72.615049
+        ],
+        [
+          40.839761,
+          -72.615119
+        ]
+      ],
+      "labelPosition": [
+        40.84035,
+        -72.61545
+      ]
+    },
+    {
+      "id": "deer-pond-water",
+      "name": "Deer Pond",
+      "kind": "water",
+      "coordinates": [
+        [
+          40.842897,
+          -72.615619
+        ],
+        [
+          40.843161,
+          -72.615485
+        ],
+        [
+          40.84323,
+          -72.61549
+        ],
+        [
+          40.843376,
+          -72.615447
+        ],
+        [
+          40.843477,
+          -72.615383
+        ],
+        [
+          40.843672,
+          -72.615319
+        ],
+        [
+          40.843838,
+          -72.615303
+        ],
+        [
+          40.843891,
+          -72.61526
+        ],
+        [
+          40.843907,
+          -72.615217
+        ],
+        [
+          40.843883,
+          -72.615168
+        ],
+        [
+          40.84381,
+          -72.615168
+        ],
+        [
+          40.843538,
+          -72.615233
+        ],
+        [
+          40.843339,
+          -72.615335
+        ],
+        [
+          40.843169,
+          -72.615458
+        ],
+        [
+          40.842897,
+          -72.615619
+        ]
+      ],
+      "labelPosition": [
+        40.84345,
+        -72.61538
+      ]
+    },
+    {
+      "id": "quantuck-pond-south",
+      "name": "Quantuck Creek",
+      "kind": "water",
+      "coordinates": [
+        [
+          40.832832,
+          -72.618041
+        ],
+        [
+          40.832855,
+          -72.617733
+        ],
+        [
+          40.832962,
+          -72.617719
+        ],
+        [
+          40.833037,
+          -72.61768
+        ],
+        [
+          40.833085,
+          -72.617602
+        ],
+        [
+          40.833176,
+          -72.617553
+        ],
+        [
+          40.833321,
+          -72.617627
+        ],
+        [
+          40.833328,
+          -72.617711
+        ],
+        [
+          40.833297,
+          -72.617797
+        ],
+        [
+          40.833246,
+          -72.617821
+        ],
+        [
+          40.833138,
+          -72.617875
+        ],
+        [
+          40.833053,
+          -72.617955
+        ],
+        [
+          40.832988,
+          -72.618023
+        ],
+        [
+          40.832915,
+          -72.618063
+        ],
+        [
+          40.832832,
+          -72.618041
+        ]
+      ],
+      "labelPosition": [
+        40.8314,
+        -72.61795
+      ]
+    }
+  ],
+  "habitats": [
+    {
+      "id": "habitat-dwarf-pines",
+      "name": "Dwarf Pine Barrens",
+      "kind": "dwarf-pine-barrens",
+      "coordinates": [
+        [
+          40.84492,
+          -72.61992
+        ],
+        [
+          40.84527,
+          -72.6195
+        ],
+        [
+          40.84562,
+          -72.61998
+        ],
+        [
+          40.84675,
+          -72.62006
+        ],
+        [
+          40.84702,
+          -72.61995
+        ],
+        [
+          40.84748,
+          -72.6194
+        ],
+        [
+          40.84942,
+          -72.61696
+        ],
+        [
+          40.84942,
+          -72.61656
+        ],
+        [
+          40.8492,
+          -72.61625
+        ],
+        [
+          40.84552,
+          -72.61494
+        ],
+        [
+          40.84485,
+          -72.6175
+        ]
+      ],
+      "labelPosition": [
+        40.847,
+        -72.6172
+      ]
+    },
+    {
+      "id": "habitat-regeneration",
+      "name": "Forest Regeneration Area",
+      "kind": "forest-regeneration",
+      "coordinates": [
+        [
+          40.8397,
+          -72.6192
+        ],
+        [
+          40.8398,
+          -72.6168
+        ],
+        [
+          40.8384,
+          -72.6168
+        ],
+        [
+          40.8378,
+          -72.6184
+        ],
+        [
+          40.8386,
+          -72.6192
+        ]
+      ],
+      "labelPosition": [
+        40.8389,
+        -72.618
+      ]
+    },
+    {
+      "id": "habitat-swamp-north",
+      "name": "Swamp",
+      "kind": "swamp",
+      "coordinates": [
+        [
+          40.836798,
+          -72.616299
+        ],
+        [
+          40.837001,
+          -72.616246
+        ],
+        [
+          40.837196,
+          -72.61608
+        ],
+        [
+          40.837341,
+          -72.61591
+        ],
+        [
+          40.83748,
+          -72.615772
+        ],
+        [
+          40.837646,
+          -72.61562
+        ],
+        [
+          40.837775,
+          -72.615556
+        ],
+        [
+          40.8379,
+          -72.615521
+        ],
+        [
+          40.838096,
+          -72.615499
+        ],
+        [
+          40.838291,
+          -72.615478
+        ],
+        [
+          40.83846,
+          -72.615542
+        ],
+        [
+          40.838639,
+          -72.615655
+        ],
+        [
+          40.838779,
+          -72.615797
+        ],
+        [
+          40.838939,
+          -72.615818
+        ],
+        [
+          40.839057,
+          -72.615814
+        ],
+        [
+          40.839397,
+          -72.615726
+        ],
+        [
+          40.83948,
+          -72.615715
+        ],
+        [
+          40.839558,
+          -72.615733
+        ],
+        [
+          40.839697,
+          -72.615867
+        ],
+        [
+          40.839678,
+          -72.615248
+        ],
+        [
+          40.839536,
+          -72.615411
+        ],
+        [
+          40.839405,
+          -72.615549
+        ],
+        [
+          40.83918,
+          -72.615591
+        ],
+        [
+          40.838942,
+          -72.615567
+        ],
+        [
+          40.838755,
+          -72.615464
+        ],
+        [
+          40.83865,
+          -72.615276
+        ],
+        [
+          40.838556,
+          -72.615138
+        ],
+        [
+          40.838332,
+          -72.615135
+        ],
+        [
+          40.837759,
+          -72.615241
+        ],
+        [
+          40.837467,
+          -72.615372
+        ],
+        [
+          40.837169,
+          -72.615577
+        ],
+        [
+          40.837001,
+          -72.615763
+        ],
+        [
+          40.837019,
+          -72.615821
+        ],
+        [
+          40.837025,
+          -72.615891
+        ],
+        [
+          40.83705,
+          -72.615988
+        ],
+        [
+          40.83707,
+          -72.616063
+        ],
+        [
+          40.836989,
+          -72.616154
+        ],
+        [
+          40.836798,
+          -72.616299
+        ]
+      ],
+      "labelPosition": [
+        40.8383,
+        -72.6157
+      ]
+    },
+    {
+      "id": "habitat-swamp-upper",
+      "name": "Swamp",
+      "kind": "swamp",
+      "coordinates": [
+        [
+          40.839806,
+          -72.616137
+        ],
+        [
+          40.839784,
+          -72.61587
+        ],
+        [
+          40.83985,
+          -72.61588
+        ],
+        [
+          40.839946,
+          -72.61591
+        ],
+        [
+          40.840089,
+          -72.615918
+        ],
+        [
+          40.840198,
+          -72.615912
+        ],
+        [
+          40.840239,
+          -72.615888
+        ],
+        [
+          40.840264,
+          -72.615735
+        ],
+        [
+          40.840287,
+          -72.615705
+        ],
+        [
+          40.840265,
+          -72.615633
+        ],
+        [
+          40.840418,
+          -72.615682
+        ],
+        [
+          40.840512,
+          -72.615564
+        ],
+        [
+          40.840547,
+          -72.61568
+        ],
+        [
+          40.840463,
+          -72.615795
+        ],
+        [
+          40.840341,
+          -72.615977
+        ],
+        [
+          40.840309,
+          -72.616154
+        ],
+        [
+          40.840173,
+          -72.616164
+        ],
+        [
+          40.839837,
+          -72.61617
+        ],
+        [
+          40.839806,
+          -72.616137
+        ]
+      ]
+    },
+    {
+      "id": "habitat-swamp-bridge",
+      "name": "Swamp",
+      "kind": "swamp",
+      "coordinates": [
+        [
+          40.83621,
+          -72.616369
+        ],
+        [
+          40.836088,
+          -72.616326
+        ],
+        [
+          40.835978,
+          -72.616401
+        ],
+        [
+          40.836007,
+          -72.616524
+        ],
+        [
+          40.83608,
+          -72.61661
+        ],
+        [
+          40.836165,
+          -72.616616
+        ],
+        [
+          40.83621,
+          -72.616717
+        ],
+        [
+          40.836356,
+          -72.61676
+        ],
+        [
+          40.836376,
+          -72.61683
+        ],
+        [
+          40.836722,
+          -72.616802
+        ],
+        [
+          40.836854,
+          -72.616776
+        ],
+        [
+          40.836888,
+          -72.616711
+        ],
+        [
+          40.836889,
+          -72.616638
+        ],
+        [
+          40.836859,
+          -72.616599
+        ],
+        [
+          40.836741,
+          -72.616573
+        ],
+        [
+          40.836642,
+          -72.616575
+        ],
+        [
+          40.836547,
+          -72.616559
+        ],
+        [
+          40.836465,
+          -72.616538
+        ],
+        [
+          40.836354,
+          -72.616498
+        ],
+        [
+          40.836327,
+          -72.616385
+        ],
+        [
+          40.83621,
+          -72.616369
+        ]
+      ]
+    },
+    {
+      "id": "habitat-bog-south",
+      "name": "Bog",
+      "kind": "bog",
+      "coordinates": [
+        [
+          40.8342,
+          -72.6188
+        ],
+        [
+          40.8341,
+          -72.6162
+        ],
+        [
+          40.8336,
+          -72.6163
+        ],
+        [
+          40.8336,
+          -72.6188
+        ]
+      ],
+      "labelPosition": [
+        40.83385,
+        -72.61755
+      ]
+    },
+    {
+      "id": "habitat-fairy-dell",
+      "name": "Fairy Dell Tidal Wetlands",
+      "kind": "swamp",
+      "coordinates": [
+        [
+          40.832593,
+          -72.617894
+        ],
+        [
+          40.832694,
+          -72.617858
+        ],
+        [
+          40.832894,
+          -72.616545
+        ],
+        [
+          40.83267,
+          -72.616183
+        ],
+        [
+          40.831403,
+          -72.616309
+        ],
+        [
+          40.830354,
+          -72.615928
+        ],
+        [
+          40.830372,
+          -72.617278
+        ],
+        [
+          40.830626,
+          -72.617125
+        ],
+        [
+          40.830816,
+          -72.617087
+        ],
+        [
+          40.831247,
+          -72.616653
+        ],
+        [
+          40.831378,
+          -72.616709
+        ],
+        [
+          40.831415,
+          -72.616857
+        ],
+        [
+          40.831399,
+          -72.616892
+        ],
+        [
+          40.831214,
+          -72.616881
+        ],
+        [
+          40.83096,
+          -72.617004
+        ],
+        [
+          40.830831,
+          -72.617157
+        ],
+        [
+          40.830849,
+          -72.617313
+        ],
+        [
+          40.830973,
+          -72.617503
+        ],
+        [
+          40.831267,
+          -72.617519
+        ],
+        [
+          40.831464,
+          -72.61739
+        ],
+        [
+          40.831598,
+          -72.617436
+        ],
+        [
+          40.831679,
+          -72.617562
+        ],
+        [
+          40.831997,
+          -72.617592
+        ],
+        [
+          40.832227,
+          -72.617492
+        ],
+        [
+          40.832127,
+          -72.617677
+        ],
+        [
+          40.832131,
+          -72.617897
+        ],
+        [
+          40.832593,
+          -72.617894
+        ]
+      ],
+      "labelPosition": [
+        40.8318,
+        -72.6169
+      ]
+    },
+    {
+      "id": "habitat-field",
+      "name": "Field",
+      "kind": "field",
+      "coordinates": [
+        [
+          40.8359,
+          -72.6149
+        ],
+        [
+          40.8359,
+          -72.614
+        ],
+        [
+          40.8349,
+          -72.6141
+        ],
+        [
+          40.8349,
+          -72.615
+        ]
+      ],
+      "labelPosition": [
+        40.8354,
+        -72.6145
+      ]
+    }
+  ],
+  "builtFeatures": [
+    {
+      "id": "parking-lot-main",
+      "name": "Main Gravel Parking Lot",
+      "kind": "parking-lot",
+      "coordinates": [
+        [
+          40.833984,
+          -72.615371
+        ],
+        [
+          40.833877,
+          -72.615445
+        ],
+        [
+          40.83401,
+          -72.613535
+        ],
+        [
+          40.83415,
+          -72.613553
+        ],
+        [
+          40.834117,
+          -72.613915
+        ],
+        [
+          40.833984,
+          -72.615371
+        ]
+      ]
+    },
+    {
+      "id": "parking-lot-upper",
+      "name": "Upper Trailhead Parking",
+      "kind": "parking-lot",
+      "coordinates": [
+        [
+          40.834441,
+          -72.615318
+        ],
+        [
+          40.834392,
+          -72.615308
+        ],
+        [
+          40.83432,
+          -72.615294
+        ],
+        [
+          40.834311,
+          -72.615255
+        ],
+        [
+          40.834298,
+          -72.615237
+        ],
+        [
+          40.834236,
+          -72.615196
+        ],
+        [
+          40.83425,
+          -72.615158
+        ],
+        [
+          40.834281,
+          -72.615116
+        ],
+        [
+          40.834307,
+          -72.614883
+        ],
+        [
+          40.834486,
+          -72.614918
+        ],
+        [
+          40.834441,
+          -72.615318
+        ]
+      ]
+    },
+    {
+      "id": "building-nature-center",
+      "name": "Charles Banks Belt Nature Center",
+      "kind": "building-closed",
+      "coordinates": [
+        [
+          40.83399,
+          -72.61593
+        ],
+        [
+          40.834044,
+          -72.615944
+        ],
+        [
+          40.834047,
+          -72.615921
+        ],
+        [
+          40.834204,
+          -72.615961
+        ],
+        [
+          40.834225,
+          -72.615816
+        ],
+        [
+          40.834175,
+          -72.615802
+        ],
+        [
+          40.834177,
+          -72.615786
+        ],
+        [
+          40.834018,
+          -72.615744
+        ],
+        [
+          40.83399,
+          -72.61593
+        ]
+      ]
+    },
+    {
+      "id": "building-ice-exhibit",
+      "name": "Ice Harvesting Exhibit",
+      "kind": "building",
+      "coordinates": [
+        [
+          40.83439,
+          -72.615302
+        ],
+        [
+          40.834385,
+          -72.615367
+        ],
+        [
+          40.834459,
+          -72.615378
+        ],
+        [
+          40.834465,
+          -72.615313
+        ],
+        [
+          40.83439,
+          -72.615302
+        ]
+      ]
+    },
+    {
+      "id": "building-education-cottage",
+      "name": "Temporary Office / Education Cottage",
+      "kind": "building",
+      "coordinates": [
+        [
+          40.834232,
+          -72.614669
+        ],
+        [
+          40.834208,
+          -72.614881
+        ],
+        [
+          40.834278,
+          -72.614895
+        ],
+        [
+          40.83429,
+          -72.614791
+        ],
+        [
+          40.834311,
+          -72.614795
+        ],
+        [
+          40.834317,
+          -72.614743
+        ],
+        [
+          40.834303,
+          -72.61474
+        ],
+        [
+          40.834309,
+          -72.614684
+        ],
+        [
+          40.834232,
+          -72.614669
+        ]
+      ]
+    },
+    {
+      "id": "building-restrooms",
+      "name": "Outdoor Restrooms",
+      "kind": "building",
+      "coordinates": [
+        [
+          40.834683,
+          -72.614642
+        ],
+        [
+          40.83473,
+          -72.614562
+        ],
+        [
+          40.834659,
+          -72.614491
+        ],
+        [
+          40.834612,
+          -72.614571
+        ],
+        [
+          40.834683,
+          -72.614642
+        ]
+      ]
+    }
+  ],
+  "boundaryPolygon": [
+    [
+      40.8336,
+      -72.61945
+    ],
+    [
+      40.83675,
+      -72.61955
+    ],
+    [
+      40.83975,
+      -72.61968
+    ],
+    [
+      40.8445,
+      -72.61992
+    ],
+    [
+      40.84492,
+      -72.61995
+    ],
+    [
+      40.84527,
+      -72.61952
+    ],
+    [
+      40.84562,
+      -72.62
+    ],
+    [
+      40.84675,
+      -72.62008
+    ],
+    [
+      40.84702,
+      -72.61998
+    ],
+    [
+      40.84748,
+      -72.61942
+    ],
+    [
+      40.84945,
+      -72.61698
+    ],
+    [
+      40.84946,
+      -72.61655
+    ],
+    [
+      40.84924,
+      -72.61622
+    ],
+    [
+      40.84555,
+      -72.6149
+    ],
+    [
+      40.8438,
+      -72.61442
+    ],
+    [
+      40.839,
+      -72.61368
+    ],
+    [
+      40.8368,
+      -72.61336
+    ],
+    [
+      40.83392,
+      -72.6134
+    ],
+    [
+      40.83376,
+      -72.61555
+    ],
+    [
+      40.83358,
+      -72.61645
+    ]
+  ],
+  "decorLines": [
+    {
+      "id": "road-old-country",
+      "name": "Old Country Road",
+      "kind": "road",
+      "coordinates": [
+        [
+          40.834398,
+          -72.61268
+        ],
+        [
+          40.834345,
+          -72.612806
+        ],
+        [
+          40.834304,
+          -72.612913
+        ],
+        [
+          40.834268,
+          -72.613029
+        ],
+        [
+          40.834238,
+          -72.613145
+        ],
+        [
+          40.834215,
+          -72.61325
+        ],
+        [
+          40.834195,
+          -72.613385
+        ],
+        [
+          40.834179,
+          -72.61352
+        ],
+        [
+          40.834002,
+          -72.615417
+        ]
+      ]
+    },
+    {
+      "id": "road-old-main",
+      "name": "Old Main Road",
+      "kind": "road",
+      "coordinates": [
+        [
+          40.834002,
+          -72.615417
+        ],
+        [
+          40.833998,
+          -72.615453
+        ],
+        [
+          40.83399,
+          -72.615496
+        ],
+        [
+          40.833983,
+          -72.615515
+        ],
+        [
+          40.833968,
+          -72.615538
+        ],
+        [
+          40.833952,
+          -72.615554
+        ],
+        [
+          40.833931,
+          -72.61557
+        ],
+        [
+          40.833904,
+          -72.615586
+        ],
+        [
+          40.833871,
+          -72.615603
+        ],
+        [
+          40.833825,
+          -72.615625
+        ],
+        [
+          40.833775,
+          -72.615648
+        ],
+        [
+          40.833684,
+          -72.615682
+        ],
+        [
+          40.833086,
+          -72.615926
+        ]
+      ]
+    },
+    {
+      "id": "road-south-country",
+      "name": "South Country Road",
+      "kind": "road",
+      "coordinates": [
+        [
+          40.833086,
+          -72.615926
+        ],
+        [
+          40.833062,
+          -72.61598
+        ],
+        [
+          40.833043,
+          -72.616034
+        ],
+        [
+          40.833039,
+          -72.616045
+        ],
+        [
+          40.833025,
+          -72.616091
+        ],
+        [
+          40.833011,
+          -72.616147
+        ],
+        [
+          40.832998,
+          -72.616213
+        ],
+        [
+          40.832943,
+          -72.616498
+        ],
+        [
+          40.83285,
+          -72.617179
+        ],
+        [
+          40.832681,
+          -72.618391
+        ],
+        [
+          40.832653,
+          -72.61859
+        ],
+        [
+          40.832618,
+          -72.618828
+        ],
+        [
+          40.832579,
+          -72.619059
+        ],
+        [
+          40.832534,
+          -72.61931
+        ],
+        [
+          40.832496,
+          -72.619508
+        ],
+        [
+          40.832462,
+          -72.619688
+        ]
+      ]
+    },
+    {
+      "id": "road-old-meeting-house",
+      "name": "Old Meeting House Road",
+      "kind": "road",
+      "coordinates": [
+        [
+          40.832943,
+          -72.616498
+        ],
+        [
+          40.832906,
+          -72.616427
+        ],
+        [
+          40.832868,
+          -72.616364
+        ],
+        [
+          40.832831,
+          -72.61631
+        ],
+        [
+          40.832794,
+          -72.616257
+        ],
+        [
+          40.832777,
+          -72.616236
+        ],
+        [
+          40.832765,
+          -72.616222
+        ],
+        [
+          40.832716,
+          -72.616173
+        ],
+        [
+          40.832672,
+          -72.616133
+        ],
+        [
+          40.832501,
+          -72.616017
+        ],
+        [
+          40.831644,
+          -72.615541
+        ],
+        [
+          40.831477,
+          -72.61546
+        ],
+        [
+          40.83131,
+          -72.61537
+        ],
+        [
+          40.830826,
+          -72.615023
+        ]
+      ]
+    },
+    {
+      "id": "road-driveway-in",
+      "name": "Refuge Entrance Drive",
+      "kind": "road",
+      "coordinates": [
+        [
+          40.834002,
+          -72.615417
+        ],
+        [
+          40.834096,
+          -72.615418
+        ],
+        [
+          40.834169,
+          -72.615365
+        ],
+        [
+          40.834244,
+          -72.615246
+        ],
+        [
+          40.834289,
+          -72.615204
+        ],
+        [
+          40.83432,
+          -72.615191
+        ],
+        [
+          40.834359,
+          -72.615209
+        ]
+      ]
+    },
+    {
+      "id": "road-driveway-out",
+      "name": "Refuge Exit Drive",
+      "kind": "road",
+      "coordinates": [
+        [
+          40.834359,
+          -72.615209
+        ],
+        [
+          40.834352,
+          -72.615295
+        ],
+        [
+          40.834344,
+          -72.615373
+        ],
+        [
+          40.834285,
+          -72.615454
+        ],
+        [
+          40.83423,
+          -72.615493
+        ],
+        [
+          40.834176,
+          -72.61551
+        ],
+        [
+          40.834087,
+          -72.615514
+        ],
+        [
+          40.83399,
+          -72.615496
+        ]
+      ]
+    },
+    {
+      "id": "lirr-railroad",
+      "name": "LIRR Montauk Branch",
+      "kind": "railroad",
+      "coordinates": [
+        [
+          40.833223,
+          -72.6204
+        ],
+        [
+          40.833684,
+          -72.615682
+        ],
+        [
+          40.833985,
+          -72.6126
+        ]
+      ]
+    },
+    {
+      "id": "quantuck-creek-upper",
+      "name": "Quantuck Creek",
+      "kind": "creek",
+      "coordinates": [
+        [
+          40.84385,
+          -72.615227
+        ],
+        [
+          40.843283,
+          -72.615421
+        ],
+        [
+          40.843154,
+          -72.615474
+        ],
+        [
+          40.842897,
+          -72.615619
+        ],
+        [
+          40.842157,
+          -72.615482
+        ],
+        [
+          40.842104,
+          -72.615387
+        ],
+        [
+          40.842008,
+          -72.615228
+        ],
+        [
+          40.84186,
+          -72.615203
+        ],
+        [
+          40.84173,
+          -72.615233
+        ],
+        [
+          40.841459,
+          -72.615285
+        ],
+        [
+          40.841307,
+          -72.615323
+        ],
+        [
+          40.840962,
+          -72.615457
+        ],
+        [
+          40.840736,
+          -72.61545
+        ],
+        [
+          40.840447,
+          -72.615726
+        ],
+        [
+          40.840256,
+          -72.615808
+        ],
+        [
+          40.840047,
+          -72.615722
+        ],
+        [
+          40.839771,
+          -72.615444
+        ]
+      ]
+    },
+    {
+      "id": "quantuck-creek-mid",
+      "name": "Quantuck Creek",
+      "kind": "creek",
+      "coordinates": [
+        [
+          40.839686,
+          -72.615455
+        ],
+        [
+          40.839352,
+          -72.61571
+        ],
+        [
+          40.838848,
+          -72.615756
+        ],
+        [
+          40.83844,
+          -72.61542
+        ],
+        [
+          40.837864,
+          -72.615394
+        ],
+        [
+          40.837477,
+          -72.615557
+        ],
+        [
+          40.837048,
+          -72.615823
+        ],
+        [
+          40.836942,
+          -72.616139
+        ],
+        [
+          40.836468,
+          -72.616273
+        ],
+        [
+          40.835968,
+          -72.616252
+        ],
+        [
+          40.835019,
+          -72.616654
+        ],
+        [
+          40.834536,
+          -72.616541
+        ],
+        [
+          40.83425,
+          -72.616762
+        ],
+        [
+          40.834056,
+          -72.617648
+        ]
+      ]
+    },
+    {
+      "id": "quantuck-creek-south",
+      "name": "Quantuck Creek",
+      "kind": "creek",
+      "coordinates": [
+        [
+          40.83391,
+          -72.61761
+        ],
+        [
+          40.83343,
+          -72.61775
+        ],
+        [
+          40.83266,
+          -72.6178
+        ],
+        [
+          40.8318,
+          -72.61782
+        ],
+        [
+          40.8305,
+          -72.6181
+        ]
+      ]
+    }
+  ]
+}
