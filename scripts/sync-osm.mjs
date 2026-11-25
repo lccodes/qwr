@@ -118,7 +118,7 @@ function main(osm) {
     ['west-fence-mid-south-outer', 8901535026, 'West Fence at NW Spur'],
     ['sw-bog-corner', 8901534933, 'Southwest Bog Corner'],
     ['bog-boardwalk-west', 8901534941, 'Bog Boardwalk'],
-    ['nature-center-south', 11087786659, 'Nature Center'],
+    ['ice-exhibit-junction', 8901534957, 'Ice Harvesting Exhibit'],
     ['east-swamp-mid', 8901535039, 'East Swamp Trail'],
     ['east-fence-north-pond', 8901535038, 'East Fence near North Pond'],
     ['north-pond-east', 8901516182, 'North Pond (East)'],
@@ -134,8 +134,13 @@ function main(osm) {
     ['interior-north-cross-east', 8901535018, 'Dwarf Pine Crossroad (East)'],
     ['interior-north-cross-west', 8901535019, 'Dwarf Pine Crossroad (West)'],
     ['west-fence-north-cross', 8901535022, 'West Fence North Cross'],
-    ['fairy-dell-entry', 9349973652, 'Fairy Dell Boardwalk Entry'],
-    ['fairy-dell-overlook', 9349973632, 'Fairy Dell Overlook']
+    ['old-main-rail-crossing', 213660915, 'LIRR Crossing (Old Main Rd)'],
+    ['fairy-dell-entry', 9349973652, 'Fairy Dell Boardwalk Gate'],
+    ['fairy-dell-fork', 9349973651, 'Fairy Dell Boardwalk Fork'],
+    ['fairy-dell-mid-fork', 9349973626, 'Fairy Dell Middle Split'],
+    ['fairy-dell-west-overlook', 9349973642, 'Fairy Dell West Overlook'],
+    ['fairy-dell-east-overlook', 9349973636, 'Fairy Dell Middle Overlook'],
+    ['fairy-dell-overlook', 9349973632, 'Fairy Dell South Overlook']
   ];
 
   const osmIdByNode = Object.fromEntries(nodeSpecs.map(([id, nid]) => [id, nid]));
@@ -154,17 +159,17 @@ function main(osm) {
       waypoints: sliceWay(1419544797, 8901534960, 8901516134),
       habitat: 'pine-oak-forest',
       surface: 'gravel',
-      loops: ['green', 'yellow', 'blue', 'red']
+      loops: ['purple', 'yellow', 'blue', 'red']
     },
     {
-      id: 'green-pond-east',
-      name: 'Old Ice Pond East Trail (Inner Green Trail)',
+      id: 'storybook-pond-east',
+      name: 'Old Ice Pond East Trail (Storybook Walk Trail)',
       from: 'animal-complex-north',
       to: 'bridge-east-junction',
       waypoints: sliceWay(962314905, 8901516134, 8901535031),
       habitat: 'pine-oak-forest',
       surface: 'dirt',
-      loops: ['green']
+      loops: ['purple']
     },
     {
       id: 'east-amphitheater-field',
@@ -198,7 +203,7 @@ function main(osm) {
       ),
       habitat: 'swamp',
       surface: 'bridge',
-      loops: ['green', 'red']
+      loops: ['purple', 'red']
     },
     {
       id: 'old-ice-pond-nw-spur',
@@ -208,7 +213,7 @@ function main(osm) {
       waypoints: sliceWay(1419544800, 8901516210, 8901535027),
       habitat: 'pine-barrens',
       surface: 'dirt',
-      loops: ['green', 'yellow']
+      loops: ['purple', 'yellow']
     },
     {
       id: 'west-fence-spur-link',
@@ -228,7 +233,7 @@ function main(osm) {
       waypoints: sliceWay(1419544796, 8901535027, 8901534933),
       habitat: 'pine-barrens',
       surface: 'dirt',
-      loops: ['green', 'yellow', 'red']
+      loops: ['purple', 'yellow', 'red']
     },
     {
       id: 'west-fence-south-outer',
@@ -258,27 +263,31 @@ function main(osm) {
       waypoints: sliceWay(1419544794, 8901534933, 8901534941),
       habitat: 'bog',
       surface: 'dirt',
-      loops: ['green', 'yellow', 'blue', 'red']
+      loops: ['purple', 'yellow', 'blue', 'red']
     },
     {
       id: 'bog-boardwalk',
-      name: 'Bog Boardwalk (South of Old Ice Pond)',
+      name: 'Bog Boardwalk & Nature Center Loop (South of Old Ice Pond)',
       from: 'bog-boardwalk-west',
-      to: 'nature-center-south',
-      waypoints: sliceWay(1194602557, 8901534941, 11087786659),
+      to: 'ice-exhibit-junction',
+      // Exact 18 OSM vertices: sharp turns through the southern bog & sweeping curve around the closed Nature Center
+      waypoints: chainSlices(
+        sliceWay(1194602557, 8901534941, 11087786659),
+        sliceWay(1194602556, 11087786659, 8901534957)
+      ),
       habitat: 'bog',
       surface: 'boardwalk',
-      loops: ['green', 'yellow', 'blue', 'red']
+      loops: ['purple', 'yellow', 'blue', 'red']
     },
     {
-      id: 'nature-center-to-parking',
-      name: 'Nature Center to Parking Path',
-      from: 'nature-center-south',
+      id: 'ice-exhibit-to-parking',
+      name: 'Ice Harvesting Exhibit to Parking Path',
+      from: 'ice-exhibit-junction',
       to: 'parking',
-      waypoints: sliceWay(1194602556, 11087786659, 8901534960),
+      waypoints: sliceWay(1194602556, 8901534957, 8901534960),
       habitat: 'pine-oak-forest',
       surface: 'gravel',
-      loops: ['green', 'yellow', 'blue', 'red']
+      loops: ['purple', 'yellow', 'blue', 'red']
     },
     {
       id: 'swamp-east-south',
@@ -510,43 +519,113 @@ function main(osm) {
       loops: ['blue']
     },
     {
-      id: 'fairy-dell-connector',
-      name: 'Path to Fairy Dell Boardwalk (Across Old Country Rd & LIRR)',
-      from: 'nature-center-south',
+      id: 'fairy-dell-lirr-approach',
+      name: 'Parking to LIRR Crossing (Old Main Rd)',
+      from: 'parking',
+      to: 'old-main-rail-crossing',
+      waypoints: chainSlices(
+        sliceWay(1419544793, 8901534960, 8901516133),
+        [pt(8901516133), pt(8901516125)],
+        sliceWay(1419543449, 8901516125, 213513961),
+        sliceWay(925923928, 213513961, 213660915)
+      ),
+      habitat: 'pine-oak-forest',
+      surface: 'roadside'
+    },
+    {
+      id: 'fairy-dell-roadside',
+      name: 'Roadside walk to Fairy Dell (Old Main Rd)',
+      from: 'old-main-rail-crossing',
       to: 'fairy-dell-entry',
       waypoints: chainSlices(
-        [pt(11087786659), [40.83348, -72.61598], pt(13044609217)],
-        sliceWay(1419543442, 13044609217, 13044609216),
+        sliceWay(925923928, 213660915, 213660918),
+        sliceWay(20226239, 213660918, 13044609218),
+        sliceWay(1419543442, 13044609218, 13044609216),
         sliceWay(1419543441, 13044609216, 13044609212),
         sliceWay(1419543440, 13044609212, 9349973652)
       ),
       habitat: 'bog',
-      surface: 'gravel'
+      surface: 'roadside'
+    },
+    {
+      id: 'fairy-dell-gigis-path',
+      name: "Gigi's Path to Fairy Dell (Wooded Trail)",
+      from: 'old-main-rail-crossing',
+      to: 'fairy-dell-entry',
+      // Wooded off-road corridor immediately west of Old Main Rd between LIRR tracks and South Country Rd
+      waypoints: [
+        pt(213660915),
+        [40.833585, -72.615780],
+        [40.833520, -72.616010],
+        [40.833425, -72.616225],
+        [40.833270, -72.616365],
+        [40.833090, -72.616405],
+        [40.832930, -72.616345],
+        pt(9349973652)
+      ],
+      habitat: 'pine-oak-forest',
+      surface: 'dirt'
+    },
+    {
+      id: 'fairy-dell-boardwalk-stem',
+      name: 'Fairy Dell Boardwalk Entry',
+      from: 'fairy-dell-entry',
+      to: 'fairy-dell-fork',
+      waypoints: sliceWay(1013430382, 9349973652, 9349973651),
+      habitat: 'swamp',
+      surface: 'boardwalk'
+    },
+    {
+      id: 'fairy-dell-boardwalk-west',
+      name: 'Fairy Dell Boardwalk (West Platform Branch)',
+      from: 'fairy-dell-fork',
+      to: 'fairy-dell-west-overlook',
+      waypoints: sliceWay(1013430386, 9349973651, 9349973642),
+      habitat: 'swamp',
+      surface: 'boardwalk'
+    },
+    {
+      id: 'fairy-dell-boardwalk-mid',
+      name: 'Fairy Dell Boardwalk (Main Catwalk)',
+      from: 'fairy-dell-fork',
+      to: 'fairy-dell-mid-fork',
+      waypoints: sliceWay(1013430382, 9349973651, 9349973626),
+      habitat: 'swamp',
+      surface: 'boardwalk'
+    },
+    {
+      id: 'fairy-dell-boardwalk-east-spur',
+      name: 'Fairy Dell Boardwalk (Middle Overlook Platform)',
+      from: 'fairy-dell-mid-fork',
+      to: 'fairy-dell-east-overlook',
+      waypoints: sliceWay(1013430384, 9349973626, 9349973636),
+      habitat: 'swamp',
+      surface: 'boardwalk'
     },
     {
       id: 'fairy-dell-boardwalk',
-      name: 'Fairy Dell Boardwalk (Quantuck Creek Wetlands)',
-      from: 'fairy-dell-entry',
+      name: 'Fairy Dell Boardwalk (South Quantuck Creek Overlook)',
+      from: 'fairy-dell-mid-fork',
       to: 'fairy-dell-overlook',
-      waypoints: sliceWay(1013430382, 9349973652, 9349973632),
+      waypoints: sliceWay(1013430382, 9349973626, 9349973632),
       habitat: 'swamp',
       surface: 'boardwalk'
     }
   ];
 
-  // Standard blaze loops (exact counter-clockwise order from the December 2025 map)
+  // Standard blaze loops (exact counter-clockwise order from the QWR trail map)
   const standardLoops = [
     {
-      id: 'green-08',
-      colorId: 'green',
-      name: 'Green Trail',
-      shortName: 'Green · 0.8 mi',
-      colorHex: '#1E8E4E',
+      id: 'storybook-08',
+      colorId: 'purple',
+      name: 'Storybook Walk Trail',
+      shortName: 'Storybook · 0.8 mi',
+      colorHex: '#7B2D8E',
       badgeShape: 'circle',
       canonicalMiles: 0.8,
       difficulty: 'Easy',
-      summary: 'Old Ice Pond & Bridge',
-      highlights: ['Old Ice Pond', 'The Bridge', 'Bog Boardwalk'],
+      summary: 'Old Ice Pond & Storybook Walk',
+      highlights: ['Storybook Pages', 'Old Ice Pond', 'The Bridge'],
       canonicalNodeIds: [
         'parking',
         'animal-complex-north',
@@ -555,7 +634,7 @@ function main(osm) {
         'west-fence-nw-spur',
         'sw-bog-corner',
         'bog-boardwalk-west',
-        'nature-center-south',
+        'ice-exhibit-junction',
         'parking'
       ],
       detourAnchors: ['animal-complex-north', 'bridge-east-junction', 'bridge-west', 'east-fence-mid-south']
@@ -584,7 +663,7 @@ function main(osm) {
         'west-fence-nw-spur',
         'sw-bog-corner',
         'bog-boardwalk-west',
-        'nature-center-south',
+        'ice-exhibit-junction',
         'parking'
       ],
       detourAnchors: [
@@ -622,7 +701,7 @@ function main(osm) {
         'west-fence-mid-south-outer',
         'sw-bog-corner',
         'bog-boardwalk-west',
-        'nature-center-south',
+        'ice-exhibit-junction',
         'parking'
       ],
       detourAnchors: [
@@ -670,7 +749,7 @@ function main(osm) {
         'west-fence-nw-spur',
         'sw-bog-corner',
         'bog-boardwalk-west',
-        'nature-center-south',
+        'ice-exhibit-junction',
         'parking'
       ],
       detourAnchors: [
@@ -689,7 +768,7 @@ function main(osm) {
     }
   ];
 
-  // Landmarks & POIs positioned accurately from OSM buildings/features & Dec 2025 map
+  // Landmarks & POIs positioned accurately from OSM buildings/features & QWR map
   const pois = [
     {
       id: 'parking',
@@ -697,24 +776,37 @@ function main(osm) {
       shortName: 'Parking',
       category: 'entry',
       icon: 'parking',
-      lat: 40.83436,
-      lng: -72.61515,
+      lat: 40.83402,
+      lng: -72.61453,
       nodeId: 'parking',
-      description: 'Free gravel parking lot at 3 Old Country Rd and main starting hub for all Refuge trails.',
+      description: 'Free gravel parking lot at 3 Old Country Rd plus upper accessible turnaround spots near the trailhead.',
       kidTip: 'Start and end your walk here — check the trailhead board for seasonal bird sightings!',
       selectableForCustomWalk: false
     },
     {
-      id: 'animal-complex',
-      name: 'Outdoor Wildlife Complex',
-      shortName: 'Animal Complex',
-      category: 'wildlife',
-      icon: 'animals',
-      lat: 40.83457,
-      lng: -72.61514,
-      nodeId: 'animal-complex-north',
-      description: 'Home to permanently injured native New York wildlife ambassadors including owls, hawks, falcons, and foxes.',
-      kidTip: 'Look quietly into the tall aviaries to spot barred owls, screech owls, and red-tailed hawks.',
+      id: 'education-cottage',
+      name: 'Temporary Office / Education Cottage',
+      shortName: 'Temp Office / Cottage',
+      category: 'entry',
+      icon: 'cottage',
+      lat: 40.83428,
+      lng: -72.61476,
+      nodeId: 'parking',
+      description: 'Temporary home for Refuge staff and indoor Nature Center animals during renovations — slated to become the permanent Education Cottage for camps, workshops, and family programs.',
+      kidTip: 'Right beside the parking lot — wave hello to Refuge educators or stop by with questions!',
+      selectableForCustomWalk: true
+    },
+    {
+      id: 'ice-exhibit',
+      name: 'Ice Harvesting Exhibit',
+      shortName: 'Ice Harvesting Exhibit',
+      category: 'landmark',
+      icon: 'ice-exhibit',
+      lat: 40.83442,
+      lng: -72.61533,
+      nodeId: 'ice-exhibit-junction',
+      description: 'Historic exhibit house right beside the trailhead displaying authentic century-old saws, tongs, and tools used by the Quogue Ice Company to harvest winter ice from Old Ice Pond.',
+      kidTip: 'Before freezers existed, people sawed giant blocks of winter ice right out of Old Ice Pond!',
       selectableForCustomWalk: true
     },
     {
@@ -723,11 +815,24 @@ function main(osm) {
       shortName: 'Nature Center',
       category: 'entry',
       icon: 'nature-center',
-      lat: 40.83411,
-      lng: -72.61585,
-      nodeId: 'nature-center-south',
-      description: 'Historic lakeside Nature Center overlooking Old Ice Pond (undergoing renovation & expansion).',
-      kidTip: 'Peek out over Old Ice Pond right beside the building to look for painted turtles and ducks.',
+      lat: 40.83410,
+      lng: -72.61587,
+      nodeId: 'ice-exhibit-junction',
+      description: 'Historic lakeside Nature Center overlooking Old Ice Pond — currently closed for major renovation and expansion. Visit the open Temporary Office / Education Cottage beside the parking lot.',
+      kidTip: 'The building is getting a brand-new expansion! Follow open trails around Old Ice Pond to spot turtles and ducks.',
+      selectableForCustomWalk: false
+    },
+    {
+      id: 'animal-complex',
+      name: 'Outdoor Wildlife Complex',
+      shortName: 'Animal Complex',
+      category: 'wildlife',
+      icon: 'animals',
+      lat: 40.83462,
+      lng: -72.61510,
+      nodeId: 'animal-complex-north',
+      description: 'Home to permanently injured native New York wildlife ambassadors including owls, hawks, falcons, and foxes.',
+      kidTip: 'Look quietly into the tall aviaries to spot barred owls, screech owls, and red-tailed hawks.',
       selectableForCustomWalk: true
     },
     {
@@ -768,19 +873,6 @@ function main(osm) {
       description: 'Shaded outdoor wooden seating area along the east trail used for nature talks and school groups.',
       kidTip: 'Take a quick rest on the curved benches and listen for woodpeckers tapping nearby.',
       selectableForCustomWalk: false
-    },
-    {
-      id: 'ice-exhibit',
-      name: 'Ice Harvesting Exhibit & Bog',
-      shortName: 'Bog & Ice Exhibit',
-      category: 'landmark',
-      icon: 'ice-exhibit',
-      lat: 40.83400,
-      lng: -72.61642,
-      nodeId: 'bog-boardwalk-west',
-      description: 'Scenic wooden boardwalk over the southern bog showcasing how the Quogue Ice Company harvested pond ice in the 1910s.',
-      kidTip: 'Before freezers existed, people sawed giant blocks of winter ice right out of Old Ice Pond!',
-      selectableForCustomWalk: true
     },
     {
       id: 'old-ice-pond',
@@ -866,12 +958,12 @@ function main(osm) {
       shortName: 'Fairy Dell',
       category: 'water',
       icon: 'boardwalk',
-      lat: 40.83155,
+      lat: 40.83160,
       lng: -72.61695,
       nodeId: 'fairy-dell-overlook',
-      description: 'Elevated wooden catwalk south of the railroad tracks winding through tidal wetlands along Quantuck Creek.',
-      kidTip: 'Walk carefully across Old Country Rd to reach the boardwalk — watch for fiddler crabs and egrets from the platforms!',
-      selectableForCustomWalk: true
+      description: '1,500-foot wooden catwalk south of the railroad tracks winding through tidal wetlands along Quantuck Creek with three creek overlooks. Reachable via Gigi’s Path (wooded trail) or the Roadside walk along Old Main Rd.',
+      kidTip: 'Cross Old Main Rd and the LIRR tracks carefully — then look for osprey nests, fiddler crabs, and egrets from the three platforms!',
+      selectableForCustomWalk: false
     }
   ];
 
@@ -993,6 +1085,46 @@ function main(osm) {
     }
   ];
 
+  // Real OSM parking lots (rendered in crisp grey) & key visitor buildings
+  const builtFeatures = [
+    {
+      id: 'parking-lot-main',
+      name: 'Main Gravel Parking Lot',
+      kind: 'parking-lot',
+      coordinates: wayRing(1194621358)
+    },
+    {
+      id: 'parking-lot-upper',
+      name: 'Upper Trailhead Parking',
+      kind: 'parking-lot',
+      coordinates: wayRing(1419543453)
+    },
+    {
+      id: 'building-nature-center',
+      name: 'Charles Banks Belt Nature Center',
+      kind: 'building-closed',
+      coordinates: wayRing(466661778)
+    },
+    {
+      id: 'building-ice-exhibit',
+      name: 'Ice Harvesting Exhibit',
+      kind: 'building',
+      coordinates: wayRing(466661829)
+    },
+    {
+      id: 'building-education-cottage',
+      name: 'Temporary Office / Education Cottage',
+      kind: 'building',
+      coordinates: wayRing(466661770)
+    },
+    {
+      id: 'building-restrooms',
+      name: 'Outdoor Restrooms',
+      kind: 'building',
+      coordinates: wayRing(466661861)
+    }
+  ];
+
   // Clean refuge perimeter polygon faithfully tracing the real fence line (including NW notch & bulge)
   const boundaryPolygon = [
     [40.83360, -72.61945],
@@ -1012,20 +1144,57 @@ function main(osm) {
     [40.84380, -72.61442],
     [40.83900, -72.61368],
     [40.83680, -72.61336],
-    [40.83375, -72.61355],
-    [40.83355, -72.61620]
+    [40.83392, -72.61340],
+    [40.83376, -72.61555],
+    [40.83358, -72.61645]
   ];
 
-  // LIRR railroad line clipped to refuge width + Quantuck Creek stream
+  // LIRR railroad line aligned through exact OSM crossing (40.833684, -72.615682), road context, & Quantuck Creek
   const decorLines = [
+    {
+      id: 'road-old-country',
+      name: 'Old Country Road',
+      kind: 'road',
+      coordinates: sliceWay(1027593279, 11178238592, 213513961)
+    },
+    {
+      id: 'road-old-main',
+      name: 'Old Main Road',
+      kind: 'road',
+      coordinates: sliceWay(925923928, 213513961, 213660918)
+    },
+    {
+      id: 'road-south-country',
+      name: 'South Country Road',
+      kind: 'road',
+      coordinates: sliceWay(20226239, 213660918, 213945567)
+    },
+    {
+      id: 'road-old-meeting-house',
+      name: 'Old Meeting House Road',
+      kind: 'road',
+      coordinates: sliceWay(20220696, 213945550, 213866388)
+    },
+    {
+      id: 'road-driveway-in',
+      name: 'Refuge Entrance Drive',
+      kind: 'road',
+      coordinates: wayRing(1419543449)
+    },
+    {
+      id: 'road-driveway-out',
+      name: 'Refuge Exit Drive',
+      kind: 'road',
+      coordinates: wayRing(962314896)
+    },
     {
       id: 'lirr-railroad',
       name: 'LIRR Montauk Branch',
       kind: 'railroad',
       coordinates: [
-        [40.83318, -72.62040],
-        [40.83333, -72.61620],
-        [40.83348, -72.61260]
+        [40.833223, -72.62040],
+        [40.833684, -72.615682],
+        [40.833985, -72.61260]
       ]
     },
     {
@@ -1055,9 +1224,9 @@ function main(osm) {
   ];
 
   const network = {
-    version: '2025.12-osm',
+    version: '2026.11-osm',
     sourceNote:
-      'Real-world GPS coordinates from OpenStreetMap contributors reconciled with Quogue Wildlife Refuge Trail Map (December 2025 with Clearing).',
+      'Real-world GPS coordinates from OpenStreetMap contributors reconciled with Quogue Wildlife Refuge Trail Map & Fairy Dell Boardwalk geometry.',
     refugeCenter: { lat: 40.8405, lng: -72.6166 },
     bounds: {
       north: 40.8504,
@@ -1076,6 +1245,7 @@ function main(osm) {
     pois,
     waterBodies,
     habitats,
+    builtFeatures,
     boundaryPolygon,
     decorLines
   };

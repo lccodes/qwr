@@ -8,6 +8,7 @@ import {
   Navigation,
   Route,
   Square,
+  TreePine,
   Volume2,
   VolumeX
 } from 'lucide-react';
@@ -18,6 +19,7 @@ import type {
   StandardLoopDef
 } from '../types';
 import { formatMiles } from '../engine/geo';
+import { FAIRY_DELL_GIGIS_ID, FAIRY_DELL_ROADSIDE_ID } from '../engine/router';
 
 interface BottomSheetProps {
   mode: 'standard' | 'custom';
@@ -133,6 +135,11 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({
     );
   }
 
+  const gigisRoute = resolvedStandardLoops[FAIRY_DELL_GIGIS_ID];
+  const roadsideRoute = resolvedStandardLoops[FAIRY_DELL_ROADSIDE_ID];
+  const gigisStopIdx = selectedPoiIds.indexOf(FAIRY_DELL_GIGIS_ID);
+  const roadsideStopIdx = selectedPoiIds.indexOf(FAIRY_DELL_ROADSIDE_ID);
+
   return (
     <section className="bottom-sheet" aria-label="Choose a trail">
       <button
@@ -170,40 +177,106 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({
           </div>
 
           {mode === 'standard' ? (
-            <div className="loop-grid">
-              {standardLoops.map((loop) => {
-                const resolved = resolvedStandardLoops[loop.id];
-                const isSelected = selectedLoopId === loop.id;
-                const displayMiles = resolved
-                  ? resolved.distanceMiles.toFixed(1)
-                  : loop.canonicalMiles.toFixed(1);
-                return (
-                  <button
-                    key={loop.id}
-                    type="button"
-                    className={`loop-card ${isSelected ? 'selected' : ''}`}
-                    onClick={() => onSelectLoop(loop.id)}
-                  >
-                    <div className="loop-card-top">
-                      <span className="loop-badge">
-                        <span
-                          className={`blaze-dot ${loop.badgeShape}`}
-                          style={{ background: loop.colorHex }}
-                        />
-                        <span>{loop.name}</span>
-                      </span>
-                      <span className="loop-dist tabular">{displayMiles} mi</span>
-                    </div>
-                    <div className="loop-summary">{loop.summary}</div>
-                    {resolved?.isDetoured && (
-                      <span className="loop-detour-tag">
-                        <AlertTriangle size={11} />
-                        Open detour
-                      </span>
+            <div className="standard-scroll">
+              <div className="loop-grid">
+                {standardLoops.map((loop) => {
+                  const resolved = resolvedStandardLoops[loop.id];
+                  const isSelected = selectedLoopId === loop.id;
+                  const displayMiles = resolved
+                    ? resolved.distanceMiles.toFixed(1)
+                    : loop.canonicalMiles.toFixed(1);
+                  return (
+                    <button
+                      key={loop.id}
+                      type="button"
+                      className={`loop-card ${isSelected ? 'selected' : ''}`}
+                      onClick={() => onSelectLoop(loop.id)}
+                    >
+                      <div className="loop-card-top">
+                        <span className="loop-badge">
+                          <span
+                            className={`blaze-dot ${loop.badgeShape}`}
+                            style={{ background: loop.colorHex }}
+                          />
+                          <span>{loop.name}</span>
+                        </span>
+                        <span className="loop-dist tabular">{displayMiles} mi</span>
+                      </div>
+                      <div className="loop-summary">{loop.summary}</div>
+                      {resolved?.isDetoured && (
+                        <span className="loop-detour-tag">
+                          <AlertTriangle size={11} />
+                          Open detour
+                        </span>
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {(gigisRoute || roadsideRoute) && (
+                <div className="fairy-dell-section">
+                  <div className="fairy-dell-label">
+                    <TreePine size={13} />
+                    <span>Fairy Dell Boardwalk (South of Tracks)</span>
+                  </div>
+                  <div className="fairy-dell-grid">
+                    {gigisRoute && (
+                      <button
+                        type="button"
+                        className={`fairy-card ${
+                          selectedLoopId === FAIRY_DELL_GIGIS_ID ? 'selected' : ''
+                        }`}
+                        onClick={() => onSelectLoop(FAIRY_DELL_GIGIS_ID)}
+                      >
+                        <div className="loop-card-top">
+                          <span className="loop-badge">
+                            <span
+                              className="blaze-dot"
+                              style={{ background: gigisRoute.colorHex }}
+                            />
+                            <span>Gigi&apos;s Path to Fairy Dell</span>
+                          </span>
+                          <span className="loop-dist tabular">
+                            {gigisRoute.distanceMiles.toFixed(1)} mi
+                          </span>
+                        </div>
+                        <span className="fairy-card-sub">
+                          <TreePine size={12} />
+                          Wooded trail
+                        </span>
+                      </button>
                     )}
-                  </button>
-                );
-              })}
+
+                    {roadsideRoute && (
+                      <button
+                        type="button"
+                        className={`fairy-card ${
+                          selectedLoopId === FAIRY_DELL_ROADSIDE_ID ? 'selected' : ''
+                        }`}
+                        onClick={() => onSelectLoop(FAIRY_DELL_ROADSIDE_ID)}
+                      >
+                        <div className="loop-card-top">
+                          <span className="loop-badge">
+                            <span
+                              className="blaze-dot square"
+                              style={{ background: roadsideRoute.colorHex }}
+                            />
+                            <span>Roadside walk to Fairy Dell</span>
+                          </span>
+                          <span className="loop-dist tabular">
+                            {roadsideRoute.distanceMiles.toFixed(1)} mi
+                          </span>
+                        </div>
+                        <span className="fairy-card-sub">
+                          <Footprints size={12} />
+                          Along Old Main Rd
+                        </span>
+                      </button>
+                    )}
+                  </div>
+                </div>
+              )}
             </div>
           ) : (
             <div>
@@ -253,6 +326,30 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({
                     </button>
                   );
                 })}
+
+                <button
+                  type="button"
+                  className={`stop-chip ${gigisStopIdx >= 0 ? 'selected' : ''}`}
+                  onClick={() => onTogglePoiStop(FAIRY_DELL_GIGIS_ID)}
+                >
+                  <TreePine size={17} style={{ flexShrink: 0 }} />
+                  <span>Gigi&apos;s Path to Fairy Dell</span>
+                  {gigisStopIdx >= 0 && (
+                    <span className="stop-order-num">{gigisStopIdx + 1}</span>
+                  )}
+                </button>
+
+                <button
+                  type="button"
+                  className={`stop-chip ${roadsideStopIdx >= 0 ? 'selected' : ''}`}
+                  onClick={() => onTogglePoiStop(FAIRY_DELL_ROADSIDE_ID)}
+                >
+                  <Footprints size={17} style={{ flexShrink: 0 }} />
+                  <span>Roadside walk to Fairy Dell</span>
+                  {roadsideStopIdx >= 0 && (
+                    <span className="stop-order-num">{roadsideStopIdx + 1}</span>
+                  )}
+                </button>
               </div>
             </div>
           )}

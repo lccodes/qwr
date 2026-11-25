@@ -103,7 +103,12 @@ if (visited.size < 3) {
 }
 
 const unreachablePois = network.pois
-  .filter((p) => p.selectableForCustomWalk && !visited.has(p.nodeId))
+  .filter(
+    (p) =>
+      p.selectableForCustomWalk &&
+      status.facilities?.[p.id]?.status !== 'closed' &&
+      !visited.has(p.nodeId)
+  )
   .map((p) => p.name);
 
 if (unreachablePois.length > 0) {

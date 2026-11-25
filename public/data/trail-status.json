@@ -1,18 +1,23 @@
 {
   "schemaVersion": "1.0",
-  "lastUpdated": "2025-12-01",
+  "lastUpdated": "2026-11-24",
   "refugePhone": "631-653-4771",
   "globalAlert": {
     "active": true,
     "severity": "warning",
-    "title": "Partial Trail Closures (Tree Work)",
-    "message": "Southwest trails are temporarily closed for Southern Pine Beetle tree cutting. Standard loops and custom walks automatically detour onto open trails."
+    "title": "Partial Trail & Nature Center Closures",
+    "message": "Southwest trails, the southern bog trail & boardwalk, and the Charles Banks Belt Nature Center are temporarily closed. Visit the open Temporary Office / Education Cottage beside the parking lot — all standard loops and custom walks automatically detour onto open trails."
   },
   "facilities": {
     "nature-center": {
       "name": "Charles Banks Belt Nature Center",
       "status": "closed",
-      "note": "Closed for renovations and expansion. Trails, Outdoor Restrooms, and the Outdoor Wildlife Complex are open daily sunrise to sunset."
+      "note": "Closed for major renovation and expansion. Please visit the open Temporary Office / Education Cottage right beside the parking lot."
+    },
+    "education-cottage": {
+      "name": "Temporary Office / Education Cottage",
+      "status": "open",
+      "note": "Open right beside the parking lot — temporary home for Refuge staff and Nature Center animals during renovations."
     },
     "restrooms": {
       "name": "Outdoor Restrooms",
@@ -55,6 +60,18 @@
       "status": "closed",
       "reason": "Southern Pine Beetle tree cutting",
       "updated": "2025-12-01"
+    },
+    "bog-south-trail": {
+      "name": "South Bog Trail (SW Corner to Bog Boardwalk)",
+      "status": "closed",
+      "reason": "Nature Center renovation & southern trail closure",
+      "updated": "2026-11-24"
+    },
+    "bog-boardwalk": {
+      "name": "Bog Boardwalk & Nature Center Loop (South of Old Ice Pond)",
+      "status": "closed",
+      "reason": "Nature Center renovation & southern trail closure",
+      "updated": "2026-11-24"
     },
     "regeneration-new-trail": {
       "name": "New Trail (Forest Regeneration & Eastern Bluebird Nestboxes)",

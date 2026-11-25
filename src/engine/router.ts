@@ -46,7 +46,8 @@ interface DirectedEdge {
 
 function buildOpenAdjacency(
   network: TrailNetwork,
-  statusConfig: TrailStatusConfig
+  statusConfig: TrailStatusConfig,
+  excludedSegmentIds?: Set<string>
 ): Map<string, DirectedEdge[]> {
   const adj = new Map<string, DirectedEdge[]>();
   for (const node of network.nodes) {
@@ -54,6 +55,7 @@ function buildOpenAdjacency(
   }
   for (const seg of network.segments) {
     if (!isSegmentOpen(seg.id, statusConfig)) continue;
+    if (excludedSegmentIds?.has(seg.id)) continue;
     const pts = segmentToLatLngs(seg, false);
     const len = polylineLengthMeters(pts);
     adj.get(seg.from)?.push({
@@ -83,7 +85,8 @@ interface ShortestPathResult {
 /**
  * Closure-aware Dijkstra shortest path over open trail segments.
  * Accepts optional `penalizedSegments` (multiplier) to gently prefer scenic loops
- * instead of retracing the exact same path on return legs.
+ * instead of retracing the exact same path on return legs, and `excludedSegmentIds`
+ * to lock parallel connectors (such as Gigi's Path vs Roadside walk to Fairy Dell).
  */
 export function findShortestOpenPath(
   network: TrailNetwork,
@@ -91,13 +94,14 @@ export function findShortestOpenPath(
   startNodeId: string,
   endNodeId: string,
   penalizedSegments?: Set<string>,
-  reusePenalty = 1.65
+  reusePenalty = 1.65,
+  excludedSegmentIds?: Set<string>
 ): ShortestPathResult | null {
   if (startNodeId === endNodeId) {
     return { nodeIds: [startNodeId], edges: [], distanceMeters: 0 };
   }
 
-  const adj = buildOpenAdjacency(network, statusConfig);
+  const adj = buildOpenAdjacency(network, statusConfig, excludedSegmentIds);
   const dist = new Map<string, number>();
   const actualDist = new Map<string, number>();
   const prevEdge = new Map<string, DirectedEdge>();
@@ -191,7 +195,7 @@ function findDirectSegment(
 }
 
 /**
- * Resolves a standard blaze loop (0.8 Green, 1.4 Yellow, 2.5 Blue, 3.1 Red).
+ * Resolves a standard blaze loop (0.8 Storybook Walk, 1.4 Yellow, 2.5 Blue, 3.1 Red).
  * If every canonical segment is open, returns the exact canonical trail.
  * If any segment is marked closed in `trail-status.json`, automatically stitches
  * the shortest open detour around closures while preserving open scenic anchors.
@@ -284,9 +288,11 @@ export function resolveStandardLoop(
       )
     );
     detourNote =
-      closedReasons.length > 0
-        ? `Detour active — avoids closed trail (${closedReasons[0]})`
-        : 'Detour active — automatically routed around closed trails';
+      closedReasons.length > 1
+        ? 'Detour active — avoids closed SW & southern bog trails'
+        : closedReasons.length === 1
+          ? `Detour active — avoids closed trail (${closedReasons[0]})`
+          : 'Detour active — automatically routed around closed trails';
   }
 
   const polyline = stitchEdgesToPolyline(finalEdges);
@@ -318,6 +324,97 @@ export function resolveStandardLoop(
   return route;
 }
 
+export type FairyDellRouteOption = 'gigis-path' | 'roadside';
+export const FAIRY_DELL_GIGIS_ID = 'fairy-dell-gigis-path';
+export const FAIRY_DELL_ROADSIDE_ID = 'fairy-dell-roadside';
+
+/**
+ * Builds one of the two Fairy Dell Boardwalk round-trip routes from Parking:
+ * - `'gigis-path'`: crosses LIRR at Old Main Rd and follows the shaded wooded
+ *   off-road corridor west of Old Main Rd down to Fairy Dell Boardwalk.
+ * - `'roadside'`: follows the existing roadside walk along Old Main Rd & crosswalks.
+ * Visits both the west creek platform and the main south Quantuck Creek overlook,
+ * returning along the same selected connector.
+ */
+export function buildFairyDellWalk(
+  network: TrailNetwork,
+  statusConfig: TrailStatusConfig,
+  option: FairyDellRouteOption,
+  startNodeId = 'parking'
+): ResolvedRoute | null {
+  const excluded = new Set<string>([
+    option === 'gigis-path' ? 'fairy-dell-roadside' : 'fairy-dell-gigis-path'
+  ]);
+
+  const hasWestOverlook = network.nodes.some(
+    (n) => n.id === 'fairy-dell-west-overlook'
+  );
+  const candidateTargets = hasWestOverlook
+    ? ['fairy-dell-west-overlook', 'fairy-dell-overlook', startNodeId]
+    : ['fairy-dell-overlook', startNodeId];
+
+  const finalEdges: DirectedEdge[] = [];
+  const finalNodeIds: string[] = [startNodeId];
+  let curr = startNodeId;
+
+  for (const target of candidateTargets) {
+    if (target === curr) continue;
+    const leg = findShortestOpenPath(
+      network,
+      statusConfig,
+      curr,
+      target,
+      undefined,
+      1.0,
+      excluded
+    );
+    if (!leg || leg.edges.length === 0) {
+      if (target === 'fairy-dell-overlook') return null;
+      continue;
+    }
+    for (const edge of leg.edges) {
+      finalEdges.push(edge);
+    }
+    for (let k = 1; k < leg.nodeIds.length; k++) {
+      finalNodeIds.push(leg.nodeIds[k]);
+    }
+    curr = target;
+  }
+
+  if (finalEdges.length === 0) return null;
+
+  const polyline = stitchEdgesToPolyline(finalEdges);
+  const distM = polylineLengthMeters(polyline);
+  const miles = metersToMiles(distM);
+  const isGigis = option === 'gigis-path';
+
+  const route: ResolvedRoute = {
+    id: isGigis ? FAIRY_DELL_GIGIS_ID : FAIRY_DELL_ROADSIDE_ID,
+    kind: 'standard',
+    title: isGigis
+      ? "Gigi's Path to Fairy Dell"
+      : 'Roadside walk to Fairy Dell',
+    subtitle: isGigis
+      ? 'Wooded trail west of Old Main Rd · Fairy Dell Boardwalk'
+      : 'Old Main Rd roadside walk · Fairy Dell Boardwalk',
+    colorHex: isGigis ? '#2B7A5B' : '#486581',
+    nodeIds: finalNodeIds,
+    segmentIds: finalEdges.map((e) => e.segment.id),
+    polyline,
+    distanceMeters: distM,
+    distanceMiles: miles,
+    estimatedMinutes: Math.max(8, Math.round(distM / WALKING_METERS_PER_MIN)),
+    isDetoured: false,
+    avoidedClosedSegments: Object.entries(statusConfig.segments)
+      .filter(([, entry]) => entry.status === 'closed')
+      .map(([id]) => id),
+    steps: []
+  };
+
+  route.steps = generateTurnSteps(route, network);
+  return route;
+}
+
 function permute<T>(items: T[]): T[][] {
   if (items.length <= 1) return [items];
   const result: T[][] = [];
@@ -333,6 +430,8 @@ function permute<T>(items: T[]): T[][] {
 /**
  * Builds the shortest open custom walk visiting 1 or more selected POIs
  * and looping safely back to Parking (never entering closed trails).
+ * Supports virtual Fairy Dell route IDs (`fairy-dell-gigis-path` and
+ * `fairy-dell-roadside`) to force the visitor's preferred Fairy Dell connector.
  */
 export function buildCustomWalk(
   network: TrailNetwork,
@@ -343,22 +442,61 @@ export function buildCustomWalk(
 ): ResolvedRoute | null {
   if (selectedPoiIds.length === 0) return null;
 
-  const selectedPois = selectedPoiIds
-    .map((id) => network.pois.find((p) => p.id === id))
-    .filter((p): p is NonNullable<typeof p> => Boolean(p));
+  // Determine optional Fairy Dell connector lock from virtual stop IDs
+  const wantsGigis = selectedPoiIds.includes(FAIRY_DELL_GIGIS_ID);
+  const wantsRoadside =
+    !wantsGigis && selectedPoiIds.includes(FAIRY_DELL_ROADSIDE_ID);
+  const excludedSegments = wantsGigis
+    ? new Set<string>(['fairy-dell-roadside'])
+    : wantsRoadside
+      ? new Set<string>(['fairy-dell-gigis-path'])
+      : undefined;
 
-  if (selectedPois.length === 0) return null;
+  // Resolve real POIs plus virtual Fairy Dell connector stops
+  const resolvedInputs: { id: string; nodeId: string; shortName: string }[] = [];
+  for (const id of selectedPoiIds) {
+    if (id === FAIRY_DELL_GIGIS_ID) {
+      resolvedInputs.push({
+        id,
+        nodeId: 'fairy-dell-overlook',
+        shortName: "Gigi's Path to Fairy Dell"
+      });
+      continue;
+    }
+    if (id === FAIRY_DELL_ROADSIDE_ID) {
+      if (wantsGigis) continue;
+      resolvedInputs.push({
+        id,
+        nodeId: 'fairy-dell-overlook',
+        shortName: 'Roadside walk to Fairy Dell'
+      });
+      continue;
+    }
+    const poi = network.pois.find((p) => p.id === id);
+    if (poi) {
+      resolvedInputs.push({
+        id: poi.id,
+        nodeId: poi.nodeId,
+        shortName: poi.shortName
+      });
+    }
+  }
+
+  if (resolvedInputs.length === 0) return null;
 
   // Deduplicate destination nodes while tracking unreachable POIs
   const reachableStops: { poiId: string; nodeId: string; name: string }[] = [];
   const unreachablePoiIds: string[] = [];
 
-  for (const poi of selectedPois) {
+  for (const poi of resolvedInputs) {
     const check = findShortestOpenPath(
       network,
       statusConfig,
       startNodeId,
-      poi.nodeId
+      poi.nodeId,
+      undefined,
+      1.65,
+      excludedSegments
     );
     if (!check) {
       unreachablePoiIds.push(poi.id);
@@ -383,7 +521,15 @@ export function buildCustomWalk(
       if (a === b) {
         pairDist.set(`${a}->${b}`, 0);
       } else {
-        const res = findShortestOpenPath(network, statusConfig, a, b);
+        const res = findShortestOpenPath(
+          network,
+          statusConfig,
+          a,
+          b,
+          undefined,
+          1.65,
+          excludedSegments
+        );
         pairDist.set(`${a}->${b}`, res ? res.distanceMeters : Infinity);
       }
     }
@@ -451,7 +597,8 @@ export function buildCustomWalk(
       curr,
       target,
       isReturn ? usedSegments : undefined,
-      1.75
+      1.75,
+      excludedSegments
     );
     if (!leg) continue;
     for (const edge of leg.edges) {
@@ -473,7 +620,9 @@ export function buildCustomWalk(
   const stopNames = orderedStops.map((s) => s.name);
   const title =
     stopNames.length === 1
-      ? `Walk to ${stopNames[0]}`
+      ? stopNames[0].includes('Fairy Dell')
+        ? stopNames[0]
+        : `Walk to ${stopNames[0]}`
       : stopNames.length === 2
         ? `${stopNames[0]} & ${stopNames[1]}`
         : `${stopNames[0]} + ${stopNames.length - 1} more stops`;

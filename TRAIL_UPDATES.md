@@ -6,7 +6,7 @@ All dynamic trail openings, closures, and facility notices live in **one simple 
 
 You **never** need to touch map coordinates, routing logic, or TypeScript code. When you mark a segment `"closed"`, the app automatically:
 1. Highlights that trail corridor in hatched red on the map with barrier markers.
-2. Detours any affected standard blaze loop (**Green 0.8**, **Yellow 1.4**, **Blue 2.5**, **Red 3.1**) onto open trails and updates its mileage.
+2. Detours any affected standard blaze loop (**Storybook Walk 0.8 Purple**, **Yellow 1.4**, **Blue 2.5**, **Red 3.1**) onto open trails and updates its mileage.
 3. Prevents **"Take Me To..."** custom walks and **"Back to Parking"** routes from entering closed trails.
 
 When you flip a segment back to `"open"`, all standard loops and custom routes restore automatically!
@@ -26,39 +26,46 @@ When you flip a segment back to `"open"`, all standard loops and custom routes r
    }
    ```
    *(Any segment omitted from `"segments"` automatically defaults to `"open"`.)*
-4. If all closures are cleared, set `"globalAlert.active"` to `false`.
-5. Run the safety validator before deploying:
+4. Under `"facilities"`, toggle buildings like `nature-center` or `education-cottage` (`"open"`, `"closed"`, or `"limited"`). Closed buildings automatically show a red **CLOSED** badge on the map.
+5. If all closures are cleared, set `"globalAlert.active"` to `false`.
+6. Run the safety validator before deploying:
    ```bash
    npm run validate:trails
    ```
-6. Commit & push — visitors' phones automatically refresh `trail-status.json` next time they have signal (and continue working offline with the cached copy).
+7. Commit & push — visitors' phones automatically refresh `trail-status.json` next time they have signal (and continue working offline with the cached copy).
 
 ---
 
 ## Trail Segment ID Reference
 
-### Southwest / Old Ice Pond West Zone (Dec 2025 Pine Beetle Area)
+### Southwest / Old Ice Pond West & South Closed Zone
 | Segment ID | Trail Section | Canonical Loops |
 |---|---|---|
-| `old-ice-pond-nw-spur` | Old Ice Pond Northwest Connector (Bridge to West Fence) | Green, Yellow |
+| `old-ice-pond-nw-spur` | Old Ice Pond Northwest Connector (Bridge to West Fence) | Storybook Walk, Yellow |
 | `west-fence-mid-south` | West Fence Trail (Regeneration Area to Old Ice Pond Spur) | Blue, Red |
 | `west-fence-spur-link` | West Fence Spur Link | Red |
-| `west-fence-south-inner` | West Trail (Old Ice Pond West Side — Inner) | Green, Yellow, Red |
+| `west-fence-south-inner` | West Trail (Old Ice Pond West Side — Inner) | Storybook Walk, Yellow, Red |
 | `west-fence-south-outer` | West Fence Trail (Old Ice Pond West Side — Outer) | Blue |
+| `bog-south-trail` | South Bog Trail (SW Corner to Bog Boardwalk) | All 4 loops |
+| `bog-boardwalk` | Bog Boardwalk & Nature Center Loop (South of Old Ice Pond) | All 4 loops |
 
-### Southern Hub, Bog & Fairy Dell
+### Southern Hub, Ice Harvesting Exhibit & Fairy Dell
 | Segment ID | Trail Section | Canonical Loops |
 |---|---|---|
 | `entrance-to-split` | Main Trailhead (Parking to Animal Complex Split) | All 4 loops |
-| `green-pond-east` | Old Ice Pond East Trail (Inner Green Trail) | Green |
+| `storybook-pond-east` | Old Ice Pond East Trail (Storybook Walk Trail) | Storybook Walk (Purple) |
 | `east-amphitheater-field` | East Trail (Amphitheater, Restrooms & Field) | Yellow, Blue, Red |
 | `east-bridge-connector` | East Fence to Bridge Connector | Yellow, Red |
-| `bridge-crossing` | Old Ice Pond Bridge Crossing | Green, Red |
-| `bog-south-trail` | South Bog Trail (SW Corner to Bog Boardwalk) | All 4 loops |
-| `bog-boardwalk` | Bog Boardwalk (South of Old Ice Pond) | All 4 loops |
-| `nature-center-to-parking` | Nature Center to Parking Path | All 4 loops |
-| `fairy-dell-connector` | Path to Fairy Dell Boardwalk (Across Old Country Rd & LIRR) | Custom |
-| `fairy-dell-boardwalk` | Fairy Dell Boardwalk (Quantuck Creek Wetlands) | Custom |
+| `bridge-crossing` | Old Ice Pond Bridge Crossing | Storybook Walk, Red |
+| `ice-exhibit-to-parking` | Ice Harvesting Exhibit to Parking Path *(open connector to Ice Harvesting Exhibit)* | All 4 loops |
+| `fairy-dell-lirr-approach` | Parking to LIRR Crossing (Old Main Rd) | Fairy Dell |
+| `fairy-dell-gigis-path` | **Gigi's Path to Fairy Dell** (Wooded trail west of Old Main Rd) | Fairy Dell (Wooded) |
+| `fairy-dell-roadside` | **Roadside walk to Fairy Dell** (Old Main Rd & crosswalks) | Fairy Dell (Roadside) |
+| `fairy-dell-boardwalk-stem` | Fairy Dell Boardwalk Entry | Fairy Dell |
+| `fairy-dell-boardwalk-west` | Fairy Dell Boardwalk (West Platform Branch) | Fairy Dell |
+| `fairy-dell-boardwalk-mid` | Fairy Dell Boardwalk (Main Catwalk) | Fairy Dell |
+| `fairy-dell-boardwalk-east-spur` | Fairy Dell Boardwalk (Middle Overlook Platform) | Fairy Dell |
+| `fairy-dell-boardwalk` | Fairy Dell Boardwalk (South Quantuck Creek Overlook) | Fairy Dell |
 
 ### Central, Swamp, North Pond & Regeneration Area
 | Segment ID | Trail Section | Canonical Loops |

@@ -25,7 +25,7 @@ export type PoiCategory =
   | 'amenity'
   | 'garden';
 
-export type LoopColorId = 'green' | 'yellow' | 'blue' | 'red';
+export type LoopColorId = 'purple' | 'yellow' | 'blue' | 'red';
 
 export interface TrailNode {
   id: string;
@@ -42,7 +42,7 @@ export interface TrailSegment {
   /** Ordered polyline coordinates starting at `from` and ending at `to` */
   waypoints: [number, number][]; // [lat, lng]
   habitat: HabitatType;
-  surface?: 'dirt' | 'boardwalk' | 'gravel' | 'bridge';
+  surface?: 'dirt' | 'boardwalk' | 'gravel' | 'bridge' | 'roadside';
   isNewTrail?: boolean;
   /** Optional standard loops that canonically include this segment */
   loops?: LoopColorId[];
@@ -73,6 +73,7 @@ export interface PoiDef {
   icon:
     | 'parking'
     | 'nature-center'
+    | 'cottage'
     | 'animals'
     | 'butterfly'
     | 'greenhouse'
@@ -96,7 +97,14 @@ export interface PoiDef {
 export interface PolygonFeature {
   id: string;
   name: string;
-  kind: HabitatType | 'water' | 'preserve-boundary' | 'closed-zone';
+  kind:
+    | HabitatType
+    | 'water'
+    | 'preserve-boundary'
+    | 'closed-zone'
+    | 'parking-lot'
+    | 'building'
+    | 'building-closed';
   /** Polygon ring coordinates as [lat, lng][] */
   coordinates: [number, number][];
   labelPosition?: [number, number];
@@ -105,7 +113,7 @@ export interface PolygonFeature {
 export interface LineFeature {
   id: string;
   name: string;
-  kind: 'fence' | 'railroad' | 'creek' | 'arrow';
+  kind: 'fence' | 'railroad' | 'creek' | 'arrow' | 'road';
   coordinates: [number, number][];
 }
 
@@ -130,6 +138,7 @@ export interface TrailNetwork {
   pois: PoiDef[];
   waterBodies: PolygonFeature[];
   habitats: PolygonFeature[];
+  builtFeatures?: PolygonFeature[];
   boundaryPolygon: [number, number][];
   decorLines: LineFeature[];
 }

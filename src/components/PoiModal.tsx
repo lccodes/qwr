@@ -1,20 +1,36 @@
 import React from 'react';
-import { AlertTriangle, Navigation, Sparkles, X } from 'lucide-react';
+import {
+  AlertTriangle,
+  Footprints,
+  Home,
+  Navigation,
+  Sparkles,
+  TreePine,
+  X
+} from 'lucide-react';
 import type { FacilityStatusEntry, PoiDef } from '../types';
+import type { FairyDellRouteOption } from '../engine/router';
 
 interface PoiModalProps {
   poi: PoiDef;
   facilityStatus?: FacilityStatusEntry;
   onClose: () => void;
   onWalkHere: (poi: PoiDef) => void;
+  onSelectFairyDellRoute?: (option: FairyDellRouteOption) => void;
+  onViewEducationCottage?: () => void;
 }
 
 export const PoiModal: React.FC<PoiModalProps> = ({
   poi,
   facilityStatus,
   onClose,
-  onWalkHere
+  onWalkHere,
+  onSelectFairyDellRoute,
+  onViewEducationCottage
 }) => {
+  const isClosed = facilityStatus?.status === 'closed';
+  const isFairyDell = poi.id === 'fairy-dell';
+
   return (
     <div
       className="modal-backdrop"
@@ -37,10 +53,10 @@ export const PoiModal: React.FC<PoiModalProps> = ({
         </div>
 
         {facilityStatus && facilityStatus.status !== 'open' && (
-          <div className="route-detour-banner">
-            <AlertTriangle size={18} style={{ flexShrink: 0 }} />
+          <div className={isClosed ? 'poi-closed-banner' : 'route-detour-banner'}>
+            <AlertTriangle size={18} style={{ flexShrink: 0, marginTop: 1 }} />
             <span>
-              <strong>Currently {facilityStatus.status}:</strong>{' '}
+              <strong>Currently {facilityStatus.status.toUpperCase()}:</strong>{' '}
               {facilityStatus.note}
             </span>
           </div>
@@ -56,15 +72,62 @@ export const PoiModal: React.FC<PoiModalProps> = ({
           <div>{poi.kidTip}</div>
         </div>
 
-        {poi.id !== 'parking' && (
-          <button
-            type="button"
-            className="primary-cta"
-            onClick={() => onWalkHere(poi)}
-          >
-            <Navigation size={20} />
-            <span>Walk Here from Parking</span>
-          </button>
+        {isClosed ? (
+          onViewEducationCottage && (
+            <button
+              type="button"
+              className="primary-cta"
+              onClick={onViewEducationCottage}
+            >
+              <Home size={20} />
+              <span>View Temporary Office / Education Cottage</span>
+            </button>
+          )
+        ) : isFairyDell && onSelectFairyDellRoute ? (
+          <div className="poi-dual-actions">
+            <button
+              type="button"
+              className="poi-route-btn wooded"
+              onClick={() => onSelectFairyDellRoute('gigis-path')}
+            >
+              <TreePine size={22} style={{ flexShrink: 0 }} />
+              <span className="poi-route-btn-text">
+                <span className="poi-route-btn-title">
+                  Gigi&apos;s Path to Fairy Dell
+                </span>
+                <span className="poi-route-btn-sub">
+                  Wooded off-road trail west of Old Main Rd
+                </span>
+              </span>
+            </button>
+
+            <button
+              type="button"
+              className="poi-route-btn roadside"
+              onClick={() => onSelectFairyDellRoute('roadside')}
+            >
+              <Footprints size={22} style={{ flexShrink: 0 }} />
+              <span className="poi-route-btn-text">
+                <span className="poi-route-btn-title">
+                  Roadside walk to Fairy Dell
+                </span>
+                <span className="poi-route-btn-sub">
+                  Existing walk along Old Main Rd &amp; crosswalks
+                </span>
+              </span>
+            </button>
+          </div>
+        ) : (
+          poi.id !== 'parking' && (
+            <button
+              type="button"
+              className="primary-cta"
+              onClick={() => onWalkHere(poi)}
+            >
+              <Navigation size={20} />
+              <span>Walk Here from Parking</span>
+            </button>
+          )
         )}
       </div>
     </div>

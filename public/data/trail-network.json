@@ -1,6 +1,6 @@
 {
-  "version": "2025.12-osm",
-  "sourceNote": "Real-world GPS coordinates from OpenStreetMap contributors reconciled with Quogue Wildlife Refuge Trail Map (December 2025 with Clearing).",
+  "version": "2026.11-osm",
+  "sourceNote": "Real-world GPS coordinates from OpenStreetMap contributors reconciled with Quogue Wildlife Refuge Trail Map & Fairy Dell Boardwalk geometry.",
   "refugeCenter": {
     "lat": 40.8405,
     "lng": -72.6166
@@ -72,10 +72,10 @@
       "label": "Bog Boardwalk"
     },
     {
-      "id": "nature-center-south",
-      "lat": 40.833797,
-      "lng": -72.61601,
-      "label": "Nature Center"
+      "id": "ice-exhibit-junction",
+      "lat": 40.834336,
+      "lng": -72.61552,
+      "label": "Ice Harvesting Exhibit"
     },
     {
       "id": "east-swamp-mid",
@@ -168,16 +168,46 @@
       "label": "West Fence North Cross"
     },
     {
+      "id": "old-main-rail-crossing",
+      "lat": 40.833684,
+      "lng": -72.615682,
+      "label": "LIRR Crossing (Old Main Rd)"
+    },
+    {
       "id": "fairy-dell-entry",
       "lat": 40.832749,
       "lng": -72.616262,
-      "label": "Fairy Dell Boardwalk Entry"
+      "label": "Fairy Dell Boardwalk Gate"
+    },
+    {
+      "id": "fairy-dell-fork",
+      "lat": 40.832358,
+      "lng": -72.616457,
+      "label": "Fairy Dell Boardwalk Fork"
+    },
+    {
+      "id": "fairy-dell-mid-fork",
+      "lat": 40.831745,
+      "lng": -72.616595,
+      "label": "Fairy Dell Middle Split"
+    },
+    {
+      "id": "fairy-dell-west-overlook",
+      "lat": 40.83172,
+      "lng": -72.617516,
+      "label": "Fairy Dell West Overlook"
+    },
+    {
+      "id": "fairy-dell-east-overlook",
+      "lat": 40.831538,
+      "lng": -72.616632,
+      "label": "Fairy Dell Middle Overlook"
     },
     {
       "id": "fairy-dell-overlook",
       "lat": 40.830972,
       "lng": -72.617373,
-      "label": "Fairy Dell Overlook"
+      "label": "Fairy Dell South Overlook"
     }
   ],
   "segments": [
@@ -199,15 +229,15 @@
       "habitat": "pine-oak-forest",
       "surface": "gravel",
       "loops": [
-        "green",
+        "purple",
         "yellow",
         "blue",
         "red"
       ]
     },
     {
-      "id": "green-pond-east",
-      "name": "Old Ice Pond East Trail (Inner Green Trail)",
+      "id": "storybook-pond-east",
+      "name": "Old Ice Pond East Trail (Storybook Walk Trail)",
       "from": "animal-complex-north",
       "to": "bridge-east-junction",
       "waypoints": [
@@ -239,7 +269,7 @@
       "habitat": "pine-oak-forest",
       "surface": "dirt",
       "loops": [
-        "green"
+        "purple"
       ]
     },
     {
@@ -441,7 +471,7 @@
       "habitat": "swamp",
       "surface": "bridge",
       "loops": [
-        "green",
+        "purple",
         "red"
       ]
     },
@@ -491,7 +521,7 @@
       "habitat": "pine-barrens",
       "surface": "dirt",
       "loops": [
-        "green",
+        "purple",
         "yellow"
       ]
     },
@@ -594,7 +624,7 @@
       "habitat": "pine-barrens",
       "surface": "dirt",
       "loops": [
-        "green",
+        "purple",
         "yellow",
         "red"
       ]
@@ -700,7 +730,7 @@
       "habitat": "bog",
       "surface": "dirt",
       "loops": [
-        "green",
+        "purple",
         "yellow",
         "blue",
         "red"
@@ -708,9 +738,9 @@
     },
     {
       "id": "bog-boardwalk",
-      "name": "Bog Boardwalk (South of Old Ice Pond)",
+      "name": "Bog Boardwalk & Nature Center Loop (South of Old Ice Pond)",
       "from": "bog-boardwalk-west",
-      "to": "nature-center-south",
+      "to": "ice-exhibit-junction",
       "waypoints": [
         [
           40.834031,
@@ -755,26 +785,6 @@
         [
           40.833797,
           -72.61601
-        ]
-      ],
-      "habitat": "bog",
-      "surface": "boardwalk",
-      "loops": [
-        "green",
-        "yellow",
-        "blue",
-        "red"
-      ]
-    },
-    {
-      "id": "nature-center-to-parking",
-      "name": "Nature Center to Parking Path",
-      "from": "nature-center-south",
-      "to": "parking",
-      "waypoints": [
-        [
-          40.833797,
-          -72.61601
         ],
         [
           40.833821,
@@ -803,6 +813,26 @@
         [
           40.834336,
           -72.61552
+        ]
+      ],
+      "habitat": "bog",
+      "surface": "boardwalk",
+      "loops": [
+        "purple",
+        "yellow",
+        "blue",
+        "red"
+      ]
+    },
+    {
+      "id": "ice-exhibit-to-parking",
+      "name": "Ice Harvesting Exhibit to Parking Path",
+      "from": "ice-exhibit-junction",
+      "to": "parking",
+      "waypoints": [
+        [
+          40.834336,
+          -72.61552
         ],
         [
           40.83445,
@@ -820,7 +850,7 @@
       "habitat": "pine-oak-forest",
       "surface": "gravel",
       "loops": [
-        "green",
+        "purple",
         "yellow",
         "blue",
         "red"
@@ -1831,22 +1861,124 @@
       ]
     },
     {
-      "id": "fairy-dell-connector",
-      "name": "Path to Fairy Dell Boardwalk (Across Old Country Rd & LIRR)",
-      "from": "nature-center-south",
+      "id": "fairy-dell-lirr-approach",
+      "name": "Parking to LIRR Crossing (Old Main Rd)",
+      "from": "parking",
+      "to": "old-main-rail-crossing",
+      "waypoints": [
+        [
+          40.834545,
+          -72.61528
+        ],
+        [
+          40.834456,
+          -72.615262
+        ],
+        [
+          40.834464,
+          -72.6152
+        ],
+        [
+          40.834362,
+          -72.615178
+        ],
+        [
+          40.834359,
+          -72.615209
+        ],
+        [
+          40.83432,
+          -72.615191
+        ],
+        [
+          40.834289,
+          -72.615204
+        ],
+        [
+          40.834244,
+          -72.615246
+        ],
+        [
+          40.834169,
+          -72.615365
+        ],
+        [
+          40.834096,
+          -72.615418
+        ],
+        [
+          40.834002,
+          -72.615417
+        ],
+        [
+          40.833998,
+          -72.615453
+        ],
+        [
+          40.83399,
+          -72.615496
+        ],
+        [
+          40.833983,
+          -72.615515
+        ],
+        [
+          40.833968,
+          -72.615538
+        ],
+        [
+          40.833952,
+          -72.615554
+        ],
+        [
+          40.833931,
+          -72.61557
+        ],
+        [
+          40.833904,
+          -72.615586
+        ],
+        [
+          40.833871,
+          -72.615603
+        ],
+        [
+          40.833825,
+          -72.615625
+        ],
+        [
+          40.833775,
+          -72.615648
+        ],
+        [
+          40.833684,
+          -72.615682
+        ]
+      ],
+      "habitat": "pine-oak-forest",
+      "surface": "roadside"
+    },
+    {
+      "id": "fairy-dell-roadside",
+      "name": "Roadside walk to Fairy Dell (Old Main Rd)",
+      "from": "old-main-rail-crossing",
       "to": "fairy-dell-entry",
       "waypoints": [
         [
-          40.833797,
-          -72.61601
+          40.833684,
+          -72.615682
         ],
         [
-          40.83348,
+          40.833086,
+          -72.615926
+        ],
+        [
+          40.833062,
           -72.61598
         ],
         [
-          40.833182,
-          -72.615972
+          40.833043,
+          -72.616034
         ],
         [
           40.833039,
@@ -1882,13 +2014,55 @@
         ]
       ],
       "habitat": "bog",
-      "surface": "gravel"
+      "surface": "roadside"
     },
     {
-      "id": "fairy-dell-boardwalk",
-      "name": "Fairy Dell Boardwalk (Quantuck Creek Wetlands)",
+      "id": "fairy-dell-gigis-path",
+      "name": "Gigi's Path to Fairy Dell (Wooded Trail)",
+      "from": "old-main-rail-crossing",
+      "to": "fairy-dell-entry",
+      "waypoints": [
+        [
+          40.833684,
+          -72.615682
+        ],
+        [
+          40.833585,
+          -72.61578
+        ],
+        [
+          40.83352,
+          -72.61601
+        ],
+        [
+          40.833425,
+          -72.616225
+        ],
+        [
+          40.83327,
+          -72.616365
+        ],
+        [
+          40.83309,
+          -72.616405
+        ],
+        [
+          40.83293,
+          -72.616345
+        ],
+        [
+          40.832749,
+          -72.616262
+        ]
+      ],
+      "habitat": "pine-oak-forest",
+      "surface": "dirt"
+    },
+    {
+      "id": "fairy-dell-boardwalk-stem",
+      "name": "Fairy Dell Boardwalk Entry",
       "from": "fairy-dell-entry",
-      "to": "fairy-dell-overlook",
+      "to": "fairy-dell-fork",
       "waypoints": [
         [
           40.832749,
@@ -1902,6 +2076,70 @@
           40.83248,
           -72.616437
         ],
+        [
+          40.832358,
+          -72.616457
+        ]
+      ],
+      "habitat": "swamp",
+      "surface": "boardwalk"
+    },
+    {
+      "id": "fairy-dell-boardwalk-west",
+      "name": "Fairy Dell Boardwalk (West Platform Branch)",
+      "from": "fairy-dell-fork",
+      "to": "fairy-dell-west-overlook",
+      "waypoints": [
+        [
+          40.832358,
+          -72.616457
+        ],
+        [
+          40.832303,
+          -72.616646
+        ],
+        [
+          40.832258,
+          -72.616734
+        ],
+        [
+          40.832237,
+          -72.616828
+        ],
+        [
+          40.832203,
+          -72.616891
+        ],
+        [
+          40.832194,
+          -72.616965
+        ],
+        [
+          40.83211,
+          -72.617084
+        ],
+        [
+          40.83192,
+          -72.617253
+        ],
+        [
+          40.831848,
+          -72.617368
+        ],
+        [
+          40.83172,
+          -72.617516
+        ]
+      ],
+      "habitat": "swamp",
+      "surface": "boardwalk"
+    },
+    {
+      "id": "fairy-dell-boardwalk-mid",
+      "name": "Fairy Dell Boardwalk (Main Catwalk)",
+      "from": "fairy-dell-fork",
+      "to": "fairy-dell-mid-fork",
+      "waypoints": [
         [
           40.832358,
           -72.616457
@@ -1922,6 +2160,46 @@
           40.831847,
           -72.616545
         ],
+        [
+          40.831745,
+          -72.616595
+        ]
+      ],
+      "habitat": "swamp",
+      "surface": "boardwalk"
+    },
+    {
+      "id": "fairy-dell-boardwalk-east-spur",
+      "name": "Fairy Dell Boardwalk (Middle Overlook Platform)",
+      "from": "fairy-dell-mid-fork",
+      "to": "fairy-dell-east-overlook",
+      "waypoints": [
+        [
+          40.831745,
+          -72.616595
+        ],
+        [
+          40.831668,
+          -72.616625
+        ],
+        [
+          40.8316,
+          -72.616636
+        ],
+        [
+          40.831538,
+          -72.616632
+        ]
+      ],
+      "habitat": "swamp",
+      "surface": "boardwalk"
+    },
+    {
+      "id": "fairy-dell-boardwalk",
+      "name": "Fairy Dell Boardwalk (South Quantuck Creek Overlook)",
+      "from": "fairy-dell-mid-fork",
+      "to": "fairy-dell-overlook",
+      "waypoints": [
         [
           40.831745,
           -72.616595
@@ -1957,19 +2235,19 @@
   ],
   "standardLoops": [
     {
-      "id": "green-08",
-      "colorId": "green",
-      "name": "Green Trail",
-      "shortName": "Green · 0.8 mi",
-      "colorHex": "#1E8E4E",
+      "id": "storybook-08",
+      "colorId": "purple",
+      "name": "Storybook Walk Trail",
+      "shortName": "Storybook · 0.8 mi",
+      "colorHex": "#7B2D8E",
       "badgeShape": "circle",
       "canonicalMiles": 0.8,
       "difficulty": "Easy",
-      "summary": "Old Ice Pond & Bridge",
+      "summary": "Old Ice Pond & Storybook Walk",
       "highlights": [
+        "Storybook Pages",
         "Old Ice Pond",
-        "The Bridge",
-        "Bog Boardwalk"
+        "The Bridge"
       ],
       "canonicalNodeIds": [
         "parking",
@@ -1979,7 +2257,7 @@
         "west-fence-nw-spur",
         "sw-bog-corner",
         "bog-boardwalk-west",
-        "nature-center-south",
+        "ice-exhibit-junction",
         "parking"
       ],
       "detourAnchors": [
@@ -2017,7 +2295,7 @@
         "west-fence-nw-spur",
         "sw-bog-corner",
         "bog-boardwalk-west",
-        "nature-center-south",
+        "ice-exhibit-junction",
         "parking"
       ],
       "detourAnchors": [
@@ -2059,7 +2337,7 @@
         "west-fence-mid-south-outer",
         "sw-bog-corner",
         "bog-boardwalk-west",
-        "nature-center-south",
+        "ice-exhibit-junction",
         "parking"
       ],
       "detourAnchors": [
@@ -2112,7 +2390,7 @@
         "west-fence-nw-spur",
         "sw-bog-corner",
         "bog-boardwalk-west",
-        "nature-center-south",
+        "ice-exhibit-junction",
         "parking"
       ],
       "detourAnchors": [
@@ -2137,24 +2415,37 @@
       "shortName": "Parking",
       "category": "entry",
       "icon": "parking",
-      "lat": 40.83436,
-      "lng": -72.61515,
+      "lat": 40.83402,
+      "lng": -72.61453,
       "nodeId": "parking",
-      "description": "Free gravel parking lot at 3 Old Country Rd and main starting hub for all Refuge trails.",
+      "description": "Free gravel parking lot at 3 Old Country Rd plus upper accessible turnaround spots near the trailhead.",
       "kidTip": "Start and end your walk here — check the trailhead board for seasonal bird sightings!",
       "selectableForCustomWalk": false
     },
     {
-      "id": "animal-complex",
-      "name": "Outdoor Wildlife Complex",
-      "shortName": "Animal Complex",
-      "category": "wildlife",
-      "icon": "animals",
-      "lat": 40.83457,
-      "lng": -72.61514,
-      "nodeId": "animal-complex-north",
-      "description": "Home to permanently injured native New York wildlife ambassadors including owls, hawks, falcons, and foxes.",
-      "kidTip": "Look quietly into the tall aviaries to spot barred owls, screech owls, and red-tailed hawks.",
+      "id": "education-cottage",
+      "name": "Temporary Office / Education Cottage",
+      "shortName": "Temp Office / Cottage",
+      "category": "entry",
+      "icon": "cottage",
+      "lat": 40.83428,
+      "lng": -72.61476,
+      "nodeId": "parking",
+      "description": "Temporary home for Refuge staff and indoor Nature Center animals during renovations — slated to become the permanent Education Cottage for camps, workshops, and family programs.",
+      "kidTip": "Right beside the parking lot — wave hello to Refuge educators or stop by with questions!",
+      "selectableForCustomWalk": true
+    },
+    {
+      "id": "ice-exhibit",
+      "name": "Ice Harvesting Exhibit",
+      "shortName": "Ice Harvesting Exhibit",
+      "category": "landmark",
+      "icon": "ice-exhibit",
+      "lat": 40.83442,
+      "lng": -72.61533,
+      "nodeId": "ice-exhibit-junction",
+      "description": "Historic exhibit house right beside the trailhead displaying authentic century-old saws, tongs, and tools used by the Quogue Ice Company to harvest winter ice from Old Ice Pond.",
+      "kidTip": "Before freezers existed, people sawed giant blocks of winter ice right out of Old Ice Pond!",
       "selectableForCustomWalk": true
     },
     {
@@ -2163,11 +2454,24 @@
       "shortName": "Nature Center",
       "category": "entry",
       "icon": "nature-center",
-      "lat": 40.83411,
-      "lng": -72.61585,
-      "nodeId": "nature-center-south",
-      "description": "Historic lakeside Nature Center overlooking Old Ice Pond (undergoing renovation & expansion).",
-      "kidTip": "Peek out over Old Ice Pond right beside the building to look for painted turtles and ducks.",
+      "lat": 40.8341,
+      "lng": -72.61587,
+      "nodeId": "ice-exhibit-junction",
+      "description": "Historic lakeside Nature Center overlooking Old Ice Pond — currently closed for major renovation and expansion. Visit the open Temporary Office / Education Cottage beside the parking lot.",
+      "kidTip": "The building is getting a brand-new expansion! Follow open trails around Old Ice Pond to spot turtles and ducks.",
+      "selectableForCustomWalk": false
+    },
+    {
+      "id": "animal-complex",
+      "name": "Outdoor Wildlife Complex",
+      "shortName": "Animal Complex",
+      "category": "wildlife",
+      "icon": "animals",
+      "lat": 40.83462,
+      "lng": -72.6151,
+      "nodeId": "animal-complex-north",
+      "description": "Home to permanently injured native New York wildlife ambassadors including owls, hawks, falcons, and foxes.",
+      "kidTip": "Look quietly into the tall aviaries to spot barred owls, screech owls, and red-tailed hawks.",
       "selectableForCustomWalk": true
     },
     {
@@ -2208,19 +2512,6 @@
       "description": "Shaded outdoor wooden seating area along the east trail used for nature talks and school groups.",
       "kidTip": "Take a quick rest on the curved benches and listen for woodpeckers tapping nearby.",
       "selectableForCustomWalk": false
-    },
-    {
-      "id": "ice-exhibit",
-      "name": "Ice Harvesting Exhibit & Bog",
-      "shortName": "Bog & Ice Exhibit",
-      "category": "landmark",
-      "icon": "ice-exhibit",
-      "lat": 40.834,
-      "lng": -72.61642,
-      "nodeId": "bog-boardwalk-west",
-      "description": "Scenic wooden boardwalk over the southern bog showcasing how the Quogue Ice Company harvested pond ice in the 1910s.",
-      "kidTip": "Before freezers existed, people sawed giant blocks of winter ice right out of Old Ice Pond!",
-      "selectableForCustomWalk": true
     },
     {
       "id": "old-ice-pond",
@@ -2306,12 +2597,12 @@
       "shortName": "Fairy Dell",
       "category": "water",
       "icon": "boardwalk",
-      "lat": 40.83155,
+      "lat": 40.8316,
       "lng": -72.61695,
       "nodeId": "fairy-dell-overlook",
-      "description": "Elevated wooden catwalk south of the railroad tracks winding through tidal wetlands along Quantuck Creek.",
-      "kidTip": "Walk carefully across Old Country Rd to reach the boardwalk — watch for fiddler crabs and egrets from the platforms!",
-      "selectableForCustomWalk": true
+      "description": "1,500-foot wooden catwalk south of the railroad tracks winding through tidal wetlands along Quantuck Creek with three creek overlooks. Reachable via Gigi’s Path (wooded trail) or the Roadside walk along Old Main Rd.",
+      "kidTip": "Cross Old Main Rd and the LIRR tracks carefully — then look for osprey nests, fiddler crabs, and egrets from the three platforms!",
+      "selectableForCustomWalk": false
     }
   ],
   "waterBodies": [
@@ -3502,6 +3793,230 @@
       ]
     }
   ],
+  "builtFeatures": [
+    {
+      "id": "parking-lot-main",
+      "name": "Main Gravel Parking Lot",
+      "kind": "parking-lot",
+      "coordinates": [
+        [
+          40.833984,
+          -72.615371
+        ],
+        [
+          40.833877,
+          -72.615445
+        ],
+        [
+          40.83401,
+          -72.613535
+        ],
+        [
+          40.83415,
+          -72.613553
+        ],
+        [
+          40.834117,
+          -72.613915
+        ],
+        [
+          40.833984,
+          -72.615371
+        ]
+      ]
+    },
+    {
+      "id": "parking-lot-upper",
+      "name": "Upper Trailhead Parking",
+      "kind": "parking-lot",
+      "coordinates": [
+        [
+          40.834441,
+          -72.615318
+        ],
+        [
+          40.834392,
+          -72.615308
+        ],
+        [
+          40.83432,
+          -72.615294
+        ],
+        [
+          40.834311,
+          -72.615255
+        ],
+        [
+          40.834298,
+          -72.615237
+        ],
+        [
+          40.834236,
+          -72.615196
+        ],
+        [
+          40.83425,
+          -72.615158
+        ],
+        [
+          40.834281,
+          -72.615116
+        ],
+        [
+          40.834307,
+          -72.614883
+        ],
+        [
+          40.834486,
+          -72.614918
+        ],
+        [
+          40.834441,
+          -72.615318
+        ]
+      ]
+    },
+    {
+      "id": "building-nature-center",
+      "name": "Charles Banks Belt Nature Center",
+      "kind": "building-closed",
+      "coordinates": [
+        [
+          40.83399,
+          -72.61593
+        ],
+        [
+          40.834044,
+          -72.615944
+        ],
+        [
+          40.834047,
+          -72.615921
+        ],
+        [
+          40.834204,
+          -72.615961
+        ],
+        [
+          40.834225,
+          -72.615816
+        ],
+        [
+          40.834175,
+          -72.615802
+        ],
+        [
+          40.834177,
+          -72.615786
+        ],
+        [
+          40.834018,
+          -72.615744
+        ],
+        [
+          40.83399,
+          -72.61593
+        ]
+      ]
+    },
+    {
+      "id": "building-ice-exhibit",
+      "name": "Ice Harvesting Exhibit",
+      "kind": "building",
+      "coordinates": [
+        [
+          40.83439,
+          -72.615302
+        ],
+        [
+          40.834385,
+          -72.615367
+        ],
+        [
+          40.834459,
+          -72.615378
+        ],
+        [
+          40.834465,
+          -72.615313
+        ],
+        [
+          40.83439,
+          -72.615302
+        ]
+      ]
+    },
+    {
+      "id": "building-education-cottage",
+      "name": "Temporary Office / Education Cottage",
+      "kind": "building",
+      "coordinates": [
+        [
+          40.834232,
+          -72.614669
+        ],
+        [
+          40.834208,
+          -72.614881
+        ],
+        [
+          40.834278,
+          -72.614895
+        ],
+        [
+          40.83429,
+          -72.614791
+        ],
+        [
+          40.834311,
+          -72.614795
+        ],
+        [
+          40.834317,
+          -72.614743
+        ],
+        [
+          40.834303,
+          -72.61474
+        ],
+        [
+          40.834309,
+          -72.614684
+        ],
+        [
+          40.834232,
+          -72.614669
+        ]
+      ]
+    },
+    {
+      "id": "building-restrooms",
+      "name": "Outdoor Restrooms",
+      "kind": "building",
+      "coordinates": [
+        [
+          40.834683,
+          -72.614642
+        ],
+        [
+          40.83473,
+          -72.614562
+        ],
+        [
+          40.834659,
+          -72.614491
+        ],
+        [
+          40.834612,
+          -72.614571
+        ],
+        [
+          40.834683,
+          -72.614642
+        ]
+      ]
+    }
+  ],
   "boundaryPolygon": [
     [
       40.8336,
@@ -3572,30 +4087,344 @@
       -72.61336
     ],
     [
-      40.83375,
-      -72.61355
+      40.83392,
+      -72.6134
     ],
     [
-      40.83355,
-      -72.6162
+      40.83376,
+      -72.61555
+    ],
+    [
+      40.83358,
+      -72.61645
     ]
   ],
   "decorLines": [
+    {
+      "id": "road-old-country",
+      "name": "Old Country Road",
+      "kind": "road",
+      "coordinates": [
+        [
+          40.834398,
+          -72.61268
+        ],
+        [
+          40.834345,
+          -72.612806
+        ],
+        [
+          40.834304,
+          -72.612913
+        ],
+        [
+          40.834268,
+          -72.613029
+        ],
+        [
+          40.834238,
+          -72.613145
+        ],
+        [
+          40.834215,
+          -72.61325
+        ],
+        [
+          40.834195,
+          -72.613385
+        ],
+        [
+          40.834179,
+          -72.61352
+        ],
+        [
+          40.834002,
+          -72.615417
+        ]
+      ]
+    },
+    {
+      "id": "road-old-main",
+      "name": "Old Main Road",
+      "kind": "road",
+      "coordinates": [
+        [
+          40.834002,
+          -72.615417
+        ],
+        [
+          40.833998,
+          -72.615453
+        ],
+        [
+          40.83399,
+          -72.615496
+        ],
+        [
+          40.833983,
+          -72.615515
+        ],
+        [
+          40.833968,
+          -72.615538
+        ],
+        [
+          40.833952,
+          -72.615554
+        ],
+        [
+          40.833931,
+          -72.61557
+        ],
+        [
+          40.833904,
+          -72.615586
+        ],
+        [
+          40.833871,
+          -72.615603
+        ],
+        [
+          40.833825,
+          -72.615625
+        ],
+        [
+          40.833775,
+          -72.615648
+        ],
+        [
+          40.833684,
+          -72.615682
+        ],
+        [
+          40.833086,
+          -72.615926
+        ]
+      ]
+    },
+    {
+      "id": "road-south-country",
+      "name": "South Country Road",
+      "kind": "road",
+      "coordinates": [
+        [
+          40.833086,
+          -72.615926
+        ],
+        [
+          40.833062,
+          -72.61598
+        ],
+        [
+          40.833043,
+          -72.616034
+        ],
+        [
+          40.833039,
+          -72.616045
+        ],
+        [
+          40.833025,
+          -72.616091
+        ],
+        [
+          40.833011,
+          -72.616147
+        ],
+        [
+          40.832998,
+          -72.616213
+        ],
+        [
+          40.832943,
+          -72.616498
+        ],
+        [
+          40.83285,
+          -72.617179
+        ],
+        [
+          40.832681,
+          -72.618391
+        ],
+        [
+          40.832653,
+          -72.61859
+        ],
+        [
+          40.832618,
+          -72.618828
+        ],
+        [
+          40.832579,
+          -72.619059
+        ],
+        [
+          40.832534,
+          -72.61931
+        ],
+        [
+          40.832496,
+          -72.619508
+        ],
+        [
+          40.832462,
+          -72.619688
+        ]
+      ]
+    },
+    {
+      "id": "road-old-meeting-house",
+      "name": "Old Meeting House Road",
+      "kind": "road",
+      "coordinates": [
+        [
+          40.832943,
+          -72.616498
+        ],
+        [
+          40.832906,
+          -72.616427
+        ],
+        [
+          40.832868,
+          -72.616364
+        ],
+        [
+          40.832831,
+          -72.61631
+        ],
+        [
+          40.832794,
+          -72.616257
+        ],
+        [
+          40.832777,
+          -72.616236
+        ],
+        [
+          40.832765,
+          -72.616222
+        ],
+        [
+          40.832716,
+          -72.616173
+        ],
+        [
+          40.832672,
+          -72.616133
+        ],
+        [
+          40.832501,
+          -72.616017
+        ],
+        [
+          40.831644,
+          -72.615541
+        ],
+        [
+          40.831477,
+          -72.61546
+        ],
+        [
+          40.83131,
+          -72.61537
+        ],
+        [
+          40.830826,
+          -72.615023
+        ]
+      ]
+    },
+    {
+      "id": "road-driveway-in",
+      "name": "Refuge Entrance Drive",
+      "kind": "road",
+      "coordinates": [
+        [
+          40.834002,
+          -72.615417
+        ],
+        [
+          40.834096,
+          -72.615418
+        ],
+        [
+          40.834169,
+          -72.615365
+        ],
+        [
+          40.834244,
+          -72.615246
+        ],
+        [
+          40.834289,
+          -72.615204
+        ],
+        [
+          40.83432,
+          -72.615191
+        ],
+        [
+          40.834359,
+          -72.615209
+        ]
+      ]
+    },
+    {
+      "id": "road-driveway-out",
+      "name": "Refuge Exit Drive",
+      "kind": "road",
+      "coordinates": [
+        [
+          40.834359,
+          -72.615209
+        ],
+        [
+          40.834352,
+          -72.615295
+        ],
+        [
+          40.834344,
+          -72.615373
+        ],
+        [
+          40.834285,
+          -72.615454
+        ],
+        [
+          40.83423,
+          -72.615493
+        ],
+        [
+          40.834176,
+          -72.61551
+        ],
+        [
+          40.834087,
+          -72.615514
+        ],
+        [
+          40.83399,
+          -72.615496
+        ]
+      ]
+    },
     {
       "id": "lirr-railroad",
       "name": "LIRR Montauk Branch",
       "kind": "railroad",
       "coordinates": [
         [
-          40.83318,
+          40.833223,
           -72.6204
         ],
         [
-          40.83333,
-          -72.6162
+          40.833684,
+          -72.615682
         ],
         [
-          40.83348,
+          40.833985,
           -72.6126
         ]
       ]

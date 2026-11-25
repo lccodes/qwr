@@ -187,6 +187,12 @@ function PoiIconGlyph({ icon }: { icon: PoiDef['icon'] }) {
           strokeLinecap="round"
         />
       );
+    case 'cottage':
+      return (
+        <g fill="#FFFFFF">
+          <path d="M-5.8 -0.2 L0 -5.6 L5.8 -0.2 L4.4 -0.2 L4.4 4.8 L1.4 4.8 L1.4 1.6 L-1.4 1.6 L-1.4 4.8 L-4.4 4.8 L-4.4 -0.2 Z" />
+        </g>
+      );
     case 'nature-center':
     case 'ice-exhibit':
       return (
@@ -200,8 +206,11 @@ function PoiIconGlyph({ icon }: { icon: PoiDef['icon'] }) {
   }
 }
 
-function poiPinFill(poi: PoiDef, isSelected: boolean): string {
+function poiPinFill(poi: PoiDef, isSelected: boolean, isClosed = false): string {
+  if (isClosed) return '#8F2424';
   if (isSelected) return '#D97706';
+  if (poi.icon === 'cottage') return '#7C5028';
+  if (poi.icon === 'ice-exhibit') return '#2B6E8C';
   switch (poi.category) {
     case 'entry':
       return '#1B4332';
@@ -690,8 +699,115 @@ export const RefugeMap: React.FC<RefugeMapProps> = ({
             })}
           </g>
 
+          {/* 3.5. Surrounding Roads & Refuge Entrance Driveways */}
+          {network.decorLines
+            .filter((l) => l.kind === 'road')
+            .map((line) => {
+              const d = coordsToSvgPath(line.coordinates, projector.latLngToSvg);
+              const isDriveway = line.id.startsWith('road-driveway');
+              return (
+                <g key={line.id}>
+                  <path
+                    d={d}
+                    fill="none"
+                    stroke="#C9C3B6"
+                    strokeWidth={isDriveway ? 5.4 : 9.2}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d={d}
+                    fill="none"
+                    stroke="#F8F5EE"
+                    strokeWidth={isDriveway ? 3.6 : 6.6}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </g>
+              );
+            })}
+
+          {/* 3.8. Grey Parking Lots & Key Visitor Buildings */}
+          {(network.builtFeatures ?? []).map((feat) => {
+            const d = coordsToSvgPath(feat.coordinates, projector.latLngToSvg, true);
+            if (feat.kind === 'parking-lot') {
+              return (
+                <g key={feat.id}>
+                  <path
+                    d={d}
+                    fill="#D4D7D5"
+                    stroke="#8B948E"
+                    strokeWidth={1.35}
+                    strokeLinejoin="round"
+                  />
+                  {feat.id === 'parking-lot-upper' && zoom >= 1.5 && (
+                    (() => {
+                      const avgLat =
+                        feat.coordinates.reduce((s, c) => s + c[0], 0) /
+                        feat.coordinates.length;
+                      const avgLng =
+                        feat.coordinates.reduce((s, c) => s + c[1], 0) /
+                        feat.coordinates.length;
+                      const pt = projector.latLngToSvg({ lat: avgLat, lng: avgLng });
+                      return (
+                        <g
+                          transform={`translate(${pt.x.toFixed(1)}, ${pt.y.toFixed(
+                            1
+                          )}) rotate(${mapRotationDeg.toFixed(1)}) scale(${inverseScale.toFixed(2)})`}
+                          pointerEvents="none"
+                        >
+                          <circle
+                            r="6.2"
+                            fill="#6C7570"
+                            stroke="#FFFFFF"
+                            strokeWidth="1.2"
+                          />
+                          <text
+                            x="0"
+                            y="2.7"
+                            textAnchor="middle"
+                            fontSize="7.5"
+                            fontWeight="800"
+                            fill="#FFFFFF"
+                          >
+                            P
+                          </text>
+                        </g>
+                      );
+                    })()
+                  )}
+                </g>
+              );
+            }
+            if (feat.kind === 'building-closed') {
+              return (
+                <path
+                  key={feat.id}
+                  d={d}
+                  fill="#ECCACA"
+                  stroke="#C92A2A"
+                  strokeWidth={1.5}
+                  strokeDasharray="2.5 1.8"
+                  strokeLinejoin="round"
+                />
+              );
+            }
+            const isCottage = feat.id === 'building-education-cottage';
+            return (
+              <path
+                key={feat.id}
+                d={d}
+                fill={isCottage ? '#DEC1A2' : '#DCD7CC'}
+                stroke={isCottage ? '#7C5028' : '#8A8478'}
+                strokeWidth={isCottage ? 1.5 : 1.15}
+                strokeLinejoin="round"
+              />
+            );
+          })}
+
           {/* 4. Creek & LIRR Railroad */}
           {network.decorLines.map((line) => {
+            if (line.kind === 'road') return null;
             const d = coordsToSvgPath(line.coordinates, projector.latLngToSvg);
             if (line.kind === 'creek') {
               return (
@@ -709,7 +825,7 @@ export const RefugeMap: React.FC<RefugeMapProps> = ({
             }
             if (line.kind === 'railroad') {
               return (
-                <g key={line.id} opacity={0.75}>
+                <g key={line.id} opacity={0.78}>
                   <path d={d} fill="none" stroke="#6E655B" strokeWidth={2.2} />
                   <path
                     d={d}
@@ -769,18 +885,19 @@ export const RefugeMap: React.FC<RefugeMapProps> = ({
             );
           })}
 
-          {/* 6. Base Trail Network (Open, New Trail, & Closed Corridors) */}
+          {/* 6. Base Trail Network (Open, New Trail, Wooded/Roadside Connectors, & Closed Corridors) */}
           {network.segments.map((seg) => {
             const d = coordsToSvgPath(seg.waypoints, projector.latLngToSvg);
             const open = isSegmentOpen(seg.id, status);
             if (!open) {
+              const isBoardwalkCurve = seg.id === 'bog-boardwalk';
               return (
                 <g key={seg.id}>
                   <path
                     d={d}
                     fill="none"
                     stroke="#D9383A"
-                    strokeWidth={15}
+                    strokeWidth={isBoardwalkCurve ? 9.5 : 12.5}
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     opacity={0.22}
@@ -789,7 +906,7 @@ export const RefugeMap: React.FC<RefugeMapProps> = ({
                     d={d}
                     fill="none"
                     stroke="url(#closedHatch)"
-                    strokeWidth={13}
+                    strokeWidth={isBoardwalkCurve ? 7.6 : 10.5}
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   />
@@ -797,9 +914,10 @@ export const RefugeMap: React.FC<RefugeMapProps> = ({
                     d={d}
                     fill="none"
                     stroke="#C92A2A"
-                    strokeWidth={2.6}
-                    strokeDasharray="6 5"
+                    strokeWidth={2.4}
+                    strokeDasharray="5 4"
                     strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                 </g>
               );
@@ -828,13 +946,63 @@ export const RefugeMap: React.FC<RefugeMapProps> = ({
               );
             }
 
+            if (seg.id === 'fairy-dell-gigis-path') {
+              return (
+                <g key={seg.id}>
+                  <path
+                    d={d}
+                    fill="none"
+                    stroke="#F7F4EC"
+                    strokeWidth={5.8}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    opacity={0.9}
+                  />
+                  <path
+                    d={d}
+                    fill="none"
+                    stroke="#2B7A5B"
+                    strokeWidth={3.1}
+                    strokeDasharray="5 3"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </g>
+              );
+            }
+
+            if (seg.surface === 'roadside') {
+              return (
+                <g key={seg.id}>
+                  <path
+                    d={d}
+                    fill="none"
+                    stroke="#F8F5EE"
+                    strokeWidth={4.8}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    opacity={0.85}
+                  />
+                  <path
+                    d={d}
+                    fill="none"
+                    stroke="#5A7288"
+                    strokeWidth={2.4}
+                    strokeDasharray="3 3.2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </g>
+              );
+            }
+
             return (
               <g key={seg.id}>
                 <path
                   d={d}
                   fill="none"
                   stroke="#F7F4EC"
-                  strokeWidth={seg.surface === 'boardwalk' || seg.surface === 'bridge' ? 6.5 : 5.4}
+                  strokeWidth={seg.surface === 'boardwalk' || seg.surface === 'bridge' ? 6.2 : 5.2}
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   opacity={0.85}
@@ -847,7 +1015,7 @@ export const RefugeMap: React.FC<RefugeMapProps> = ({
                       ? '#9B6E43'
                       : '#B49E75'
                   }
-                  strokeWidth={seg.surface === 'boardwalk' || seg.surface === 'bridge' ? 3.8 : 2.8}
+                  strokeWidth={seg.surface === 'boardwalk' || seg.surface === 'bridge' ? 3.6 : 2.8}
                   strokeDasharray={seg.surface === 'boardwalk' ? '4 2.5' : undefined}
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -865,11 +1033,11 @@ export const RefugeMap: React.FC<RefugeMapProps> = ({
               )}) rotate(${mapRotationDeg.toFixed(1)}) scale(${inverseScale.toFixed(2)})`}
               filter="url(#pinShadow)"
             >
-              <circle r="8.5" fill="#C92A2A" stroke="#FFFFFF" strokeWidth="2" />
+              <circle r="8.2" fill="#C92A2A" stroke="#FFFFFF" strokeWidth="2" />
               <path
-                d="M-3.2 -3.2 L3.2 3.2 M3.2 -3.2 L-3.2 3.2"
+                d="M-3 -3 L3 3 M3 -3 L-3 3"
                 stroke="#FFFFFF"
-                strokeWidth="2.2"
+                strokeWidth="2.1"
                 strokeLinecap="round"
               />
             </g>
@@ -947,14 +1115,14 @@ export const RefugeMap: React.FC<RefugeMapProps> = ({
             </g>
           )}
 
-          {/* 8. Habitat Region Labels (Always Counter-Rotated Upright!) */}
+          {/* 8. Habitat & Road Context Labels (Always Counter-Rotated Upright!) */}
           <g pointerEvents="none">
             {[
               { label: 'DWARF PINE BARRENS', lat: 40.8470, lng: -72.6172 },
               { label: 'PINE BARRENS', lat: 40.8423, lng: -72.6181 },
               { label: 'FOREST REGENERATION', lat: 40.8386, lng: -72.6180 },
               { label: 'TRAILS CLOSED', lat: 40.8364, lng: -72.6194, isDanger: true },
-              { label: 'BOG', lat: 40.8337, lng: -72.6177 }
+              { label: 'BOG', lat: 40.8337, lng: -72.6180 }
             ].map((h, idx) => {
               const hasClosed = Object.values(status.segments).some(
                 (s) => s.status === 'closed'
@@ -983,26 +1151,144 @@ export const RefugeMap: React.FC<RefugeMapProps> = ({
                 </g>
               );
             })}
+
+            {/* Road & Gigi's Path context labels when zoomed into the southern corridor or viewing Fairy Dell */}
+            {(zoom >= 1.35 ||
+              activeRoute?.id === 'fairy-dell-gigis-path' ||
+              activeRoute?.id === 'fairy-dell-roadside') &&
+              [
+                {
+                  label: "GIGI'S PATH",
+                  lat: 40.83328,
+                  lng: -72.61678,
+                  color: '#1F6A4A'
+                },
+                {
+                  label: 'OLD MAIN RD',
+                  lat: 40.83325,
+                  lng: -72.61525,
+                  color: '#5B6770'
+                },
+                {
+                  label: 'S COUNTRY RD',
+                  lat: 40.83265,
+                  lng: -72.61755,
+                  color: '#5B6770'
+                }
+              ].map((rl) => {
+                const pt = projector.latLngToSvg({ lat: rl.lat, lng: rl.lng });
+                return (
+                  <g
+                    key={rl.label}
+                    transform={`translate(${pt.x.toFixed(1)}, ${pt.y.toFixed(
+                      1
+                    )}) rotate(${mapRotationDeg.toFixed(1)}) scale(${inverseScale.toFixed(2)})`}
+                  >
+                    <text
+                      textAnchor="middle"
+                      fontSize="8.5"
+                      fontWeight="800"
+                      letterSpacing="0.06em"
+                      fill={rl.color}
+                      stroke="#FAF8F2"
+                      strokeWidth="3"
+                      paintOrder="stroke"
+                    >
+                      {rl.label}
+                    </text>
+                  </g>
+                );
+              })}
           </g>
 
           {/* 9. Interactive Landmark & POI Pins */}
           {network.pois.map((poi) => {
-            // Keep major pins clear and clutter-free; reveal dense southern hub details when zoomed in or selected
-            const isSelected = selectedPoiIds.includes(poi.id);
+            const isFairySelected =
+              poi.id === 'fairy-dell' &&
+              (selectedPoiIds.includes('fairy-dell-gigis-path') ||
+                selectedPoiIds.includes('fairy-dell-roadside'));
+            const isSelected = selectedPoiIds.includes(poi.id) || isFairySelected;
+            const isClosed = status.facilities[poi.id]?.status === 'closed';
             const isWaterPin = poi.icon === 'pond';
             const isMajor =
               poi.id === 'parking' ||
+              poi.id === 'nature-center' ||
+              poi.id === 'education-cottage' ||
               poi.id === 'the-bridge' ||
               poi.id === 'bluebird-nestboxes' ||
               poi.id === 'dwarf-pines' ||
               poi.id === 'fairy-dell';
+            const isMidZoomPoi = poi.id === 'ice-exhibit';
+            const isDetailHubPoi =
+              poi.id === 'animal-complex' || poi.id === 'restrooms';
+            const isDeepZoomPoi =
+              poi.id === 'butterfly-garden' || poi.id === 'amphitheater';
+
             // Show pond pins when selected or zoomed in close (water bodies already display their white cartographic labels)
             if (isWaterPin && !isSelected && zoom < 2.2) return null;
-            if (!isMajor && !isWaterPin && !isSelected && zoom < 2.35) return null;
+            if (isMidZoomPoi && !isSelected && zoom < 1.35) return null;
+            if (isDetailHubPoi && !isSelected && zoom < 2.35) return null;
+            if (isDeepZoomPoi && !isSelected && zoom < 3.4) return null;
+            if (
+              !isMajor &&
+              !isMidZoomPoi &&
+              !isDetailHubPoi &&
+              !isDeepZoomPoi &&
+              !isWaterPin &&
+              !isSelected &&
+              zoom < 2.2
+            ) {
+              return null;
+            }
 
             const pt = projector.latLngToSvg({ lat: poi.lat, lng: poi.lng });
-            const fill = poiPinFill(poi, isSelected);
-            const stopNum = selectedPoiIds.indexOf(poi.id) + 1;
+            const fill = poiPinFill(poi, isSelected, isClosed);
+            const stopNum =
+              poi.id === 'fairy-dell' && isFairySelected
+                ? Math.max(
+                    selectedPoiIds.indexOf('fairy-dell-gigis-path'),
+                    selectedPoiIds.indexOf('fairy-dell-roadside')
+                  ) + 1
+                : selectedPoiIds.indexOf(poi.id) + 1;
+
+            // Smart label offsets in the dense southern hub & Fairy Dell to guarantee zero overlap
+            let labelX = 0;
+            let labelY = isSelected ? 25 : 22;
+            let labelAnchor: 'middle' | 'start' | 'end' = 'middle';
+
+            if (poi.id === 'nature-center') {
+              labelX = -14;
+              labelY = 2;
+              labelAnchor = 'end';
+            } else if (poi.id === 'education-cottage') {
+              labelX = 14;
+              labelY = -5;
+              labelAnchor = 'start';
+            } else if (poi.id === 'ice-exhibit') {
+              labelX = -13;
+              labelY = -6;
+              labelAnchor = 'end';
+            } else if (poi.id === 'animal-complex') {
+              labelX = 0;
+              labelY = -15;
+              labelAnchor = 'middle';
+            } else if (poi.id === 'restrooms') {
+              labelX = 13;
+              labelY = -4;
+              labelAnchor = 'start';
+            } else if (poi.id === 'butterfly-garden') {
+              labelX = 13;
+              labelY = 12;
+              labelAnchor = 'start';
+            } else if (poi.id === 'amphitheater') {
+              labelX = 13;
+              labelY = -10;
+              labelAnchor = 'start';
+            } else if (poi.id === 'fairy-dell') {
+              labelX = 14;
+              labelY = 4;
+              labelAnchor = 'start';
+            }
 
             return (
               <g
@@ -1018,7 +1304,7 @@ export const RefugeMap: React.FC<RefugeMapProps> = ({
               >
                 <g filter="url(#pinShadow)">
                   <circle
-                    r={isSelected ? 14 : 11.5}
+                    r={isSelected ? 14 : 11.2}
                     fill={fill}
                     stroke="#FFFFFF"
                     strokeWidth="2.4"
@@ -1037,21 +1323,71 @@ export const RefugeMap: React.FC<RefugeMapProps> = ({
                   ) : (
                     <PoiIconGlyph icon={poi.icon} />
                   )}
+                  {/* Closed corner X badge for closed facilities like the Nature Center */}
+                  {isClosed && (
+                    <g transform="translate(8.5, -8.5)">
+                      <circle
+                        r="5.2"
+                        fill="#C92A2A"
+                        stroke="#FFFFFF"
+                        strokeWidth="1.5"
+                      />
+                      <path
+                        d="M-2 -2 L2 2 M2 -2 L-2 2"
+                        stroke="#FFFFFF"
+                        strokeWidth="1.7"
+                        strokeLinecap="round"
+                      />
+                    </g>
+                  )}
                 </g>
+
                 {/* Omit dark text beneath pond icons — the white water label renders cleanly without duplication */}
                 {!isWaterPin && (
-                  <text
-                    y={isSelected ? 25 : 22}
-                    textAnchor="middle"
-                    fontSize="10.5"
-                    fontWeight="800"
-                    fill="#16291F"
-                    stroke="#FAF8F2"
-                    strokeWidth="3.4"
-                    paintOrder="stroke"
-                  >
-                    {poi.shortName}
-                  </text>
+                  <>
+                    <text
+                      x={labelX}
+                      y={labelY}
+                      textAnchor={labelAnchor}
+                      fontSize="10.2"
+                      fontWeight="800"
+                      fill={isClosed ? '#8F1D1D' : '#16291F'}
+                      stroke="#FAF8F2"
+                      strokeWidth="3.4"
+                      paintOrder="stroke"
+                    >
+                      {poi.shortName}
+                    </text>
+                    {isClosed && (
+                      <g
+                        transform={
+                          labelAnchor === 'end'
+                            ? `translate(${labelX - 38}, ${labelY + 4})`
+                            : `translate(${labelX - 19}, ${labelY + 4})`
+                        }
+                      >
+                        <rect
+                          x="0"
+                          y="0"
+                          width="38"
+                          height="11.5"
+                          rx="3.5"
+                          fill="#C92A2A"
+                        />
+                        <text
+                          x="19"
+                          y="8.4"
+                          textAnchor="middle"
+                          fontSize="7.4"
+                          fontWeight="800"
+                          letterSpacing="0.06em"
+                          fill="#FFFFFF"
+                        >
+                          CLOSED
+                        </text>
+                      </g>
+                    )}
+                  </>
                 )}
               </g>
             );
@@ -1236,8 +1572,8 @@ export const RefugeMap: React.FC<RefugeMapProps> = ({
         <div className="legend-popover" role="region" aria-label="Map Legend">
           <h3>Trail Map Key</h3>
           <div className="legend-row">
-            <span className="legend-swatch" style={{ background: '#1E8E4E' }} />
-            <span>Green Loop · 0.8 mi</span>
+            <span className="legend-swatch" style={{ background: '#7B2D8E' }} />
+            <span>Storybook Walk · 0.8 mi</span>
           </div>
           <div className="legend-row">
             <span className="legend-swatch" style={{ background: '#C28500' }} />
@@ -1252,10 +1588,25 @@ export const RefugeMap: React.FC<RefugeMapProps> = ({
             <span>Red Loop · 3.1 mi</span>
           </div>
           <div className="legend-row">
+            <span className="legend-swatch" style={{ background: '#2B7A5B' }} />
+            <span>Gigi&apos;s Path (Wooded)</span>
+          </div>
+          <div className="legend-row">
             <span
               className="legend-swatch"
               style={{
-                background: 'repeating-linear-gradient(90deg,#8A5628 0 5px,transparent 5px 9px)'
+                background:
+                  'repeating-linear-gradient(90deg,#486581 0 5px,transparent 5px 8px)'
+              }}
+            />
+            <span>Roadside Walk (Old Main Rd)</span>
+          </div>
+          <div className="legend-row">
+            <span
+              className="legend-swatch"
+              style={{
+                background:
+                  'repeating-linear-gradient(90deg,#8A5628 0 5px,transparent 5px 9px)'
               }}
             />
             <span>New Trail (Bluebirds)</span>
@@ -1268,15 +1619,21 @@ export const RefugeMap: React.FC<RefugeMapProps> = ({
                   'repeating-linear-gradient(45deg,#D9383A 0 4px,#FAD4D4 4px 8px)'
               }}
             />
-            <span>Trails Closed (Tree Work)</span>
+            <span>Trails Closed</span>
+          </div>
+          <div className="legend-row">
+            <span
+              className="legend-swatch"
+              style={{
+                background: '#D4D7D5',
+                border: '1px solid #8B948E'
+              }}
+            />
+            <span>Parking Lot</span>
           </div>
           <div className="legend-row">
             <span className="legend-swatch" style={{ background: '#3590C6' }} />
             <span>Ponds &amp; Quantuck Creek</span>
-          </div>
-          <div className="legend-row">
-            <span className="legend-swatch" style={{ background: '#CFE8E2' }} />
-            <span>Bog &amp; Swamp Wetlands</span>
           </div>
         </div>
       )}

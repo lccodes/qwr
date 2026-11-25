@@ -9,6 +9,7 @@ import {
   ArrowUpRight,
   CheckCircle2,
   CornerUpLeft,
+  Flag,
   Footprints,
   LocateFixed,
   MapPin,
@@ -39,6 +40,7 @@ interface TopHudProps {
   simulatorFeatureEnabled: boolean;
   simEnabled: boolean;
   onOpenSafety: () => void;
+  onOpenReport: () => void;
   onStartVirtualWalk: () => void;
   onRetryGps: () => void;
   onRerouteBackToParking: () => void;
@@ -120,6 +122,7 @@ export const TopHud: React.FC<TopHudProps> = ({
   simulatorFeatureEnabled,
   simEnabled,
   onOpenSafety,
+  onOpenReport,
   onStartVirtualWalk,
   onRetryGps,
   onRerouteBackToParking
@@ -167,7 +170,7 @@ export const TopHud: React.FC<TopHudProps> = ({
                 borderColor: 'rgba(255,255,255,0.22)'
               }}
               onClick={onOpenSafety}
-              aria-label="Safety and refuge phone"
+              aria-label="Safety, report, and refuge phone"
             >
               <PhoneCall size={20} />
             </button>
@@ -228,7 +231,7 @@ export const TopHud: React.FC<TopHudProps> = ({
               borderColor: 'rgba(255,255,255,0.22)'
             }}
             onClick={onOpenSafety}
-            aria-label="Safety and refuge phone"
+            aria-label="Safety, report, and refuge phone"
           >
             <PhoneCall size={20} />
           </button>
@@ -286,6 +289,16 @@ export const TopHud: React.FC<TopHudProps> = ({
       </div>
 
       <div className="status-strip">
+        <button
+          type="button"
+          className="mini-pill report-pill"
+          onClick={onOpenReport}
+          aria-label="Report a downed tree or animal sighting"
+        >
+          <Flag size={13} />
+          <span>Report</span>
+        </button>
+
         {closedCount > 0 && statusConfig.globalAlert?.active && (
           <button
             type="button"
@@ -293,7 +306,7 @@ export const TopHud: React.FC<TopHudProps> = ({
             onClick={onOpenSafety}
           >
             <AlertTriangle size={13} />
-            <span>SW Closed · Detour On</span>
+            <span>Closures · Detour On</span>
           </button>
         )}
 

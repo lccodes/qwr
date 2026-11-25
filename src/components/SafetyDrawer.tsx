@@ -3,6 +3,7 @@ import {
   AlertTriangle,
   Car,
   Clock,
+  Flag,
   MapPin,
   PhoneCall,
   ShieldAlert,
@@ -23,6 +24,7 @@ interface SafetyDrawerProps {
   onClose: () => void;
   onBackToParking: () => void;
   onRequestGps: () => void;
+  onOpenReport: () => void;
 }
 
 export const SafetyDrawer: React.FC<SafetyDrawerProps> = ({
@@ -35,7 +37,8 @@ export const SafetyDrawer: React.FC<SafetyDrawerProps> = ({
   distanceFromRefugeMeters,
   onClose,
   onBackToParking,
-  onRequestGps
+  onRequestGps,
+  onOpenReport
 }) => {
   const closedSegments = Object.entries(statusConfig.segments).filter(
     ([, entry]) => entry.status === 'closed'
@@ -73,6 +76,18 @@ export const SafetyDrawer: React.FC<SafetyDrawerProps> = ({
         >
           <Car size={22} />
           <span>Guide Me Back to Parking</span>
+        </button>
+
+        <button
+          type="button"
+          className="safety-action-link"
+          onClick={() => {
+            onClose();
+            onOpenReport();
+          }}
+        >
+          <Flag size={20} />
+          <span>Report Downed Tree or Animal Sighting</span>
         </button>
 
         <a href={`tel:${phoneDigits}`} className="safety-action-link">

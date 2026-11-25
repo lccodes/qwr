@@ -3,8 +3,12 @@ import type { PoiDef, ResolvedRoute } from './types';
 import { FEATURE_FLAGS } from './config/featureFlags';
 import {
   buildCustomWalk,
+  buildFairyDellWalk,
+  FAIRY_DELL_GIGIS_ID,
+  FAIRY_DELL_ROADSIDE_ID,
   resolveStandardLoop,
-  routeBackToParking
+  routeBackToParking,
+  type FairyDellRouteOption
 } from './engine/router';
 import { evaluateNavigation } from './engine/navigation';
 import { getRefugeSunsetInfo } from './engine/sunset';
@@ -18,6 +22,7 @@ import { TopHud } from './components/TopHud';
 import { BottomSheet } from './components/BottomSheet';
 import { PoiModal } from './components/PoiModal';
 import { SafetyDrawer } from './components/SafetyDrawer';
+import { ReportModal } from './components/ReportModal';
 import { SimulatorBar } from './components/SimulatorBar';
 
 const SIMULATOR_ENABLED = FEATURE_FLAGS.virtualWalkSimulator;
@@ -27,7 +32,7 @@ export const App: React.FC = () => {
     useTrailData();
 
   const [mode, setMode] = useState<'standard' | 'custom'>('standard');
-  const [selectedLoopId, setSelectedLoopId] = useState<string>('green-08');
+  const [selectedLoopId, setSelectedLoopId] = useState<string>('storybook-08');
   const [selectedPoiIds, setSelectedPoiIds] = useState<string[]>([]);
   const [returnRouteOverride, setReturnRouteOverride] =
     useState<ResolvedRoute | null>(null);
@@ -37,6 +42,7 @@ export const App: React.FC = () => {
   const [voiceEnabled, setVoiceEnabled] = useState(false);
   const [focusedPoi, setFocusedPoi] = useState<PoiDef | null>(null);
   const [safetyOpen, setSafetyOpen] = useState(false);
+  const [reportOpen, setReportOpen] = useState(false);
   const [nowTick, setNowTick] = useState(() => new Date());
 
   // Keep mobile screen awake while actively walking a trail
@@ -50,13 +56,15 @@ export const App: React.FC = () => {
 
   const sunsetInfo = useMemo(() => getRefugeSunsetInfo(nowTick), [nowTick]);
 
-  // Pre-resolve all 4 standard loops with automatic closure detouring
+  // Pre-resolve all 4 standard loops + both Fairy Dell Boardwalk route options
   const resolvedStandardLoops = useMemo(() => {
     if (!network || !status) return {};
     const out: Record<string, ResolvedRoute | null> = {};
     for (const loop of network.standardLoops) {
       out[loop.id] = resolveStandardLoop(network, status, loop.id);
     }
+    out[FAIRY_DELL_GIGIS_ID] = buildFairyDellWalk(network, status, 'gigis-path');
+    out[FAIRY_DELL_ROADSIDE_ID] = buildFairyDellWalk(network, status, 'roadside');
     return out;
   }, [network, status]);
 
@@ -109,17 +117,32 @@ export const App: React.FC = () => {
   useGuidanceCues(navState, isNavigating && !geo.isAwayFromRefuge, voiceEnabled);
 
   const selectablePois = useMemo(
-    () => (network ? network.pois.filter((p) => p.selectableForCustomWalk) : []),
-    [network]
+    () =>
+      network && status
+        ? network.pois.filter(
+            (p) =>
+              p.selectableForCustomWalk &&
+              status.facilities[p.id]?.status !== 'closed'
+          )
+        : [],
+    [network, status]
   );
 
   const handleTogglePoiStop = useCallback((poiId: string) => {
     setReturnRouteOverride(null);
-    setSelectedPoiIds((prev) =>
-      prev.includes(poiId)
-        ? prev.filter((id) => id !== poiId)
-        : [...prev, poiId]
-    );
+    setSelectedPoiIds((prev) => {
+      if (prev.includes(poiId)) {
+        return prev.filter((id) => id !== poiId);
+      }
+      // Keep the two Fairy Dell connector options mutually exclusive
+      const filtered =
+        poiId === FAIRY_DELL_GIGIS_ID
+          ? prev.filter((id) => id !== FAIRY_DELL_ROADSIDE_ID)
+          : poiId === FAIRY_DELL_ROADSIDE_ID
+            ? prev.filter((id) => id !== FAIRY_DELL_GIGIS_ID)
+            : prev;
+      return [...filtered, poiId];
+    });
   }, []);
 
   const handleStartWalk = useCallback(
@@ -177,6 +200,26 @@ export const App: React.FC = () => {
     setMode('custom');
     setSelectedPoiIds([poi.id]);
   }, []);
+
+  const handleSelectFairyDellFromModal = useCallback(
+    (option: FairyDellRouteOption) => {
+      setFocusedPoi(null);
+      setReturnRouteOverride(null);
+      setMode('standard');
+      setSelectedLoopId(
+        option === 'gigis-path' ? FAIRY_DELL_GIGIS_ID : FAIRY_DELL_ROADSIDE_ID
+      );
+    },
+    []
+  );
+
+  const handleViewEducationCottage = useCallback(() => {
+    if (!network) return;
+    const cottage = network.pois.find((p) => p.id === 'education-cottage');
+    if (cottage) {
+      setFocusedPoi(cottage);
+    }
+  }, [network]);
 
   const handleStartVirtualWalkQuick = useCallback(() => {
     if (!SIMULATOR_ENABLED) return;
@@ -294,6 +337,7 @@ export const App: React.FC = () => {
         simulatorFeatureEnabled={SIMULATOR_ENABLED}
         simEnabled={geo.simEnabled}
         onOpenSafety={() => setSafetyOpen(true)}
+        onOpenReport={() => setReportOpen(true)}
         onStartVirtualWalk={handleStartVirtualWalkQuick}
         onRetryGps={() => geo.startLiveGps(true)}
         onRerouteBackToParking={handleBackToParking}
@@ -354,6 +398,8 @@ export const App: React.FC = () => {
           facilityStatus={status.facilities[focusedPoi.id]}
           onClose={() => setFocusedPoi(null)}
           onWalkHere={handleWalkToPoiFromModal}
+          onSelectFairyDellRoute={handleSelectFairyDellFromModal}
+          onViewEducationCottage={handleViewEducationCottage}
         />
       )}
 
@@ -369,6 +415,17 @@ export const App: React.FC = () => {
           onClose={() => setSafetyOpen(false)}
           onBackToParking={handleBackToParking}
           onRequestGps={() => geo.startLiveGps(true)}
+          onOpenReport={() => setReportOpen(true)}
+        />
+      )}
+
+      {reportOpen && (
+        <ReportModal
+          network={network}
+          userPosition={geo.position}
+          isAwayFromRefuge={geo.isAwayFromRefuge}
+          isOffline={isOffline}
+          onClose={() => setReportOpen(false)}
         />
       )}
     </main>

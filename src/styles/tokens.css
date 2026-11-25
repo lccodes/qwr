@@ -30,12 +30,16 @@
   --field-fill: #edf1d6;
 
   /* Accessible Blaze Colors (High Contrast on Sunlit Linen) */
-  --trail-green: #1e8e4e;
+  --trail-purple: #7b2d8e;
   --trail-yellow: #c28500;
   --trail-blue: #1d5fd6;
   --trail-red: #c62828;
+  --trail-gigis: #2b7a5b;
+  --trail-roadside: #486581;
   --trail-new: #8a5628;
   --trail-closed: #d9383a;
+  --cottage-brown: #7c5028;
+  --parking-grey: #d4d7d5;
 
   /* Semantic Status */
   --alert-bg: #fff3e0;
