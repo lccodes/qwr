@@ -2,6 +2,7 @@
   "name": "qwr-trail-map",
   "version": "1.0.0",
   "private": true,
+  "license": "MIT",
   "type": "module",
   "description": "Offline-first mobile GPS trail navigation map for the Quogue Wildlife Refuge",
   "scripts": {

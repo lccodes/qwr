@@ -31,3 +31,7 @@ npm run validate:trails
 npm run build                                # Typecheck + build static offline PWA in dist/
 npm run preview                              # Preview production PWA locally
 ```
+
+## License
+
+This project's source code is licensed under the [MIT License](LICENSE). Map geometry in [`public/data/trail-network.json`](public/data/trail-network.json) includes data from [OpenStreetMap](https://www.openstreetmap.org/copyright) contributors, licensed under the [ODbL](https://opendatacommons.org/licenses/odbl/).
